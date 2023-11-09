@@ -1073,6 +1073,18 @@ hr.layui-border-black{border-width: 0 0 1px;}
 .layui-table-header{border-width: 0; border-bottom-width: 1px; overflow: hidden;}
 .layui-table-header .layui-table{margin-bottom: -1px;}
 
+.layui-table-view.layui-table-vertical {height: auto !important;position: relative;}
+.layui-table-view.layui-table-vertical table {-webkit-writing-mode: vertical-lr;-moz-writing-mode: vertical-lr;-ms-writing-mode: tb-lr;writing-mode: vertical-lr;}
+.layui-table-view.layui-table-vertical table th > div.layui-table-cell,
+.layui-table-view.layui-table-vertical table td > div.layui-table-cell {-webkit-writing-mode: horizontal-tb;-moz-writing-mode: horizontal-tb;-ms-writing-mode: lr-tb;writing-mode: horizontal-tb;}
+.layui-table-view.layui-table-vertical table th > div.layui-table-cell {width: 120px;}
+.layui-table-view.layui-table-vertical table td > div.layui-table-cell {width: 160px;}
+.layui-table-view.layui-table-vertical .layui-table-fixed {display: none !important;}
+.layui-table-view.layui-table-vertical .layui-table-box > .layui-table-main {height: auto !important;border-left: 1px solid #eee;}
+.layui-table-view.layui-table-vertical .layui-table-box > .layui-table-main tbody tr:last-child td {border-right: none;}
+.layui-table-view.layui-table-vertical .layui-table-box > .layui-table-header {position: absolute;display: grid;}
+.layui-table-view.layui-table-vertical .layui-table-total {position: absolute;right: -1px;border-left-width: 1px;display: grid;}
+
 .layui-table-column{position: relative; width: 100%; min-height: 41px; padding: 8px 16px; border-width: 0; border-bottom-width: 1px;}
 .layui-table-column .layui-btn-container{margin-bottom: -8px;}
 .layui-table-column .layui-btn-container .layui-btn{margin-right: 8px; margin-bottom: 8px;}

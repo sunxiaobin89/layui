@@ -136,7 +136,8 @@ layui.define(['lay', 'laytpl', 'laypage', 'form', 'util'], function(exports){
   var ELEM_GROUP = 'laytable-cell-group';
   var ELEM_COL_SPECIAL = 'layui-table-col-special';
   var ELEM_TOOL_PANEL = 'layui-table-tool-panel';
-  var ELEM_EXPAND = 'layui-table-expanded'
+  var ELEM_EXPAND = 'layui-table-expanded';
+  var ELEM_VERTICAL = 'layui-table-vertical';
 
   var DATA_MOVE_NAME = 'LAY_TABLE_MOVE_DICT';
 
@@ -981,6 +982,7 @@ layui.define(['lay', 'laytpl', 'laypage', 'form', 'util'], function(exports){
     };
     var done = function(res, origin){
       that.setColsWidth();
+      options.reversal === true && that.reverse();
       typeof options.done === 'function' && options.done(
         res, curr, res[response.countName], origin
       );
@@ -2616,6 +2618,36 @@ layui.define(['lay', 'laytpl', 'laypage', 'form', 'util'], function(exports){
     });
   };
 
+  // 表格行列置换
+  Class.prototype.reverse = function () {
+    var that = this;
+    var config = that.config;
+    if (config.tree) {
+      // 不支持树表
+      return that;
+    }
+    var isVertical = config.reversal;
+
+    that.elem[isVertical ? 'addClass' : 'removeClass'](ELEM_VERTICAL);
+    that.layTotal.css({top: isVertical ? that.layTool.outerHeight() - 1 + 'px' : 0});
+    that.layMain.css({
+      marginLeft: isVertical ? that.layHeader.width() - 1 + 'px' : 0,
+      marginRight: (isVertical && config.totalRow) ? that.layTotal.width() + 'px' : 0
+    });
+    // setTimeout(function () {
+    if (isVertical) {
+
+      // isVertical || that.layHeader.scrollLeft(that.layMain.scrollLeft());
+    } else {
+      that.resize();
+    }
+
+    // }, 0);
+
+
+    return that;
+  };
+
   // 全局事件
   (function(){
     // 自适应尺寸
@@ -3048,6 +3080,23 @@ layui.define(['lay', 'laytpl', 'laypage', 'form', 'util'], function(exports){
     delete data[table.config.numbersName];
     delete data[table.config.disabledName];
     return data;
+  };
+
+  // 行列置换
+  table.reverse = function (id, reversal) {
+    var that = getThisTable(id);
+    if (!that) {
+      return;
+    }
+    var options = that.config;
+    if (typeof reversal !== 'boolean') {
+      // 如果不是true/false; 默认就是将当前的状态给重新渲染一下
+      reversal = !options.reversal;
+    }
+    // 修改状态
+    options.reversal = reversal;
+    // 调用置换方法
+    that.reverse();
   };
 
   // 自动完成渲染
