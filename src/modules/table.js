@@ -349,18 +349,18 @@ layui.define(['lay', 'laytpl', 'laypage', 'form', 'util'], function(exports){
     options.index = that.index;
     that.key = options.id || options.index;
 
-    //初始化一些其他参数
+    // 初始化一些其他参数
     that.setInit();
 
-    //高度铺满：full-差距值
-    if(options.height && /^full-\d+$/.test(options.height)){
+    // 高度铺满：full-差距值
+    if(options.height && /^full-.+$/.test(options.height)){
       that.fullHeightGap = options.height.split('-')[1];
-      options.height = _WIN.height() - that.fullHeightGap;
-    } else if (options.height && /^#\w+\S*-\d+$/.test(options.height)) {
+      options.height = _WIN.height() - (parseFloat(that.fullHeightGap) || 0);
+    } else if (options.height && /^#\w+\S*-.+$/.test(options.height)) {
       var parentDiv = options.height.split("-");
       that.parentHeightGap = parentDiv.pop();
       that.parentDiv = parentDiv.join("-");
-      options.height = $(that.parentDiv).height() - that.parentHeightGap;
+      options.height = $(that.parentDiv).height() - (parseFloat(that.parentHeightGap) || 0);
     }
 
     // 开始插入替代元素
@@ -1037,9 +1037,7 @@ layui.define(['lay', 'laytpl', 'laypage', 'form', 'util'], function(exports){
         dataType: options.dataType || 'json',
         jsonpCallback: options.jsonpCallback,
         headers: options.headers || {},
-        complete: function(xhr,ts){
-          typeof options.complete === 'function' && options.complete(xhr, ts);
-        },
+        complete: typeof options.complete === 'function' ? options.complete : undefined,
         success: function(res){
           // 若有数据解析的回调，则获得其返回的数据
           if(typeof options.parseData === 'function'){
@@ -2383,8 +2381,9 @@ layui.define(['lay', 'laytpl', 'laypage', 'form', 'util'], function(exports){
           }
           return inputElem;
         }());
-
-        input[0].value = othis.data('content') || data[field] || elemCell.text();
+        input[0].value = function(val) {
+          return (val === undefined || val === null) ? '' : val;
+        }(othis.data('content') || data[field]);
         othis.find('.'+ELEM_EDIT)[0] || othis.append(input);
         input.focus();
         e && layui.stope(e);
@@ -2471,7 +2470,7 @@ layui.define(['lay', 'laytpl', 'laypage', 'form', 'util'], function(exports){
       }
     };
     // 展开单元格内容
-    var gridExpand = function(e){
+    var gridExpand = function(e, expandedMode){
       var othis = $(this);
       var td = othis.parent();
       var key = td.data('key');
@@ -2480,7 +2479,8 @@ layui.define(['lay', 'laytpl', 'laypage', 'form', 'util'], function(exports){
       var elemCell = td.children(ELEM_CELL);
       var ELEM_CELL_C = 'layui-table-cell-c';
       var elemCellClose = $('<i class="layui-icon layui-icon-up '+ ELEM_CELL_C +'">');
-      var expandedMode = col.expandedMode || options.cellExpandedMode;
+
+      expandedMode = expandedMode || col.expandedMode || options.cellExpandedMode;
 
       // 展开风格
       if (expandedMode === 'tips') { // TIPS 展开风格
@@ -2541,10 +2541,12 @@ layui.define(['lay', 'laytpl', 'laypage', 'form', 'util'], function(exports){
         // 关闭展开状态
         elemCellClose.on('click', function(){
           var $this = $(this);
-          that.setRowActive(index, ELEM_EXPAND, true); // 移除单元格展开样式
+          that.setRowActive(index, [ELEM_EXPAND, ELEM_HOVER].join(' '), true); // 移除单元格展开样式
           that.cssRules(key, function(item){
             item.style.width =  $this.data('cell-width'); // 恢复单元格展开前的宽度
-            that.resize(); // 滚动条补丁
+            setTimeout(function(){
+              that.resize(); // 滚动条补丁
+            });
           });
           $this.remove();
         });
@@ -2560,7 +2562,7 @@ layui.define(['lay', 'laytpl', 'laypage', 'form', 'util'], function(exports){
     });
     // 表格合计栏单元格展开事件
     that.layTotal.on('click', '.'+ ELEM_GRID_DOWN, function(e){
-      gridExpand.call(this, e);
+      gridExpand.call(this, e, 'tips'); // 强制采用 tips 风格
     });
 
     // 行工具条操作事件

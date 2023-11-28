@@ -383,33 +383,72 @@ layui.define('jquery', function(exports){
       }
     },
 
-    // 批量事件
-    event: function(attr, obj, eventType){
-      var _body = $('body');
-      eventType = eventType || 'click';
+    /**
+     * 批量事件
+     * @param {string} [attr="lay-on"] - 触发事件的元素属性名
+     * @param {Object.<string, Function} events - 事件集合
+     * @param {Object} [options] - 参数的更多选项
+     * @param {(string|HTMLElement|jQuery)} [options.elem="body"] - 触发事件的委托元素
+     * @param {string} [options.trigger="click"] - 事件触发的方式
+     * @returns {Object} 返回当前 events 参数设置的事件集合
+     */
+    on: function(attr, events, options) {
+      // 若参数一为 object 类型，则为事件集，且省略 attr
+      if (typeof attr === 'object') {
+        options = events || {};
+        events = attr;
+        attr = options.attr || 'lay-on'; // 默认属性名
+      }
 
-      // 记录事件回调集合
-      obj = util.event[attr] = $.extend(true, util.event[attr], obj) || {};
+      // 更多选项
+      options = $.extend({
+        elem: 'body',
+        trigger: 'click'
+      }, typeof options === 'object' ? options : {
+        trigger: options // 兼容旧版
+      });
 
-      // 清除委托事件
-      util.event.UTIL_EVENT_CALLBACK = util.event.UTIL_EVENT_CALLBACK || {};
-      _body.off(eventType, '*['+ attr +']', util.event.UTIL_EVENT_CALLBACK[attr])
+      var elem = options.elem = $(options.elem);
+      var attrSelector = '['+ attr +']';
+      var DATANAME = 'UTIL_ON_DATA'; // 缓存在委托元素上的 data-* 属性名
 
-      // 绑定委托事件
-      util.event.UTIL_EVENT_CALLBACK[attr] = function(){
-        var othis = $(this);
-        var key = othis.attr(attr);
-        (typeof obj[key] === 'function') && obj[key].call(this, othis);
-      };
+      if (!elem[0]) return; // 若委托元素不存在
 
-      // 清除旧事件，绑定新事件
-      _body.on(eventType, '*['+ attr +']', util.event.UTIL_EVENT_CALLBACK[attr]);
+      // 初始化 data 默认值，以委托元素为存储单元
+      if (!elem.data(DATANAME)) {
+        elem.data(DATANAME, {
+          events: {},
+          callbacks: {}
+        });
+      }
 
-      return obj;
+      // 读取 data 缓存
+      var dataCache = elem.data(DATANAME);
+      var callbacks = dataCache.callbacks;
+
+      // 根据 attr 记录事件集合
+      events = $.extend(true, dataCache.events, events) || {};
+
+      // 清除事件委托，避免重复绑定
+      elem.off(options.trigger, attrSelector, callbacks[attr]);
+
+      // 绑定事件委托
+      elem.on(
+        options.trigger,
+        attrSelector,
+        callbacks[attr] = function(e) {
+          var othis = $(this);
+          var key = othis.attr(attr);
+          typeof events[key] === 'function' && events[key].call(this, othis, e);
+        }
+      );
+
+      return events;
     }
   };
 
-  util.on = util.event;
+  // 兼容旧版
+  util.event = util.on;
 
   // 输出接口
   exports('util', util);
