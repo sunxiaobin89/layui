@@ -1293,8 +1293,8 @@ layui.define(['table'], function (exports) {
     // 添加数据
     newNodes = $.extend(true, [], (layui.isArray(newNodes) ? newNodes : [newNodes]));
 
-    // 若未传入 LAY_CHECKED 属性，则继承父节点的 checked 状态
-    layui.each(newNodes, function(i, item){
+    // 若未传入 LAY_CHECKED 属性，则复选框继承父节点的 checked 状态，单选不处理
+    options.hasRadioCol || layui.each(newNodes, function(i, item){
       if(!(checkName in item) && parentNode){
         item[checkName] = parentNode[checkName];
       }
@@ -1535,7 +1535,7 @@ layui.define(['table'], function (exports) {
 
     var index = tr.data('index');
     var tableViewElem = options.elem.next();
-    
+
     tr[checked ? 'addClass' : 'removeClass'](ELEM_CHECKED); // 主体行
 
     // 右侧固定行
@@ -1571,7 +1571,7 @@ layui.define(['table'], function (exports) {
 
         // 标记父节点行背景色
         that.setRowCheckedClass(checkboxElem.closest('tr'), checked);
-        
+
         // 设置原始复选框 checked 属性值并渲染
         form.render(checkboxElem.prop({
           checked: checked,
