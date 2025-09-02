@@ -3,10 +3,9 @@
  * 常用元素操作组件
  */
 
-layui.define('jquery', function(exports) {
-  'use strict';
+  import { layui } from '../layui.js';
+  import $ from 'jquery';
 
-  var $ = layui.$;
   var hint = layui.hint();
   var device = layui.device();
 
@@ -693,6 +692,6 @@ layui.define('jquery', function(exports) {
   // dom.on('click', call.hideTabMore); // 隐藏展开的 Tab
   $(window).on('resize', call.tabAuto); // 自适应
 
-  exports(MOD_NAME, element);
-});
+  export default element;
+  export { element };
 

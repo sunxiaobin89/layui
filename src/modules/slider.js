@@ -2,11 +2,9 @@
  * slider 滑块组件
  */
 
-layui.define(['jquery', 'lay'], function(exports) {
-  'use strict';
-
-  var $ = layui.$;
-  var lay = layui.lay;
+import {layui} from '../layui.js';
+import $ from 'jquery';
+import lay from './lay.js';
 
   // 外部接口
   var slider = {
@@ -504,5 +502,5 @@ layui.define(['jquery', 'lay'], function(exports) {
     return thisSlider.call(inst);
   };
 
-  exports(MOD_NAME, slider);
-})
+  export { slider };
+  export default slider;

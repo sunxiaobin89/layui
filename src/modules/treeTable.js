@@ -3,12 +3,11 @@
  * 树表组件
  */
 
-layui.define(['table'], function (exports) {
-  "use strict";
+  import { layui } from '../layui.js';
+  import $ from 'jquery';
+  import form from './form.js';
+  import table from './table.js';
 
-  var $ = layui.$;
-  var form = layui.form;
-  var table = layui.table;
   var hint = layui.hint();
 
   // api
@@ -2150,5 +2149,5 @@ layui.define(['table'], function (exports) {
     return thisTreeTable.call(inst);
   };
 
-  exports(MOD_NAME, treeTable);
-});
+  export { treeTable };
+  export default treeTable;

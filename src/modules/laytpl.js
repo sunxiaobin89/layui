@@ -3,8 +3,6 @@
  * 轻量级通用模板引擎
  */
 
-(function(global) {
-  'use strict';
 
   var MOD_NAME = 'laytpl';
 
@@ -494,15 +492,5 @@
   };
 
   // 输出接口
-  typeof layui === 'object' ? layui.define(function(exports) { // Layui
-    exports(MOD_NAME, laytpl);
-  }) : (
-    typeof module === 'object' && typeof exports === 'object'
-      ? module.exports = laytpl // CommonJS
-    : (
-      typeof define === 'function' && define.amd ? define(function() { // RequireJS
-        return laytpl;
-      }) : global.laytpl = laytpl // 单独引入
-    )
-  );
-})(this);
+  export { laytpl };
+  export default laytpl;

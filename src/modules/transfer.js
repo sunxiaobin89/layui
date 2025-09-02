@@ -2,12 +2,10 @@
  * transfer 穿梭框组件
  */
 
-layui.define(['laytpl', 'form'], function(exports) {
-  "use strict";
-
-  var $ = layui.$;
-  var laytpl = layui.laytpl;
-  var form = layui.form;
+import { layui } from '../layui.js';
+import $ from 'jquery';
+import laytpl from './laytpl.js';
+import form from './form.js';
 
   // 模块名
   var MOD_NAME = 'transfer';
@@ -515,5 +513,5 @@ layui.define(['laytpl', 'form'], function(exports) {
     return thisModule.call(inst);
   };
 
-  exports(MOD_NAME, transfer);
-});
+  export { transfer};
+  export default transfer;

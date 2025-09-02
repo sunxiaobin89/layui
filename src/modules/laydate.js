@@ -1,7 +1,8 @@
 /** laydate 日期与时间控件 | MIT Licensed */
-// @ts-expect-error
-(function(window, document) {
-  "use strict";
+
+import { layui } from '../layui.js';
+import $ from 'jquery';
+import lay from './lay.js';
 
   var isLayui = window.layui && layui.define;
   var ready = {
@@ -2747,23 +2748,8 @@
     return new Date(thisDate.getTime() - 1000*60*60*24).getDate();
   };
 
-  //加载方式
-  isLayui ? (
-    laydate.ready()
-    ,layui.define('lay', function(exports){ //layui 加载
-      laydate.path = layui.cache.dir;
-      ready.run(lay);
-      exports(MOD_NAME, laydate);
-    })
-  ) : (
-    (typeof define === 'function' && define.amd) ? define(function(){ //requirejs 加载
-      ready.run(lay);
-      return laydate;
-    }) : function(){ //普通 script 标签加载
       laydate.ready();
-      ready.run(window.lay);
-      window.laydate = laydate;
-    }()
-  );
+      ready.run(lay);
 
-})(window, window.document);
+      export { laydate };
+      export default laydate;

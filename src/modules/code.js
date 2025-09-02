@@ -3,15 +3,15 @@
  * Code 预览组件
  */
 
-layui.define(['lay', 'util', 'element', 'tabs', 'form'], function(exports){
-  "use strict";
+  import { layui } from '../layui.js';
+  import $ from 'jquery';
+  import lay from './lay.js';
+  import util from './util.js';
+  import element from './element.js';
+  import tabs from './tabs.js';
+  import form from './form.js';
+  import layer from './layer.js';
 
-  var $ = layui.$;
-  var util = layui.util;
-  var element = layui.element;
-  var tabs = layui.tabs;
-  var form = layui.form;
-  var layer = layui.layer;
   var hint = layui.hint();
 
   // 常量
@@ -62,7 +62,7 @@ layui.define(['lay', 'util', 'element', 'tabs', 'form'], function(exports){
   };
 
   // export api
-  exports('code', function(options, mode){
+  export function code(options, mode){
     options = $.extend(true, {}, config, options);
 
     // 返回对象
@@ -599,10 +599,6 @@ layui.define(['lay', 'util', 'element', 'tabs', 'form'], function(exports){
     }
 
     return ret;
-  });
-});
+  }
 
-// 若为源码版，则自动加载该组件依赖的 css 文件
-if(!layui['layui.all']){
-  layui.addcss('modules/code.css?v=6', 'skincodecss');
-}
+  export default code;

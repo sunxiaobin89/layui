@@ -49,12 +49,7 @@ a cite{font-style: normal;}
 /** 图标字体 **/
 @font-face {
   font-family: 'layui-icon';
-  src: url('../font/iconfont.eot?v=293');
-  src: url('../font/iconfont.eot?v=293#iefix') format('embedded-opentype'),
-       url('../font/iconfont.woff2?v=293') format('woff2'),
-       url('../font/iconfont.woff?v=293') format('woff'),
-       url('../font/iconfont.ttf?v=293') format('truetype'),
-       url('../font/iconfont.svg?v=293#layui-icon') format('svg');
+  src: url('../font/iconfont.woff?v=293') format('woff'),
 }
 
 .layui-icon{

@@ -4,9 +4,6 @@
  * MIT Licensed
  */
 
-(function(window) {
-  'use strict';
-
   // 便于打包时的字符压缩
   var document = window.document;
   var location = window.location;
@@ -1029,6 +1026,9 @@
     }
   };
 
-  // export layui
-  window.layui = new Class();
-})(window);
+  // 创建全局实例以保持兼容性  
+  const layui = new Class();  
+  
+  // ES Module 导出
+  export default layui;
+  export { layui };

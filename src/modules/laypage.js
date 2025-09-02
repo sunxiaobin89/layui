@@ -2,8 +2,7 @@
  * laypage 分页组件
  */
 
-layui.define(function(exports) {
-  "use strict";
+import { layui } from '../layui.js';
 
   var doc = document;
   var id = 'getElementById';
@@ -340,5 +339,5 @@ layui.define(function(exports) {
     }
   }
 
-  exports(MOD_NAME, laypage);
-});
+  export { laypage };
+  export default laypage;

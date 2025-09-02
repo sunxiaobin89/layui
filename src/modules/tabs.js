@@ -3,13 +3,12 @@
  * 标签页组件
  */
 
-layui.define('component', function(exports) {
-  'use strict';
-
-  var $ = layui.$;
+import { layui } from '../layui.js';
+import $ from 'jquery';
+import componentBuilder  from './component.js';
 
   // 创建组件
-  var component = layui.component({
+  var component = componentBuilder({
     name: 'tabs', // 组件名
 
     // 默认配置
@@ -817,5 +816,5 @@ layui.define('component', function(exports) {
     component.render();
   });
 
-  exports(component.CONST.MOD_NAME, component);
-});
+  export { component as tabs };
+  export default component;

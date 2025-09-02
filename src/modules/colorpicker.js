@@ -3,11 +3,10 @@
  * 颜色选择组件
  */
 
-layui.define(['jquery', 'lay'], function(exports) {
-  "use strict";
+  import { layui } from '../layui.js';
+  import $ from 'jquery';
+  import lay from './lay.js';
 
-  var $ = layui.$;
-  var lay = layui.lay;
   var hint = layui.hint();
   var device = layui.device();
   var clickOrMousedown = (device.mobile ? 'click' : 'mousedown');
@@ -786,5 +785,5 @@ layui.define(['jquery', 'lay'], function(exports) {
     return thisModule.call(inst);
   };
 
-  exports(MOD_NAME, colorpicker);
-});
+  export default colorpicker;
+  export { colorpicker };

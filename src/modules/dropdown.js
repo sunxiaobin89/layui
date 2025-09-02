@@ -3,12 +3,15 @@
  * 下拉菜单组件
  */
 
-layui.define(['jquery', 'laytpl', 'lay', 'util'], function(exports) {
-  "use strict";
 
-  var $ = layui.$;
-  var laytpl = layui.laytpl;
-  var util = layui.util;
+
+  import { layui } from '../layui.js';
+  import $ from 'jquery';
+  import laytpl from './laytpl.js';
+  import lay from './lay.js';
+  import util from './util.js';
+
+
   var hint = layui.hint();
   var device = layui.device();
   var clickOrMousedown = (device.mobile ? 'touchstart' : 'mousedown');
@@ -716,5 +719,6 @@ layui.define(['jquery', 'laytpl', 'lay', 'util'], function(exports) {
     return thisModule.call(inst);
   };
 
-  exports(MOD_NAME, dropdown);
-});
+  export default dropdown;
+  export { dropdown };
+

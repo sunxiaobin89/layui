@@ -2,10 +2,9 @@
  * util 工具组件
  */
 
-layui.define('jquery', function(exports) {
-  "use strict";
+import { layui } from '../layui.js';
+import $ from 'jquery';
 
-  var $ = layui.$;
   var hint = layui.hint();
 
   // 外部接口
@@ -473,6 +472,5 @@ layui.define('jquery', function(exports) {
   // 兼容旧版
   util.event = util.on;
 
-  // 输出接口
-  exports('util', util);
-});
+  export { util };
+  export default util;

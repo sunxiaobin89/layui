@@ -2,12 +2,12 @@
  * form 表单组件
  */
 
-layui.define(['lay', 'layer', 'util'], function(exports){
-  "use strict";
+  import { layui } from '../layui.js';
+  import $ from 'jquery';
+  import layer from './layer';
+  import util from './util';
+  import lay from './lay.js';
 
-  var $ = layui.$;
-  var layer = layui.layer;
-  var util = layui.util;
   var hint = layui.hint();
   var device = layui.device();
 
@@ -1542,5 +1542,5 @@ layui.define(['lay', 'layer', 'util'], function(exports){
   $dom.on('submit', ELEM, submit)
   .on('click', '*[lay-submit]', submit);
 
-  exports(MOD_NAME, form);
-});
+export { form };
+export default form;

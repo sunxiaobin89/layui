@@ -3,16 +3,15 @@
  * 表格组件
  */
 
-layui.define(['lay', 'laytpl', 'laypage', 'form', 'util'], function(exports) {
-  "use strict";
+  import { layui } from '../layui.js';
+  import $ from 'jquery';
+  import lay from './lay.js';
+  import laytpl from './laytpl.js';
+  import laypage from './laypage.js';
+  import layer from './layer.js';
+  import form from './form.js';
+  import util from './util.js';
 
-  var $ = layui.$;
-  var lay = layui.lay;
-  var laytpl = layui.laytpl;
-  var laypage = layui.laypage;
-  var layer = layui.layer;
-  var form = layui.form;
-  var util = layui.util;
   var hint = layui.hint();
   var device = layui.device();
 
@@ -3351,5 +3350,5 @@ layui.define(['lay', 'laytpl', 'laypage', 'form', 'util'], function(exports) {
     table.init();
   });
 
-  exports(MOD_NAME, table);
-});
+  export { table };
+  export default table;

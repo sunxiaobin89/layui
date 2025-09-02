@@ -2,11 +2,9 @@
  * flow 流加载组件
  */
 
+  import { layui } from '../layui.js';
+  import $ from 'jquery';
 
-layui.define('jquery', function(exports) {
-  "use strict";
-
-  var $ = layui.$;
   var Flow = function(options) {};
   var ELEM_MORE = 'layui-flow-more';
   var ELEM_LOAD = '<i class="layui-anim layui-anim-rotate layui-anim-loop layui-icon ">&#xe63e;</i>';
@@ -200,5 +198,7 @@ layui.define('jquery', function(exports) {
   }
 
   //暴露接口
-  exports('flow', new Flow());
-});
+  const flow = new Flow();
+  export default flow;
+  export { flow };
+

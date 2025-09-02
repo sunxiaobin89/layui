@@ -3,11 +3,9 @@
  * MIT Licensed
  */
 
-layui.define(['jquery', 'lay'], function(exports) {
-  "use strict";
-
-  var $ = layui.$;
-  var lay = layui.lay;
+  import { layui } from '../layui.js';
+  import $ from 'jquery';
+  import lay from './lay.js';
 
   var hint = layui.hint();
   var device = layui.device();
@@ -370,7 +368,5 @@ layui.define(['jquery', 'lay'], function(exports) {
     return new Class(options);
   };
 
-  exports(MOD_NAME, carousel);
-});
-
-
+  export default carousel;
+  export { carousel };

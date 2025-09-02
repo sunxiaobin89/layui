@@ -2,13 +2,10 @@
  * tree 树组件
  */
 
-layui.define(['form','util'], function(exports) {
-  "use strict";
-
-  var $ = layui.$;
-  var form = layui.form;
-  var layer = layui.layer;
-  var util = layui.util;
+  import { layui } from '../layui.js';
+  import $ from 'jquery';
+  import form from './form.js';
+  import util from './util.js';
 
   // 模块名
   var MOD_NAME = 'tree';
@@ -861,5 +858,5 @@ layui.define(['form','util'], function(exports) {
     return thisModule.call(inst);
   };
 
-  exports(MOD_NAME, tree);
-})
+  export { tree};
+  export default tree;

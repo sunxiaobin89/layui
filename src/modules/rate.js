@@ -3,14 +3,12 @@
  * 评分组件
  */
 
-layui.define('component', function(exports) {
-  "use strict";
-
-  var $ = layui.$;
-  var lay = layui.lay;
+  import lay from './lay.js';
+  import componentBuilder  from './component.js';
+  import $ from 'jquery';
 
   // 创建组件
-  var component = layui.component({
+  var component = componentBuilder({
     name: 'rate',
 
     // 默认配置
@@ -232,5 +230,5 @@ layui.define('component', function(exports) {
     });
   };
 
-  exports(CONST.MOD_NAME, component);
-});
+  export { component as rate };
+  export default component;

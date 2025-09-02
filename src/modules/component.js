@@ -3,14 +3,12 @@
  * Layui 2 组件构建器
  */
 
-layui.define(['jquery', 'lay'], function(exports) {
-  "use strict";
-
-  var $ = layui.$;
-  var lay = layui.lay;
+  import { layui } from '../layui.js';
+  import $ from 'jquery';
+  import lay from './lay.js';
 
   // export
-  exports('component', function(settings) {
+  export function component(settings) {
     // 默认设置
     settings = $.extend(true, {
       isDeepReload: false // 是否默认为深度重载
@@ -256,5 +254,5 @@ layui.define(['jquery', 'lay'], function(exports) {
     };
 
     return component;
-  });
-});
+  }
+  export default component;

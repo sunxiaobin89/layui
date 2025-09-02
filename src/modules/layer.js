@@ -2,12 +2,10 @@
  * layer
  * 通用 Web 弹出层组件
  */
-//@ts-ignore
-(function(window, undefined) {
-"use strict";
+import { layui } from '../layui.js';
+import $ from 'jquery';
 
 var isLayui = window.layui && layui.define;
-var $;
 var win;
 var ready = {
   getPath: function(){
@@ -1868,7 +1866,7 @@ layer.photos = function(options, loop, key){
 
 // 主入口
 ready.run = function(_$){
-  $ = _$;
+  var $ = _$;
   win = $(window);
 
   // 移动端兼容性处理
@@ -1894,25 +1892,8 @@ ready.run = function(_$){
   };
 };
 
-// 加载方式
-window.layui && layui.define ? (
-  layer.ready(),
-  layui.define(['jquery','lay'], function(exports){ // layui
-    layer.path = layui.cache.dir;
-    ready.run(layui.$);
-
-    // export api
-    window.layer = layer;
-    exports('layer', layer);
-  })
-) : (
-  (typeof define === 'function' && define.amd) ? define(['jquery'], function(){ // requirejs
-    ready.run(window.jQuery);
-    return layer;
-  }) : function(){ // 普通 script 标签引入
     layer.ready();
-    ready.run(window.jQuery);
-  }()
-);
+    ready.run($);
 
-})(window);
+    export { layer };
+    export default layer;

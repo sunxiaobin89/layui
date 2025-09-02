@@ -1,8 +1,6 @@
 
 /** lay 基础模块 | MIT Licensed */
-
-(function(window) {
-  "use strict";
+import { layui } from '../layui.js';
 
   var MOD_NAME = 'lay'; // 模块名
   var document = window.document;
@@ -980,14 +978,5 @@
     });
   };
 
-  // export
-  window.lay = lay;
-
-  // 输出为 layui 模块
-  if(window.layui && layui.define){
-    layui.define(function(exports){
-      exports(MOD_NAME, lay);
-    });
-  }
-
-})(window);
+export default lay;
+export { lay };

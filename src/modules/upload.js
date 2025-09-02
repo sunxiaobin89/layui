@@ -3,12 +3,11 @@
  * 上传组件
  */
 
-layui.define(['lay', 'layer'], function(exports) {
-  "use strict";
+  import { layui } from '../layui.js';
+  import $ from 'jquery';
+  import lay from './lay.js';
+  import layer from './layer.js';
 
-  var $ = layui.$;
-  var lay = layui.lay;
-  var layer = layui.layer;
   var device = layui.device();
 
   // 模块名
@@ -845,6 +844,5 @@ layui.define(['lay', 'layer'], function(exports) {
     return thisModule.call(inst);
   };
 
-  exports(MOD_NAME, upload);
-});
-
+  export { upload };
+  export default upload;
