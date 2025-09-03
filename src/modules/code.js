@@ -3,7 +3,7 @@
  * Code 预览组件
  */
 
-  import { layui } from '../layui.js';
+  import { layui } from '../core.js';
   import $ from 'jquery';
   import lay from './lay.js';
   import util from './util.js';

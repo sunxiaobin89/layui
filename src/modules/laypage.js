@@ -2,7 +2,7 @@
  * laypage 分页组件
  */
 
-import { layui } from '../layui.js';
+  import { layui } from '../core.js';
 
   var doc = document;
   var id = 'getElementById';

@@ -2008,7 +2008,7 @@ function getDefaultExportFromCjs (x) {
 	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
 }
 
-var jquery$1 = {exports: {}};
+var jquery = {exports: {}};
 
 /*!
  * jQuery JavaScript Library v3.7.1
@@ -12697,10 +12697,10 @@ var jquery$1 = {exports: {}};
 
 	return jQuery;
 	} ); 
-} (jquery$1));
+} (jquery));
 
-var jqueryExports = jquery$1.exports;
-var jquery = /*@__PURE__*/getDefaultExportFromCjs(jqueryExports);
+var jqueryExports = jquery.exports;
+var $ = /*@__PURE__*/getDefaultExportFromCjs(jqueryExports);
 
 /**
  * layer
@@ -12812,7 +12812,7 @@ var layer$1 = {
   path: ready$1.getPath,
   config: function(options, fn){
     options = options || {};
-    layer$1.cache = ready$1.config = jquery.extend({}, ready$1.config, options);
+    layer$1.cache = ready$1.config = $.extend({}, ready$1.config, options);
     layer$1.path = ready$1.config.path || layer$1.path;
     typeof options.extend === 'string' && (options.extend = [options.extend]);
 
@@ -12848,7 +12848,7 @@ var layer$1 = {
   alert: function(content, options, yes){
     var type = typeof options === 'function';
     if(type) yes = options;
-    return layer$1.open(jquery.extend({
+    return layer$1.open($.extend({
       content: content,
       yes: yes
     }, type ? {} : options));
@@ -12860,7 +12860,7 @@ var layer$1 = {
       cancel = yes;
       yes = options;
     }
-    return layer$1.open(jquery.extend({
+    return layer$1.open($.extend({
       content: content,
       btn: ready$1.btn,
       yes: yes,
@@ -12873,7 +12873,7 @@ var layer$1 = {
     var skin = (rskin ? rskin + ' ' + rskin + '-msg' : '')||'layui-layer-msg';
     var anim = doms.anim.length - 1;
     if(type) end = options;
-    return layer$1.open(jquery.extend({
+    return layer$1.open($.extend({
       content: content,
       time: 3000,
       shade: false,
@@ -12897,7 +12897,7 @@ var layer$1 = {
   },
 
   load: function(icon, options){
-    return layer$1.open(jquery.extend({
+    return layer$1.open($.extend({
       type: 3,
       icon: icon || 0,
       resize: false,
@@ -12907,7 +12907,7 @@ var layer$1 = {
   },
 
   tips: function(content, follow, options){
-    return layer$1.open(jquery.extend({
+    return layer$1.open($.extend({
       type: 4,
       content: [content, follow],
       closeBtn: false,
@@ -12926,8 +12926,8 @@ var Class$e = function(setings){
     that.creat();
   };
   that.index = ++layer$1.index;
-  that.config.maxWidth = jquery(win).width() - 15*2; // 初始最大宽度：当前屏幕宽，左右留 15px 边距
-  that.config = jquery.extend({}, that.config, ready$1.config, setings);
+  that.config.maxWidth = $(win).width() - 15*2; // 初始最大宽度：当前屏幕宽，左右留 15px 边距
+  that.config = $.extend({}, that.config, ready$1.config, setings);
   document.body ? creat() : setTimeout(function(){
     creat();
   }, 30);
@@ -13089,7 +13089,7 @@ Class$e.pt.vessel = function(conType, callback){
       }() : '')
       + (config.resize ? '<span class="layui-layer-resize"></span>' : '')
     + '</div>'
-  ], titleHTML, jquery('<div class="'+ doms.MOVE +'" id="'+ doms.MOVE +'"></div>'));
+  ], titleHTML, $('<div class="'+ doms.MOVE +'" id="'+ doms.MOVE +'"></div>'));
   return that;
 };
 
@@ -13100,7 +13100,7 @@ Class$e.pt.creat = function(){
   var times = that.index;
   var content = config.content;
   var conType = typeof content === 'object';
-  var body = jquery('body');
+  var body = $('body');
 
   var setAnim = function(layero){
     // anim 兼容旧版 shift
@@ -13112,18 +13112,18 @@ Class$e.pt.creat = function(){
     if(doms.anim[config.anim]){
       var animClass = 'layer-anim '+ doms.anim[config.anim];
       layero.addClass(animClass).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
-        jquery(this).removeClass(animClass);
+        $(this).removeClass(animClass);
       });
     }
   };
 
   // 若 id 对应的弹层已经存在，则不重新创建
-  if(config.id && jquery('.'+ doms[0]).find('#'+ config.id)[0]){
+  if(config.id && $('.'+ doms[0]).find('#'+ config.id)[0]){
     return (function(){
-      var layero = jquery('#'+ config.id).closest('.'+ doms[0]);
+      var layero = $('#'+ config.id).closest('.'+ doms[0]);
       var index = layero.attr('times');
       var options = layero.data('config');
-      var elemShade = jquery('#'+ doms.SHADE + index);
+      var elemShade = $('#'+ doms.SHADE + index);
 
       var maxminStatus = layero.data('maxminStatus') || {};
       // 若弹层为最小化状态，则点击目标元素时，自动还原
@@ -13184,18 +13184,18 @@ Class$e.pt.creat = function(){
     body.append(html[0]);
     conType ? function(){
       (config.type == 2 || config.type == 4) ? function(){
-        jquery('body').append(html[1]);
+        $('body').append(html[1]);
       }() : function(){
         if(!content.parents('.'+doms[0])[0]){
           content.data('display', content.css('display')).show().addClass('layui-layer-wrap').wrap(html[1]);
-          jquery('#'+ doms[0] + times).find('.'+doms[5]).before(titleHTML);
+          $('#'+ doms[0] + times).find('.'+doms[5]).before(titleHTML);
         }
       }();
     }() : body.append(html[1]);
-    jquery('#'+ doms.MOVE)[0] || body.append(ready$1.moveElem = moveElem);
+    $('#'+ doms.MOVE)[0] || body.append(ready$1.moveElem = moveElem);
 
-    that.layero = jquery('#'+ doms[0] + times);
-    that.shadeo = jquery('#'+ doms.SHADE + times);
+    that.layero = $('#'+ doms[0] + times);
+    that.shadeo = $('#'+ doms.SHADE + times);
 
     config.scrollbar || ready$1.setScrollbar(times);
   }).auto(times);
@@ -13259,7 +13259,7 @@ Class$e.pt.resize = function(){
 
 // 自适应
 Class$e.pt.auto = function(index){
-  var that = this, config = that.config, layero = jquery('#'+ doms[0] + index);
+  var that = this, config = that.config, layero = $('#'+ doms[0] + index);
 
   if((config.area[0] === '' || config.area[0] === 'auto') && config.maxWidth > 0){
     // 适配 ie7
@@ -13365,8 +13365,8 @@ Class$e.pt.offset = function(){
 // Tips
 Class$e.pt.tips = function(){
   var that = this, config = that.config, layero = that.layero;
-  var layArea = [layero.outerWidth(), layero.outerHeight()], follow = jquery(config.follow);
-  if(!follow[0]) follow = jquery('body');
+  var layArea = [layero.outerWidth(), layero.outerHeight()], follow = $(config.follow);
+  if(!follow[0]) follow = $('body');
   var goal = {
     width: follow.outerWidth(),
     height: follow.outerHeight(),
@@ -13434,7 +13434,7 @@ Class$e.pt.tips = function(){
 Class$e.pt.move = function(){
   var that = this;
   var config = that.config;
-  var _DOC = jquery(document);
+  var _DOC = $(document);
   var layero = that.layero;
   var DATA_NAME = ['LAY_MOVE_DICT', 'LAY_RESIZE_DICT'];
   var moveElem = layero.find(config.move);
@@ -13446,7 +13446,7 @@ Class$e.pt.move = function(){
   // 按下拖动元素
   moveElem.on('mousedown', function(e){
     if (e.button) {return;} // 不是左键不处理
-    var othis = jquery(this);
+    var othis = $(this);
     var dict = {};
 
     if(config.move){
@@ -13467,7 +13467,7 @@ Class$e.pt.move = function(){
 
   // 按下右下角拉伸
   resizeElem.on('mousedown', function(e){
-    var othis = jquery(this);
+    var othis = $(this);
     var dict = {};
 
     if(config.resize){
@@ -13588,7 +13588,7 @@ Class$e.pt.callback = function(){
 
   // 按钮
   layero.find('.'+ doms[6]).children('a').on('click', function(){
-    var btnElem = jquery(this);
+    var btnElem = $(this);
     var index = btnElem.index();
     if(btnElem.attr('disabled')) return;
 
@@ -13651,7 +13651,7 @@ Class$e.pt.callback = function(){
 
   // 全屏/还原
   layero.find('.layui-layer-max').on('click', function(){
-    if(jquery(this).hasClass('layui-layer-maxmin')){
+    if($(this).hasClass('layui-layer-maxmin')){
       layer$1.restore(that.index);
       config.restore && config.restore(layero, that.index, that);
     } else {
@@ -13663,15 +13663,15 @@ Class$e.pt.callback = function(){
   });
 
   config.end && (ready$1.end[that.index] = config.end);
-  config.beforeEnd && (ready$1.beforeEnd[that.index] = jquery.proxy(config.beforeEnd, config, layero, that.index, that));
+  config.beforeEnd && (ready$1.beforeEnd[that.index] = $.proxy(config.beforeEnd, config, layero, that.index, that));
 };
 
 // for ie6 恢复 select
 ready$1.reselect = function(){
-  jquery.each(jquery('select'), function(index , value){
-    var sthis = jquery(this);
+  $.each($('select'), function(index , value){
+    var sthis = $(this);
     if(!sthis.parents('.'+doms[0])[0]){
-      (sthis.attr('layer') == 1 && jquery('.'+doms[0]).length < 1) && sthis.removeAttr('layer').show();
+      (sthis.attr('layer') == 1 && $('.'+doms[0]).length < 1) && sthis.removeAttr('layer').show();
     }
     sthis = null;
   });
@@ -13679,8 +13679,8 @@ ready$1.reselect = function(){
 
 Class$e.pt.IE6 = function(layero){
   // 隐藏select
-  jquery('select').each(function(index , value){
-    var sthis = jquery(this);
+  $('select').each(function(index , value){
+    var sthis = $(this);
     if(!sthis.parents('.'+doms[0])[0]){
       sthis.css('display') === 'none' || sthis.attr({'layer' : '1'}).hide();
     }
@@ -13732,8 +13732,8 @@ ready$1.restScrollbar = function(index) {
   if(!doms.html.css('overflow')) return;
 
   // 关闭和大小化, layer-full 处理
-  var targetEl = jquery('.'+ doms[0]).filter(function(){
-    var layero = jquery(this);
+  var targetEl = $('.'+ doms[0]).filter(function(){
+    var layero = $(this);
     var options = layero.data('config') || {};
     return options.scrollbar === false
       && layero.data('maxminStatus') !== 'min'
@@ -13746,7 +13746,7 @@ ready$1.restScrollbar = function(index) {
 
 // 类似 Promise.resolve
 ready$1.promiseLikeResolve = function(value){
-  var deferred = jquery.Deferred();
+  var deferred = $.Deferred();
 
   if(value && typeof value.then === 'function'){
     value.then(deferred.resolve, deferred.reject);
@@ -13762,21 +13762,21 @@ window.layer = layer$1;
 
 // 获取子 iframe 的 DOM
 layer$1.getChildFrame = function(selector, index){
-  index = index || jquery('.'+doms[4]).attr('times');
-  return jquery('#'+ doms[0] + index).find('iframe').contents().find(selector);
+  index = index || $('.'+doms[4]).attr('times');
+  return $('#'+ doms[0] + index).find('iframe').contents().find(selector);
 };
 
 // 得到当前 iframe 层的索引，子 iframe 时使用
 layer$1.getFrameIndex = function(name){
   if(!name) return;
-  return jquery('#'+ name).parents('.'+doms[4]).attr('times');
+  return $('#'+ name).parents('.'+doms[4]).attr('times');
 };
 
 // iframe 层自适应宽高
 layer$1.iframeAuto = function(index){
   if(!index) return;
   var heg = layer$1.getChildFrame('html', index).outerHeight();
-  var layero = jquery('#'+ doms[0] + index);
+  var layero = $('#'+ doms[0] + index);
   var titHeight = layero.find(doms[1]).outerHeight() || 0;
   var btnHeight = layero.find('.'+doms[6]).outerHeight() || 0;
   layero.css({height: heg + titHeight + btnHeight});
@@ -13785,12 +13785,12 @@ layer$1.iframeAuto = function(index){
 
 // 重置 iframe url
 layer$1.iframeSrc = function(index, url){
-  jquery('#'+ doms[0] + index).find('iframe').attr('src', url);
+  $('#'+ doms[0] + index).find('iframe').attr('src', url);
 };
 
 // 设定层的样式
 layer$1.style = function(index, options, limit){
-  var layero = jquery('#'+ doms[0] + index);
+  var layero = $('#'+ doms[0] + index);
   var contentElem = layero.find('.layui-layer-content');
   var type = layero.attr('type');
   var titHeight = layero.find(doms[1]).outerHeight() || 0;
@@ -13829,7 +13829,7 @@ layer$1.style = function(index, options, limit){
 
 // 最小化
 layer$1.min = function(index, options){
-  var layero = jquery('#'+ doms[0] + index);
+  var layero = $('#'+ doms[0] + index);
   var maxminStatus = layero.data('maxminStatus');
 
   if(maxminStatus === 'min') return; // 当前的状态是否已经是最小化
@@ -13838,7 +13838,7 @@ layer$1.min = function(index, options){
   layero.data('maxminStatus', 'min');
   options = options || layero.data('config') || {};
 
-  var shadeo = jquery('#'+ doms.SHADE + index);
+  var shadeo = $('#'+ doms.SHADE + index);
   var elemMin = layero.find('.layui-layer-min');
   var titHeight = layero.find(doms[1]).outerHeight() || 0;
   var minLeft = layero.attr('minLeft'); // 最小化时的横坐标
@@ -13891,8 +13891,8 @@ layer$1.min = function(index, options){
 
 // 还原
 layer$1.restore = function(index){
-  var layero = jquery('#'+ doms[0] + index);
-  var shadeo = jquery('#'+ doms.SHADE + index);
+  var layero = $('#'+ doms[0] + index);
+  var shadeo = $('#'+ doms.SHADE + index);
   var contentElem = layero.find('.layui-layer-content');
   var area = layero.attr('area').split(',');
   var type = layero.attr('type');
@@ -13932,7 +13932,7 @@ layer$1.restore = function(index){
 
 // 全屏（最大化）
 layer$1.full = function(index){
-  var layero = jquery('#'+ doms[0] + index);
+  var layero = $('#'+ doms[0] + index);
   var maxminStatus = layero.data('maxminStatus');
 
   if(maxminStatus === 'max') return // 检查当前的状态是否已经是最大化
@@ -13957,18 +13957,18 @@ layer$1.full = function(index){
 
 // 改变 title
 layer$1.title = function(name, index){
-  var title = jquery('#'+ doms[0] + (index || layer$1.index)).find(doms[1]);
+  var title = $('#'+ doms[0] + (index || layer$1.index)).find(doms[1]);
   title.html(name);
 };
 
 // 关闭 layer 总方法
 layer$1.close = function(index, callback){
   var layero = function(){
-    var closest = jquery('.'+ doms[0]).children('#'+ index).closest('.'+ doms[0]);
+    var closest = $('.'+ doms[0]).children('#'+ index).closest('.'+ doms[0]);
     return closest[0] ? (
       index = closest.attr('times'),
       closest
-    ) : jquery('#'+ doms[0] + index)
+    ) : $('#'+ doms[0] + index)
   }();
   var type = layero.attr('type');
   var options = layero.data('config') || {};
@@ -14007,7 +14007,7 @@ layer$1.close = function(index, callback){
         // 低版本 IE 回收 iframe
         if(type === ready$1.type[2]){
           try {
-            var iframe = jquery('#'+ doms[4] + index)[0];
+            var iframe = $('#'+ doms[4] + index)[0];
             iframe.contentWindow.document.write('');
             iframe.contentWindow.close();
             layero.find('.'+doms[5])[0].removeChild(iframe);
@@ -14028,7 +14028,7 @@ layer$1.close = function(index, callback){
       }
     };
     // 移除遮罩
-    var shadeo = jquery('#'+ doms.SHADE + index);
+    var shadeo = $('#'+ doms.SHADE + index);
     if((layer$1.ie && layer$1.ie < 10) || !options.isOutAnim){
       shadeo[hideOnClose ? 'hide' : 'remove']();
     }else {
@@ -14083,9 +14083,9 @@ layer$1.closeAll = function(type, callback){
     callback = type;
     type = null;
   }
-  var domsElem = jquery('.'+doms[0]);
-  jquery.each(domsElem, function(_index){
-    var othis = jquery(this);
+  var domsElem = $('.'+doms[0]);
+  $.each(domsElem, function(_index){
+    var othis = $(this);
     var is = type ? (othis.attr('type') === type) : 1;
     is && layer$1.close(othis.attr('times'), _index === domsElem.length - 1 ? callback : null);
     is = null;
@@ -14096,9 +14096,9 @@ layer$1.closeAll = function(type, callback){
 // 根据弹层类型关闭最近打开的层
 layer$1.closeLast = function(type, callback){
   var layerIndexList = [];
-  var isArrayType = jquery.isArray(type);
-  jquery(typeof type === 'string' ? '.layui-layer-' + type : '.layui-layer').each(function(i, el){
-    var layero = jquery(el);
+  var isArrayType = $.isArray(type);
+  $(typeof type === 'string' ? '.layui-layer-' + type : '.layui-layer').each(function(i, el){
+    var layero = $(el);
     var shouldSkip = (isArrayType && type.indexOf(layero.attr('type')) === -1) || layero.css('display') === 'none';
     if(shouldSkip) return true;
     layerIndexList.push(Number(layero.attr('times')));
@@ -14142,7 +14142,7 @@ layer$1.prompt = function(options, yes){
   var success = options.success;
   delete options.success;
 
-  return layer$1.open(jquery.extend({
+  return layer$1.open($.extend({
     type: 1,
     btn: ['确定','取消'],
     content: content,
@@ -14175,7 +14175,7 @@ layer$1.tab = function(options){
 
   delete options.success;
 
-  return layer$1.open(jquery.extend({
+  return layer$1.open($.extend({
     type: 1,
     skin: 'layui-layer-tab' + skin('tab'),
     resize: false,
@@ -14204,7 +14204,7 @@ layer$1.tab = function(options){
       var main = layero.find('.layui-layer-tabmain').children();
       btn.on('mousedown', function(e){
         e.stopPropagation ? e.stopPropagation() : e.cancelBubble = true;
-        var othis = jquery(this), index = othis.index();
+        var othis = $(this), index = othis.index();
         othis.addClass(THIS).siblings().removeClass(THIS);
         main.eq(index).show().siblings().hide();
         typeof options.change === 'function' && options.change(index);
@@ -14219,7 +14219,7 @@ layer$1.photos = function(options, loop, key){
   var dict = {};
 
   // 默认属性
-  options = jquery.extend(true, {
+  options = $.extend(true, {
     toolbar: true,
     footer: true
   }, options);
@@ -14227,7 +14227,7 @@ layer$1.photos = function(options, loop, key){
   if(!options.photos) return;
 
   // 若 photos 并非选择器或 jQuery 对象，则为普通 object
-  var isObject = !(typeof options.photos === 'string' || options.photos instanceof jquery);
+  var isObject = !(typeof options.photos === 'string' || options.photos instanceof $);
   var photos = isObject ? options.photos : {};
   var data = photos.data || [];
   var start = photos.start || 0;
@@ -14239,10 +14239,10 @@ layer$1.photos = function(options, loop, key){
 
   // 若 options.photos 不是一个对象
   if(!isObject){ // 页面直接获取
-    var parent = jquery(options.photos), pushData = function(){
+    var parent = $(options.photos), pushData = function(){
       data = [];
       parent.find(options.img).each(function(index){
-        var othis = jquery(this);
+        var othis = $(this);
         othis.attr('layer-index', index);
         data.push({
           alt: othis.attr('alt'),
@@ -14257,8 +14257,8 @@ layer$1.photos = function(options, loop, key){
 
     loop || parent.on('click', options.img, function(){
       pushData();
-      var othis = jquery(this), index = othis.attr('layer-index');
-      layer$1.photos(jquery.extend(options, {
+      var othis = $(this), index = othis.attr('layer-index');
+      layer$1.photos($.extend(options, {
         photos: {
           start: index,
           data: data,
@@ -14357,11 +14357,11 @@ layer$1.photos = function(options, loop, key){
       dict.imgnext(true);
     });
 
-    jquery(document).on('keyup', dict.keyup);
+    $(document).on('keyup', dict.keyup);
 
     // 头部工具栏事件
     layero.off('click').on('click','*[toolbar-event]', function () {
-      var othis = jquery(this);
+      var othis = $(this);
       var event = othis.attr('toolbar-event');
       switch (event) {
         case 'rotate':
@@ -14431,7 +14431,7 @@ layer$1.photos = function(options, loop, key){
         }
       };
 
-      jquery.each([that.shadeo, dict.main], function(i, elem){
+      $.each([that.shadeo, dict.main], function(i, elem){
         lay.touchSwipe(elem, {
           onTouchEnd: touchEndCallback
         });
@@ -14470,12 +14470,12 @@ layer$1.photos = function(options, loop, key){
     if(key) options.anim = -1;
 
     // 弹出图片层
-    dict.index = layer$1.open(jquery.extend({
+    dict.index = layer$1.open($.extend({
       type: 1,
       id: 'layui-layer-photos',
       area: function(){
         var imgarea = [img.width, img.height];
-        var winarea = [jquery(window).width() - 100, jquery(window).height() - 100];
+        var winarea = [$(window).width() - 100, $(window).height() - 100];
 
         // 若实际图片的宽或者高比 屏幕大（那么进行缩放）
         if(!options.full && (imgarea[0]>winarea[0]||imgarea[1]>winarea[1])){
@@ -14551,7 +14551,7 @@ layer$1.photos = function(options, loop, key){
         typeof success === 'function' && success(layero);
       }, end: function(){
         dict.end = true;
-        jquery(document).off('keyup', dict.keyup);
+        $(document).off('keyup', dict.keyup);
       }
     }, options));
   }, function(){
@@ -14595,7 +14595,7 @@ ready$1.run = function(_$){
 };
 
     layer$1.ready();
-    ready$1.run(jquery);
+    ready$1.run($);
 
 /** laydate 日期与时间控件 | MIT Licensed */
 
@@ -18184,10 +18184,10 @@ ready$1.run = function(_$){
     // 固定块
     fixbar: function(options){
       var ELEM = 'layui-fixbar';
-      var $doc = jquery(document);
+      var $doc = $(document);
 
       // 默认可选项
-      options = jquery.extend(true, {
+      options = $.extend(true, {
         target: 'body', // fixbar 的插入目标选择器
         bars: [], //  bar 信息
         "default": true, // 是否显示默认 bar
@@ -18196,12 +18196,12 @@ ready$1.run = function(_$){
       }, options);
 
       // 目标元素对象
-      var $target = jquery(options.target);
+      var $target = $(options.target);
 
       // 滚动条所在元素对象
       var $scroll = options.scroll
-        ? jquery(options.scroll)
-      : jquery(options.target === 'body' ? $doc : $target);
+        ? $(options.scroll)
+      : $(options.target === 'body' ? $doc : $target);
 
       // 是否提供默认图标
       if(options['default']){
@@ -18225,12 +18225,12 @@ ready$1.run = function(_$){
         });
       }
 
-      var elem = jquery('<ul>').addClass(ELEM);
+      var elem = $('<ul>').addClass(ELEM);
       var elemTopBar;
 
       // 遍历生成 bars 节点
       layui.each(options.bars, function(i, item){
-        var elemBar = jquery('<li class="layui-icon">');
+        var elemBar = $('<li class="layui-icon">');
 
         // 设置 bar 相关属性
         elemBar.addClass(item.icon).attr({
@@ -18240,11 +18240,11 @@ ready$1.run = function(_$){
 
         // bar 点击事件
         elemBar.on('click', function(){
-          var type = jquery(this).attr('lay-type');
+          var type = $(this).attr('lay-type');
           if(type === 'top'){
             (
               options.target === 'body'
-                ? jquery('html,body')
+                ? $('html,body')
               : $scroll
             ).animate({
               scrollTop : 0
@@ -18257,7 +18257,7 @@ ready$1.run = function(_$){
         if(layui.type(options.on) === 'object'){
           layui.each(options.on, function(eventName, callback){
             elemBar.on(eventName, function(){
-              var type = jquery(this).attr('lay-type');
+              var type = $(this).attr('lay-type');
               typeof callback === 'function' && callback.call(this, type);
             });
           });
@@ -18308,7 +18308,7 @@ ready$1.run = function(_$){
     countdown: function(options){
 
       // 默认可选项
-      options = jquery.extend(true, {
+      options = $.extend(true, {
         date: new Date(),
         now: new Date()
       }, options);
@@ -18329,7 +18329,7 @@ ready$1.run = function(_$){
         },
         reload: function(opts){ // 重置倒计时
           this.clear();
-          jquery.extend(true, this.options, {
+          $.extend(true, this.options, {
             now: new Date()
           }, opts);
           count();
@@ -18551,7 +18551,7 @@ ready$1.run = function(_$){
 
     // 让指定的元素保持在可视区域
     toVisibleArea: function(options){
-      options = jquery.extend({
+      options = $.extend({
         margin: 160, // 触发动作的边界值
         duration: 200, // 动画持续毫秒数
         type: 'y' // 触发方向，x 水平、y 垂直
@@ -18595,14 +18595,14 @@ ready$1.run = function(_$){
       }
 
       // 更多选项
-      options = jquery.extend({
+      options = $.extend({
         elem: 'body',
         trigger: 'click'
       }, typeof options === 'object' ? options : {
         trigger: options // 兼容旧版
       });
 
-      var elem = options.elem = jquery(options.elem);
+      var elem = options.elem = $(options.elem);
       var attrSelector = '['+ attr +']';
       var DATANAME = 'UTIL_ON_DATA'; // 缓存在委托元素上的 data-* 属性名
 
@@ -18622,7 +18622,7 @@ ready$1.run = function(_$){
       var key = attr + '_' + options.trigger;
 
       // 根据 key 记录事件集合
-      events = dataCache.events[key] = jquery.extend(true, dataCache.events[key], events);
+      events = dataCache.events[key] = $.extend(true, dataCache.events[key], events);
 
 
       // 清除事件委托，避免重复绑定
@@ -18631,7 +18631,7 @@ ready$1.run = function(_$){
 
       // 绑定事件委托
       elem.on(trigger, attrSelector, function(e) {
-        var othis = jquery(this);
+        var othis = $(this);
         var attrValue = othis.attr(attr);
         typeof events[attrValue] === 'function' && events[attrValue].call(this, othis, e);
       });
@@ -18646,7 +18646,6 @@ ready$1.run = function(_$){
 /**
  * form 表单组件
  */
-
 
   var hint$4 = layui.hint();
   layui.device();
@@ -18716,20 +18715,20 @@ ready$1.run = function(_$){
   // 全局设置
   Form.prototype.set = function(options){
     var that = this;
-    jquery.extend(true, that.config, options);
+    $.extend(true, that.config, options);
     return that;
   };
 
   // 验证规则设定
   Form.prototype.verify = function(settings){
     var that = this;
-    jquery.extend(true, that.config.verify, settings);
+    $.extend(true, that.config.verify, settings);
     return that;
   };
 
   // 获取指定表单对象
   Form.prototype.getFormElem = function(filter){
-    return jquery(ELEM$2 + function(){
+    return $(ELEM$2 + function(){
       return filter ? ('[lay-filter="' + filter +'"]') : '';
     }());
   };
@@ -18746,7 +18745,7 @@ ready$1.run = function(_$){
 
     // 遍历
     formElem.each(function(index, item){
-      var itemForm = jquery(this);
+      var itemForm = $(this);
 
       // 赋值
       for(var key in object){
@@ -18787,7 +18786,7 @@ ready$1.run = function(_$){
     ,fieldElem = itemForm.find('input,select,textarea'); // 获取所有表单域
 
     layui.each(fieldElem, function(_, item){
-      var othis = jquery(this)
+      var othis = $(this)
       ,init_name; // 初始 name
 
       item.name = (item.name || '').replace(/^\s*|\s*&/, '');
@@ -18816,7 +18815,7 @@ ready$1.run = function(_$){
   Form.prototype.render = function(type, filter){
     var that = this;
     var options = that.config;
-    var elemForm = jquery(ELEM$2 + function(){
+    var elemForm = $(ELEM$2 + function(){
       return filter ? ('[lay-filter="' + filter +'"]') : '';
     }());
     var items = {
@@ -18846,7 +18845,7 @@ ready$1.run = function(_$){
           if(eventType === 'click'){
             // 兼容旧版行为，2.10 以前 readonly 不禁用控制按钮
             if(elem[0].type === 'text' && typeof elem.attr('readonly') === 'string') return;
-            var isDecrement = !!jquery(that).index(); // 0: icon-up, 1: icon-down
+            var isDecrement = !!$(that).index(); // 0: icon-up, 1: icon-down
             value = isDecrement ? value - step : value + step;
           }
 
@@ -18896,7 +18895,7 @@ ready$1.run = function(_$){
 
         // 初始化输入框动态点缀
         elemForm.find('input[lay-affix],textarea[lay-affix]').each(function(){
-          var othis = jquery(this);
+          var othis = $(this);
           var affix = othis.attr('lay-affix');
           var CLASS_WRAP = 'layui-input-wrap';
           var CLASS_SUFFIX = 'layui-input-suffix';
@@ -18905,19 +18904,19 @@ ready$1.run = function(_$){
 
           // 根据是否空值来显示或隐藏元素
           var showAffix = function(elem, value){
-            elem = jquery(elem);
+            elem = $(elem);
             if(!elem[0]) return;
-            elem[jquery.trim(value) ? 'removeClass' : 'addClass'](HIDE$4);
+            elem[$.trim(value) ? 'removeClass' : 'addClass'](HIDE$4);
           };
 
           // 渲染动态点缀内容
           var renderAffix = function(opts){
-            opts = jquery.extend({}, (affixOptions[affix] || {
+            opts = $.extend({}, (affixOptions[affix] || {
               value: affix
             }), opts, lay.options(othis[0]));
-            var elemAffix = jquery('<div class="'+ CLASS_AFFIX +'">');
+            var elemAffix = $('<div class="'+ CLASS_AFFIX +'">');
             var value = layui.isArray(opts.value) ? opts.value : [opts.value];
-            var elemIcon = jquery(function(){
+            var elemIcon = $(function(){
               var arr = [];
               layui.each(value, function(i, item){
                 arr.push('<i class="layui-icon layui-icon-'+ item + (
@@ -18979,7 +18978,7 @@ ready$1.run = function(_$){
             // 点击动态后缀事件
             elemIcon.on('click', function(){
               var inputFilter = othis.attr('lay-filter');
-              if(jquery(this).hasClass(DISABLED$3)) return;
+              if($(this).hasClass(DISABLED$3)) return;
 
               typeof opts.click === 'function' && opts.click.call(this, othis, opts);
 
@@ -19011,7 +19010,7 @@ ready$1.run = function(_$){
               value: 'clear',
               click: function(elem){
                 elem.val('').focus();
-                showAffix(jquery(this).parent(), null);
+                showAffix($(this).parent(), null);
               },
               show: 'auto', // 根据输入框值是否存在来显示或隐藏点缀图标
               disabled: disabled // 跟随输入框禁用状态
@@ -19066,7 +19065,7 @@ ready$1.run = function(_$){
                   if(isMouseWheel){
                     elem.on(['wheel','mousewheel','DOMMouseScroll'].join(ns + ' ') + ns, function (e) {
                       if(!btnElem.length) return;
-                      if(!jquery(this).is(':focus')) return;
+                      if(!$(this).is(':focus')) return;
                       var direction = 0;
                       e.preventDefault();
                       // IE9+，chrome 和 firefox 同时添加 'wheel' 和 'mousewheel' 事件时，只执行 'wheel' 事件
@@ -19115,7 +19114,7 @@ ready$1.run = function(_$){
 
         // 各种事件
         var events = function(reElem, titleElem, disabled, isSearch, isCreatable, isAppendTo){
-          var select = jquery(this);
+          var select = $(this);
           var title = titleElem;
           var input = title.find('input');
           var dl = reElem.find('dl');
@@ -19159,7 +19158,7 @@ ready$1.run = function(_$){
               };
 
               updatePosition();
-              jquery(window).on('resize.lay_select_resize', updatePosition);
+              $(window).on('resize.lay_select_resize', updatePosition);
             }
             var top = reElem.offset().top + reElem.outerHeight() + 5 - $win$1.scrollTop();
             var dlHeight = dl.outerHeight();
@@ -19211,7 +19210,7 @@ ready$1.run = function(_$){
             }
             if(isAppendTo){
               reElem.detach();
-              jquery(window).off('resize.lay_select_resize');
+              $(window).off('resize.lay_select_resize');
             }
 
             if(choose) return;
@@ -19221,7 +19220,7 @@ ready$1.run = function(_$){
 
               // 未查询到相关值
               if(none){
-                initValue = jquery(select[0].options[selectedIndex]).prop('text'); // 重新获得初始选中值
+                initValue = $(select[0].options[selectedIndex]).prop('text'); // 重新获得初始选中值
 
                 // 如果是第一项，且文本值等于 placeholder，则清空初始值
                 if(selectedIndex === 0 && initValue === input.attr('placeholder')){
@@ -19296,7 +19295,7 @@ ready$1.run = function(_$){
               var selectedIndex = -1;
 
               layui.each(allDisplayedElem, function(index, el){
-                if(jquery(el).hasClass(THIS$2)){
+                if($(el).hasClass(THIS$2)){
                   selectedIndex = index;
                   return true;
                 }
@@ -19337,7 +19336,7 @@ ready$1.run = function(_$){
               fuzzyMatchRE = fuzzyMatchRegExp(value, laySearch.caseSensitive);
             }
             layui.each(dds, function(){
-              var othis = jquery(this);
+              var othis = $(this);
               var text = othis.text();
               var isCreateOption = isCreatable && othis.hasClass(CREATE_OPTION);
 
@@ -19359,7 +19358,7 @@ ready$1.run = function(_$){
             });
             // 处理 select 分组元素
             origin === 'keyup' && layui.each(dts, function(){
-              var othis = jquery(this);
+              var othis = $(this);
               var thisDds = othis.nextUntil('dt').filter('dd'); // 当前分组下的dd元素
               if(isCreatable) thisDds = thisDds.not('.' + CREATE_OPTION);
               var allHide = thisDds.length == thisDds.filter('.' + HIDE$4).length; // 当前分组下所有dd元素都隐藏了
@@ -19395,7 +19394,7 @@ ready$1.run = function(_$){
                     createOptionElem.attr('lay-value', value).text(value);
                   }else {
                     // 临时显示在顶部
-                    var ddElem = jquery('<dd>').addClass(CREATE_OPTION).attr('lay-value', value).text(value);
+                    var ddElem = $('<dd>').addClass(CREATE_OPTION).attr('lay-value', value).text(value);
                     var firstOptionELem = dl.children().eq(0);
                     var hasTips = firstOptionELem.hasClass('layui-select-tips');
                     firstOptionELem[hasTips ? 'after' : 'before'](ddElem);
@@ -19427,7 +19426,7 @@ ready$1.run = function(_$){
             input.on('input propertychange', layui.debounce(search, 50)).on('blur', function(e){
               var selectedIndex = select[0].selectedIndex;
 
-              initValue = jquery(select[0].options[selectedIndex]).prop('text'); // 重新获得初始选中值
+              initValue = $(select[0].options[selectedIndex]).prop('text'); // 重新获得初始选中值
 
               // 如果是第一项，且文本值等于 placeholder，则清空初始值
               if(selectedIndex === 0 && initValue === input.attr('placeholder')){
@@ -19444,14 +19443,14 @@ ready$1.run = function(_$){
 
           // 选择
           dl.on('click', 'dd', function(){
-            var othis = jquery(this), value = othis.attr('lay-value');
+            var othis = $(this), value = othis.attr('lay-value');
             var filter = select.attr('lay-filter'); // 获取过滤器
 
             if(othis.hasClass(DISABLED$3)) return false;
 
             // 将新增的 option 元素添加到末尾
             if(isCreatable && othis.hasClass(CREATE_OPTION)){
-              var optionElem = jquery('<option>').text(othis.text());
+              var optionElem = $('<option>').text(othis.text());
               var displayValue = optionElem.prop('text');
               value = displayValue;
               optionElem.attr('value', displayValue);
@@ -19497,7 +19496,7 @@ ready$1.run = function(_$){
         };
 
         // 仅 appendTo 使用，移除触发元素时，自动移除面板元素
-        jquery.event.special['_lay-select-destroy'] = {
+        $.event.special['_lay-select-destroy'] = {
           remove: function( handleObj ) {
             handleObj.handler();
           }
@@ -19505,11 +19504,11 @@ ready$1.run = function(_$){
 
         // 初始渲染 select 组件选项
         selects.each(function(index, select) {
-          var othis = jquery(this);
+          var othis = $(this);
           var hasRender = othis.next('.'+CLASS);
           var disabled = this.disabled;
           var value = select.value;
-          var selected = jquery(select.options[select.selectedIndex]); // 获取当前选中项
+          var selected = $(select.options[select.selectedIndex]); // 获取当前选中项
           var optionsFirst = select.options[0];
 
           // 为忽略渲染的 select 元素保持原生显示状态
@@ -19526,7 +19525,7 @@ ready$1.run = function(_$){
 
           // 用于替代 select 的外层容器
           var selectWrapper = (function() {
-            var elem = jquery('<div class="'+ CLASS +'"></div>');
+            var elem = $('<div class="'+ CLASS +'"></div>');
             if (!isSearch) {
               elem.addClass('layui-unselect');
             }
@@ -19537,7 +19536,7 @@ ready$1.run = function(_$){
           })();
 
           var inputElem = (function() {
-            var elem = jquery('<input type="text" class="layui-input">');
+            var elem = $('<input type="text" class="layui-input">');
 
             // 设置占位符和默认值
             elem.prop('placeholder', placeholder);
@@ -19557,14 +19556,14 @@ ready$1.run = function(_$){
           })();
 
           var titleElem = (function() {
-            var elem = jquery('<div class="'+ TITLE +'"></div>');
+            var elem = $('<div class="'+ TITLE +'"></div>');
             elem.append(inputElem);
             elem.append('<i class="layui-edge"></i>');
             return elem;
           })();
 
           var contentElem = (function() {
-            var elem = jquery('<dl class="layui-anim layui-anim-upbit"></dl>');
+            var elem = $('<dl class="layui-anim layui-anim-upbit"></dl>');
             if (othis.find('optgroup')[0]) {
               elem.addClass('layui-select-group');
             }
@@ -19572,13 +19571,13 @@ ready$1.run = function(_$){
               var arr = [];
               layui.each(othis.find('optgroup,option'), function(index, item) {
                 var tagName = item.tagName.toLowerCase();
-                var dd = jquery('<dd lay-value=""></dd>');
+                var dd = $('<dd lay-value=""></dd>');
                 if (index === 0 && !item.value && tagName !== 'optgroup') {
                   dd.addClass('layui-select-tips');
                   dd.text(item.text || TIPS);
                   arr.push(dd.prop('outerHTML'));
                 } else if(tagName === 'optgroup') {
-                  var dt = jquery('<dt></dt>');
+                  var dt = $('<dt></dt>');
                   dt.text(item.label);
                   arr.push(dt.prop('outerHTML'));
                 } else {
@@ -19613,7 +19612,7 @@ ready$1.run = function(_$){
           if (isAppendTo) {
             selectWrapper.append(titleElem);
             othis.after(selectWrapper);
-            var contentWrapElem = jquery('<div class="'+ CLASS + ' ' + PANEL_WRAP +'"></div>').append(contentElem);
+            var contentWrapElem = $('<div class="'+ CLASS + ' ' + PANEL_WRAP +'"></div>').append(contentElem);
             selectWrapper.data(PANEL_ELEM_DATA, contentWrapElem); // 将面板元素对象记录在触发元素 data 中，重新渲染时需要清理旧面板元素
             events.call(this, contentWrapElem, titleElem, disabled, isSearch, isCreatable, isAppendTo);
           } else {
@@ -19635,7 +19634,7 @@ ready$1.run = function(_$){
         var checks = elem || elemForm.find('input[type=checkbox]');
         // 事件
         var events = function(reElem, RE_CLASS){
-          var check = jquery(this);
+          var check = $(this);
           var skin = check.attr('lay-skin') || 'primary';
           var isSwitch = skin === 'switch';
           var isPrimary = skin === 'primary';
@@ -19695,9 +19694,9 @@ ready$1.run = function(_$){
 
         // 遍历复选框
         checks.each(function(index, check){
-          var othis = jquery(this);
+          var othis = $(this);
           var skin = othis.attr('lay-skin') || 'primary';
-          var title = util.escape(jquery.trim(check.title || function(){ // 向下兼容 lay-text 属性
+          var title = util.escape($.trim(check.title || function(){ // 向下兼容 lay-text 属性
             return check.title = othis.attr('lay-text') || '';
           }()));
           var disabled = this.disabled;
@@ -19736,7 +19735,7 @@ ready$1.run = function(_$){
           }
 
           // 替代元素
-          var reElem = jquery(['<div class="layui-unselect '+ RE_CLASS[0],
+          var reElem = $(['<div class="layui-unselect '+ RE_CLASS[0],
             (check.checked ? (' '+ RE_CLASS[1]) : ''), // 选中状态
             (disabled ? ' layui-checkbox-disabled '+ DISABLED$3 : ''), // 禁用状态
             '"',
@@ -19770,7 +19769,7 @@ ready$1.run = function(_$){
 
         // 事件
         var events = function(reElem){
-          var radio = jquery(this);
+          var radio = $(this);
           var ANIM = 'layui-anim-scaleSpring';
 
           radio.off(clickEventName).on(clickEventName, function(){
@@ -19814,7 +19813,7 @@ ready$1.run = function(_$){
 
         // 初始渲染
         radios.each(function(index, radio){
-          var othis = jquery(this), hasRender = othis.next('.' + CLASS);
+          var othis = $(this), hasRender = othis.next('.' + CLASS);
           var disabled = this.disabled;
           var skin = othis.attr('lay-skin');
 
@@ -19842,7 +19841,7 @@ ready$1.run = function(_$){
           titleTplAttrs = titleTplAttrs.join(' ');
 
           // 替代元素
-          var reElem = jquery(['<div class="layui-unselect '+ CLASS,
+          var reElem = $(['<div class="layui-unselect '+ CLASS,
             (radio.checked ? (' '+ CLASS +'ed') : ''), // 选中状态
           (disabled ? ' layui-radio-disabled '+DISABLED$3 : '') +'"', // 禁用状态
           (skin ? ' lay-skin="'+ skin +'"' : ''),
@@ -19867,12 +19866,12 @@ ready$1.run = function(_$){
     // jquery 对象
     if (layui.type(type) === 'object') {
       // 若对象为表单域容器
-      if(jquery(type).is(ELEM$2)){
-        elemForm = jquery(type);
+      if($(type).is(ELEM$2)){
+        elemForm = $(type);
         renderItem();
       } else { // 对象为表单项
         type.each(function (index, item) {
-          var elem = jquery(item);
+          var elem = $(item);
           if (!elem.closest(ELEM$2).length) {
             return; // 若不在 layui-form 容器中直接跳过
           }
@@ -19955,7 +19954,7 @@ ready$1.run = function(_$){
     var verify = options.verify; // 验证规则
     var DANGER = 'layui-form-danger'; // 警示样式
 
-    elem = jquery(elem);
+    elem = $(elem);
 
     // 节点不存在可视为 true
     if (!elem[0]) return true;
@@ -19970,12 +19969,12 @@ ready$1.run = function(_$){
 
     // 开始校验
     layui.each(elem, function(_, item) {
-      var othis = jquery(this);
+      var othis = $(this);
       var verifyStr = othis.attr('lay-verify') || '';
       var vers = verifyStr.split('|');
       var verType = othis.attr('lay-vertype'); // 提示方式
       var value = othis.val();
-      value = typeof value === 'string' ? jquery.trim(value) : value;
+      value = typeof value === 'string' ? $.trim(value) : value;
 
       othis.removeClass(DANGER); // 移除警示样式
 
@@ -20042,7 +20041,7 @@ ready$1.run = function(_$){
   // 提交表单并校验
   var submit = Form.prototype.submit = function(filter, callback){
     var field = {};  // 字段集合
-    var button = jquery(this); // 当前触发的按钮
+    var button = $(this); // 当前触发的按钮
 
     // 表单域 lay-filter 属性值
     var layFilter = typeof filter === 'string'
@@ -20154,17 +20153,17 @@ ready$1.run = function(_$){
   }
 
   var form = new Form();
-  var $dom = jquery(document);
-  var $win$1 = jquery(window);
+  var $dom = $(document);
+  var $win$1 = $(window);
 
   // 初始自动完成渲染
-  jquery(function(){
+  $(function(){
     form.render();
   });
 
   // 表单 reset 重置渲染
   $dom.on('reset', ELEM$2, function(){
-    var filter = jquery(this).attr('lay-filter');
+    var filter = $(this).attr('lay-filter');
     setTimeout(function(){
       form.render(null, filter);
     }, 50);
@@ -20193,7 +20192,7 @@ ready$1.run = function(_$){
     // 设置全局项
     set: function(options){
       var that = this;
-      that.config = jquery.extend({}, that.config, options);
+      that.config = $.extend({}, that.config, options);
       return that;
     },
     // 事件
@@ -20231,7 +20230,7 @@ ready$1.run = function(_$){
   var Class$a = function(options){
     var that = this;
     that.index = ++upload.index;
-    that.config = jquery.extend({}, that.config, upload.config, options);
+    that.config = $.extend({}, that.config, upload.config, options);
     that.render();
   };
 
@@ -20264,7 +20263,7 @@ ready$1.run = function(_$){
   // 重载实例
   Class$a.prototype.reload = function(options){
     var that = this;
-    that.config = jquery.extend({}, that.config, options);
+    that.config = $.extend({}, that.config, options);
     that.render(true);
   };
 
@@ -20274,10 +20273,10 @@ ready$1.run = function(_$){
     var options = that.config;
 
     // 若 elem 非唯一
-    var elem = jquery(options.elem);
+    var elem = $(options.elem);
     if (elem.length > 1) {
       layui.each(elem, function() {
-        upload.render(jquery.extend({}, options, {
+        upload.render($.extend({}, options, {
           elem: this
         }));
       });
@@ -20285,7 +20284,7 @@ ready$1.run = function(_$){
     }
 
     // 合并 lay-options 属性上的配置信息
-    jquery.extend(options, lay.options(elem[0], {
+    $.extend(options, lay.options(elem[0], {
       attr: elem.attr('lay-data') ? 'lay-data' : null // 兼容旧版的 lay-data 属性
     }));
 
@@ -20297,8 +20296,8 @@ ready$1.run = function(_$){
       return newThat.reload(options);
     }
 
-    options.elem = jquery(options.elem);
-    options.bindAction = jquery(options.bindAction);
+    options.elem = $(options.elem);
+    options.bindAction = $(options.bindAction);
 
     // 初始化 id 属性 - 优先取 options > 元素 id > 自增索引
     options.id = 'id' in options ? options.id : (
@@ -20313,7 +20312,7 @@ ready$1.run = function(_$){
   Class$a.prototype.file = function(){
     var that = this;
     var options = that.config;
-    var elemFile = that.elemFile = jquery([
+    var elemFile = that.elemFile = $([
       '<input class="'+ ELEM_FILE +'" type="file" accept="'+ options.acceptMime +'" name="'+ options.field +'"'
       ,(options.multiple ? ' multiple' : '')
       ,'>'
@@ -20344,12 +20343,12 @@ ready$1.run = function(_$){
   Class$a.prototype.initIE = function(){
     var that = this;
     var options = that.config;
-    var iframe = jquery('<iframe id="'+ ELEM_IFRAME +'" class="'+ ELEM_IFRAME +'" name="'+ ELEM_IFRAME +'" frameborder="0"></iframe>');
-    var elemForm = jquery(['<form target="'+ ELEM_IFRAME +'" class="'+ ELEM_FORM +'" method="post" key="set-mine" enctype="multipart/form-data" action="'+ options.url +'">'
+    var iframe = $('<iframe id="'+ ELEM_IFRAME +'" class="'+ ELEM_IFRAME +'" name="'+ ELEM_IFRAME +'" frameborder="0"></iframe>');
+    var elemForm = $(['<form target="'+ ELEM_IFRAME +'" class="'+ ELEM_FORM +'" method="post" key="set-mine" enctype="multipart/form-data" action="'+ options.url +'">'
     ,'</form>'].join(''));
 
     //插入iframe
-    jquery('#'+ ELEM_IFRAME)[0] || jquery('body').append(iframe);
+    $('#'+ ELEM_IFRAME)[0] || $('body').append(iframe);
 
     //包裹文件域
     if(!options.elem.next().hasClass(ELEM_FORM)){
@@ -20495,7 +20494,7 @@ ready$1.run = function(_$){
         // 进度条
         if(typeof options.progress === 'function'){
           opts.xhr = function(){
-            var xhr = jquery.ajaxSettings.xhr();
+            var xhr = $.ajaxSettings.xhr();
             // 上传进度
             xhr.upload.addEventListener("progress", function (obj) {
               if(obj.lengthComputable){
@@ -20506,7 +20505,7 @@ ready$1.run = function(_$){
             return xhr;
           };
         }
-        jquery.ajax(opts);
+        $.ajax(opts);
       };
 
       // 多文件是否一起上传
@@ -20527,7 +20526,7 @@ ready$1.run = function(_$){
 
     // 低版本 IE 处理方式，不支持跨域
     var iframeSend = function(){
-      var iframe = jquery('#'+ ELEM_IFRAME);
+      var iframe = $('#'+ ELEM_IFRAME);
 
       that.elemFile.parent().submit();
 
@@ -20878,7 +20877,7 @@ ready$1.run = function(_$){
 
     // 点击上传容器
     options.elem.off('upload.start').on('upload.start', function(){
-      var othis = jquery(this);
+      var othis = $(this);
 
       that.config.item = othis;
       that.elemFile[0].click();
@@ -20887,15 +20886,15 @@ ready$1.run = function(_$){
     // 拖拽上传
     if(!(device$4.ie && device$4.ie < 10)){
       options.elem.off('upload.over').on('upload.over', function(){
-        var othis = jquery(this);
+        var othis = $(this);
         othis.attr('lay-over', '');
       })
       .off('upload.leave').on('upload.leave', function(){
-        var othis = jquery(this);
+        var othis = $(this);
         othis.removeAttr('lay-over');
       })
       .off('upload.drop').on('upload.drop', function(e, param){
-        var othis = jquery(this);
+        var othis = $(this);
         var files = getFiles(param.originalEvent.dataTransfer.files);
 
         othis.removeAttr('lay-over');
@@ -20929,25 +20928,25 @@ ready$1.run = function(_$){
     // 目标元素 click 事件
     options.elem.on('click', function(){
       if(that.isFile()) return;
-      jquery(this).trigger('upload.start');
+      $(this).trigger('upload.start');
     });
 
     // 目标元素 drop 事件
     if(options.drag){
       options.elem.on('dragover', function(e){
         e.preventDefault();
-        jquery(this).trigger('upload.over');
+        $(this).trigger('upload.over');
       }).on('dragleave', function(e){
-        jquery(this).trigger('upload.leave');
+        $(this).trigger('upload.leave');
       }).on('drop', function(e){
         e.preventDefault();
-        jquery(this).trigger('upload.drop', e);
+        $(this).trigger('upload.drop', e);
       });
     }
 
     // 手动上传时触发上传的元素 click 事件
     options.bindAction.on('click', function(){
-      jquery(this).trigger('upload.action');
+      $(this).trigger('upload.action');
     });
 
     // 绑定元素索引
@@ -20981,7 +20980,7 @@ ready$1.run = function(_$){
      * 将给定的值转换为一个 JQueryDeferred 对象
      */
     promiseLikeResolve:function(value){
-      var deferred = jquery.Deferred();
+      var deferred = $.Deferred();
 
       if(value && typeof value.then === 'function'){
         value.then(deferred.resolve, deferred.reject);
@@ -21039,7 +21038,7 @@ ready$1.run = function(_$){
     // 设置全局项
     set: function(options){
       var that = this;
-      that.config = jquery.extend({}, that.config, options);
+      that.config = $.extend({}, that.config, options);
       return that;
     },
 
@@ -21094,7 +21093,7 @@ ready$1.run = function(_$){
   var Class$9 = function(options){
     var that = this;
     that.index = ++dropdown.index;
-    that.config = jquery.extend({}, that.config, dropdown.config, options);
+    that.config = $.extend({}, that.config, dropdown.config, options);
     that.init();
   };
 
@@ -21117,7 +21116,7 @@ ready$1.run = function(_$){
   // 重载实例
   Class$9.prototype.reload = function(options, type){
     var that = this;
-    that.config = jquery.extend({}, that.config, options);
+    that.config = $.extend({}, that.config, options);
     that.init(true, type);
   };
 
@@ -21127,10 +21126,10 @@ ready$1.run = function(_$){
     var options = that.config;
 
     // 若 elem 非唯一
-    var elem = jquery(options.elem);
+    var elem = $(options.elem);
     if(elem.length > 1){
       layui.each(elem, function(){
-        dropdown.render(jquery.extend({}, options, {
+        dropdown.render($.extend({}, options, {
           elem: this
         }));
       });
@@ -21138,7 +21137,7 @@ ready$1.run = function(_$){
     }
 
     // 合并 lay-options 属性上的配置信息
-    jquery.extend(options, lay.options(elem[0]));
+    $.extend(options, lay.options(elem[0]));
 
     // 若重复执行 render，则视为 reload 处理
     if(!rerender && elem.attr(MOD_ID$2)){
@@ -21147,8 +21146,8 @@ ready$1.run = function(_$){
       return newThat.reload(options, type);
     }
 
-    options.elem = jquery(options.elem);
-    options.target = jquery('body'); // 后续考虑开放 target 元素
+    options.elem = $(options.elem);
+    options.target = $('body'); // 后续考虑开放 target 元素
 
     // 初始化 id 属性 - 优先取 options > 元素 id > 自增索引
     options.id = 'id' in options ? options.id : (
@@ -21159,7 +21158,7 @@ ready$1.run = function(_$){
     elem.attr(MOD_ID$2, options.id); // 目标元素已渲染过的标记
 
     // 初始化自定义字段名
-    options.customName = jquery.extend({}, dropdown.config.customName, options.customName);
+    options.customName = $.extend({}, dropdown.config.customName, options.customName);
 
     // 若传入 hover，则解析为 mouseenter
     if (options.trigger === 'hover') {
@@ -21181,7 +21180,7 @@ ready$1.run = function(_$){
 
     // 默认菜单内容
     var getDefaultView = function(){
-      var elemUl = jquery('<ul class="layui-menu layui-dropdown-menu"></ul>');
+      var elemUl = $('<ul class="layui-menu layui-dropdown-menu"></ul>');
       if(options.data.length > 0 ){
         eachItemView(elemUl, options.data);
       } else {
@@ -21226,7 +21225,7 @@ ready$1.run = function(_$){
         if(type !== '-' && (!item[customName.title] && !item[customName.id] && !isChild)) return;
 
         //列表元素
-        var viewLi = jquery(['<li'+ function(){
+        var viewLi = $(['<li'+ function(){
           var className = {
             group: 'layui-menu-item-group'+ (
               options.isAllowSpread ? (
@@ -21270,8 +21269,8 @@ ready$1.run = function(_$){
 
         //子级区
         if(isChild){
-          var elemPanel = jquery('<div class="layui-panel layui-menu-body-panel"></div>');
-          var elemUl = jquery('<ul></ul>');
+          var elemPanel = $('<div class="layui-panel layui-menu-body-panel"></div>');
+          var elemUl = $('<ul></ul>');
 
           if(type === 'parent'){
             elemPanel.append(eachItemView(elemUl, item[customName.children]));
@@ -21299,7 +21298,7 @@ ready$1.run = function(_$){
       var mainElem = that.mainElem = mainElemExisted;
       mainElemExisted.html(content);
     } else { // 常规渲染
-      var mainElem = that.mainElem = jquery(TPL_MAIN);
+      var mainElem = that.mainElem = $(TPL_MAIN);
       mainElem.append(content);
 
       // 初始化某些属性
@@ -21335,7 +21334,7 @@ ready$1.run = function(_$){
 
     // 触发菜单列表事件
     mainElem.find('.layui-menu li').on('click', function(e){
-      var othis = jquery(this);
+      var othis = $(this);
       var data = othis.data('item') || {};
       var isChild = data[customName.children] && data[customName.children].length > 0;
       var isClickAllScope = options.clickScope === 'all'; // 是否所有父子菜单均触发点击事件
@@ -21355,7 +21354,7 @@ ready$1.run = function(_$){
 
     // 触发菜单组展开收缩
     mainElem.find(STR_GROUP_TITLE).on('click', function(e){
-      var othis = jquery(this);
+      var othis = $(this);
       var elemGroup = othis.parent();
       var data = elemGroup.data('item') || {};
 
@@ -21484,7 +21483,7 @@ ready$1.run = function(_$){
 
   // 根据 id 从页面查找组件主面板元素
   thisModule$3.findMainElem = function(id) {
-    return jquery('.' + STR_ELEM + '[' + MOD_ID$2 + '="' + id + '"]');
+    return $('.' + STR_ELEM + '[' + MOD_ID$2 + '="' + id + '"]');
   };
 
   // 设置菜单组展开和收缩状态
@@ -21495,7 +21494,7 @@ ready$1.run = function(_$){
 
     // 动画执行完成后的操作
     var complete = function() {
-      jquery(this).css({'display': ''}); // 剔除临时 style，以适配外部样式的状态重置;
+      $(this).css({'display': ''}); // 剔除临时 style，以适配外部样式的状态重置;
     };
 
     // 动画是否正在执行
@@ -21520,8 +21519,8 @@ ready$1.run = function(_$){
 
   // 全局事件
   (function(){
-    var _WIN = jquery(window);
-    var _DOC = jquery(document);
+    var _WIN = $(window);
+    var _DOC = $(document);
 
     // 自适应定位
     _WIN.on('resize', function(){
@@ -21529,7 +21528,7 @@ ready$1.run = function(_$){
       var that = thisModule$3.getThis(dropdown.thisId);
       if(!that) return;
 
-      if((that.mainElem && !that.mainElem[0]) || !jquery('.'+ STR_ELEM)[0]){
+      if((that.mainElem && !that.mainElem[0]) || !$('.'+ STR_ELEM)[0]){
         return false;
       }
 
@@ -21561,7 +21560,7 @@ ready$1.run = function(_$){
       if(isTriggerTarget || isPanelTarget) return;
       // 处理移动端点击穿透问题
       if(e.type === 'touchstart' && options.elem.data(MOD_INDEX_OPENED)){
-        jquery(e.target).hasClass(STR_ELEM_SHADE) && e.preventDefault();
+        $(e.target).hasClass(STR_ELEM_SHADE) && e.preventDefault();
       }
 
       // 点击 dropdown 外部时的回调
@@ -21598,7 +21597,7 @@ ready$1.run = function(_$){
     // 基础菜单的静态元素事件
     var ELEM_LI = '.layui-menu:not(.layui-dropdown-menu) li';
     _DOC.on('click', ELEM_LI, function(e){
-      var othis = jquery(this);
+      var othis = $(this);
       var parent = othis.parents('.layui-menu').eq(0);
       var isChild = othis.hasClass(STR_ITEM_GROUP) || othis.hasClass(STR_ITEM_PARENT);
       var filter = parent.attr('lay-filter') || parent.attr('id');
@@ -21615,7 +21614,7 @@ ready$1.run = function(_$){
         othis.addClass(STR_ITEM_CHECKED); //添加选中样式
         othis.parents('.'+ STR_ITEM_PARENT).addClass(STR_ITEM_CHECKED2); // 添加父级菜单选中样式
 
-        options.title = options.title || jquery.trim(othis.children('.'+ STR_MENU_TITLE).text());
+        options.title = options.title || $.trim(othis.children('.'+ STR_MENU_TITLE).text());
 
         // 触发事件
         layui.event.call(this, MOD_NAME$7, 'click('+ filter +')', options);
@@ -21624,7 +21623,7 @@ ready$1.run = function(_$){
 
     // 基础菜单的展开收缩事件
     _DOC.on('click', (ELEM_LI + STR_GROUP_TITLE), function(e){
-      var othis = jquery(this);
+      var othis = $(this);
       var elemGroup = othis.parents('.'+ STR_ITEM_GROUP +':eq(0)');
       var options = lay.options(elemGroup[0]);
       var isAccordion = typeof othis.parents('.layui-menu').eq(0).attr('lay-accordion') === 'string';
@@ -21637,7 +21636,7 @@ ready$1.run = function(_$){
     // 判断子级菜单是否超出屏幕
     var ELEM_LI_PAR = '.layui-menu .'+ STR_ITEM_PARENT;
     _DOC.on('mouseenter', ELEM_LI_PAR, function(e){
-      var othis = jquery(this);
+      var othis = $(this);
       var elemPanel = othis.find('.'+ STR_MENU_PANEL);
 
       if(!elemPanel[0]) return;
@@ -21658,7 +21657,7 @@ ready$1.run = function(_$){
         elemPanel.eq(0).css('margin-top', -(rect.bottom - _WIN.height() + 5));
       }
     }).on('mouseleave', ELEM_LI_PAR, function(e){
-      var othis = jquery(this);
+      var othis = $(this);
       var elemPanel = othis.children('.'+ STR_MENU_PANEL);
 
       elemPanel.removeClass(STR_MENU_PANEL_L);
@@ -21696,7 +21695,7 @@ ready$1.run = function(_$){
 
   // 仅重载数据
   dropdown.reloadData = function(){
-    var args = jquery.extend([], arguments);
+    var args = $.extend([], arguments);
     args[2] = 'reloadData';
 
     // 重载时，与数据相关的参数
@@ -21736,7 +21735,7 @@ ready$1.run = function(_$){
     // 设置全局项
     set: function(options) {
       var that = this;
-      that.config = jquery.extend({}, that.config, options);
+      that.config = $.extend({}, that.config, options);
       return that;
     },
 
@@ -21817,7 +21816,7 @@ ready$1.run = function(_$){
   var Class$8 = function(options){
     var that = this;
     that.index = ++transfer.index;
-    that.config = jquery.extend({}, that.config, transfer.config, options);
+    that.config = $.extend({}, that.config, transfer.config, options);
     that.render();
   };
 
@@ -21839,7 +21838,7 @@ ready$1.run = function(_$){
   // 重载实例
   Class$8.prototype.reload = function(options){
     var that = this;
-    that.config = jquery.extend({}, that.config, options);
+    that.config = $.extend({}, that.config, options);
     that.render();
   };
 
@@ -21849,7 +21848,7 @@ ready$1.run = function(_$){
     var options = that.config;
 
     // 解析模板
-    var thisElem = that.elem = jquery(laytpl(TPL_MAIN$1, {
+    var thisElem = that.elem = $(laytpl(TPL_MAIN$1, {
       open: '{{', // 标签符前缀
       close: '}}', // 标签符后缀
       tagStyle: 'legacy'
@@ -21858,7 +21857,7 @@ ready$1.run = function(_$){
       index: that.index // 索引
     }));
 
-    var othis = options.elem = jquery(options.elem);
+    var othis = options.elem = $(options.elem);
     if(!othis[0]) return;
 
     // 初始化属性
@@ -21953,7 +21952,7 @@ ready$1.run = function(_$){
     obj = obj || {};
 
     that.layBox.each(function(_index){
-      var othis = jquery(this);
+      var othis = $(this);
       var thisDataElem = othis.find('.'+ ELEM_DATA);
       var allElemCheckbox = othis.find('.'+ ELEM_HEADER$1).find('input[type="checkbox"]');
       var listElemCheckbox =  thisDataElem.find('input[type="checkbox"]');
@@ -21963,7 +21962,7 @@ ready$1.run = function(_$){
       var haveChecked = false;
 
       listElemCheckbox.each(function(){
-        var isHide = jquery(this).data('hide');
+        var isHide = $(this).data('hide');
         if(this.checked || this.disabled || isHide){
           nums++;
         }
@@ -21987,7 +21986,7 @@ ready$1.run = function(_$){
 
   // 无数据视图
   Class$8.prototype.noneView = function(thisDataElem, text){
-    var createNoneElem = jquery('<p class="layui-none">'+ (text || '') +'</p>');
+    var createNoneElem = $('<p class="layui-none">'+ (text || '') +'</p>');
     if(thisDataElem.find('.'+ NONE$1)[0]){
       thisDataElem.find('.'+ NONE$1).remove();
     }
@@ -22001,7 +22000,7 @@ ready$1.run = function(_$){
     var arr = [];
 
     that.layBox.eq(1).find('.'+ ELEM_DATA +' input[type="checkbox"]').each(function(){
-      var isHide = jquery(this).data('hide');
+      var isHide = $(this).data('hide');
       isHide || arr.push(this.value);
     });
     options.value = arr;
@@ -22021,7 +22020,7 @@ ready$1.run = function(_$){
         ? options.parseData(item)
       : item) || item;
 
-      newData.push(item = jquery.extend({}, item));
+      newData.push(item = $.extend({}, item));
 
       layui.each(options.value, function(index2, item2){
         if(item2 == item.value){
@@ -22063,11 +22062,11 @@ ready$1.run = function(_$){
     if (!elem) {
       // 通过按钮触发找到选中的进行移动
       thisBoxElem.each(function(_index){
-        var othis = jquery(this);
+        var othis = $(this);
         var thisDataElem = othis.find('.'+ ELEM_DATA);
 
         thisDataElem.children('li').each(function(){
-          var thisList = jquery(this);
+          var thisList = $(this);
           var thisElemCheckbox = thisList.find('input[type="checkbox"]');
           var isHide = thisElemCheckbox.data('hide');
 
@@ -22115,7 +22114,7 @@ ready$1.run = function(_$){
 
     // 左右复选框
     that.elem.on('click', 'input[lay-filter="layTransferCheckbox"]+', function(){
-      var thisElemCheckbox = jquery(this).prev();
+      var thisElemCheckbox = $(this).prev();
       var checked = thisElemCheckbox[0].checked;
       var thisDataElem = thisElemCheckbox.parents('.'+ ELEM_BOX$1).eq(0).find('.'+ ELEM_DATA);
 
@@ -22136,7 +22135,7 @@ ready$1.run = function(_$){
 
     // 双击穿梭
     that.elem.on('dblclick', '.' + ELEM_DATA + '>li', function(event){
-      var elemThis = jquery(this);
+      var elemThis = $(this);
       var thisElemCheckbox = elemThis.children('input[type="checkbox"]');
       var thisDataElem = elemThis.parent();
       var thisBoxElem = thisDataElem.parent();
@@ -22158,7 +22157,7 @@ ready$1.run = function(_$){
 
     // 穿梭按钮事件
     that.layBtn.on('click', function(){
-      var othis = jquery(this);
+      var othis = $(this);
       var _index = othis.data('index');
 
       if(othis.hasClass(DISABLED$2)) return;
@@ -22168,11 +22167,11 @@ ready$1.run = function(_$){
     // 搜索
     that.laySearch.find('input').on('keyup', function(){
       var value = this.value;
-      var thisDataElem = jquery(this).parents('.'+ ELEM_SEARCH).eq(0).siblings('.'+ ELEM_DATA);
+      var thisDataElem = $(this).parents('.'+ ELEM_SEARCH).eq(0).siblings('.'+ ELEM_DATA);
       var thisListElem = thisDataElem.children('li');
 
       thisListElem.each(function(){
-        var thisList = jquery(this);
+        var thisList = $(this);
         var thisElemCheckbox = thisList.find('input[type="checkbox"]');
         var title = thisElemCheckbox[0].title;
 
@@ -22242,7 +22241,7 @@ ready$1.run = function(_$){
     // 设置全局项
     set: function(options){
       var that = this;
-      that.config = jquery.extend({}, that.config, options);
+      that.config = $.extend({}, that.config, options);
       return that;
     },
 
@@ -22294,7 +22293,7 @@ ready$1.run = function(_$){
   var Class$7 = function(options){
     var that = this;
     that.index = ++tree.index;
-    that.config = jquery.extend({}, that.config, tree.config, options);
+    that.config = $.extend({}, that.config, tree.config, options);
     that.render();
   };
 
@@ -22323,7 +22322,7 @@ ready$1.run = function(_$){
       if(layui.type(item) === 'array') delete that.config[key];
     });
 
-    that.config = jquery.extend(true, {}, that.config, options);
+    that.config = $.extend(true, {}, that.config, options);
     that.render();
   };
 
@@ -22333,14 +22332,14 @@ ready$1.run = function(_$){
     var options = that.config;
 
     // 初始化自定义字段名
-    options.customName = jquery.extend({}, tree.config.customName, options.customName);
+    options.customName = $.extend({}, tree.config.customName, options.customName);
 
     that.checkids = [];
 
-    var temp = jquery('<div class="layui-tree layui-border-box'+ (options.showCheckbox ? " layui-form" : "") + (options.showLine ? " layui-tree-line" : "") +'" lay-filter="LAY-tree-'+ that.index +'"></div>');
+    var temp = $('<div class="layui-tree layui-border-box'+ (options.showCheckbox ? " layui-form" : "") + (options.showLine ? " layui-tree-line" : "") +'" lay-filter="LAY-tree-'+ that.index +'"></div>');
     that.tree(temp);
 
-    var othis = options.elem = jquery(options.elem);
+    var othis = options.elem = $(options.elem);
     if(!othis[0]) return;
 
     // 索引
@@ -22348,7 +22347,7 @@ ready$1.run = function(_$){
 
     // 插入组件结构
     that.elem = temp;
-    that.elemNone = jquery('<div class="layui-tree-emptyText">'+ options.text.none +'</div>');
+    that.elemNone = $('<div class="layui-tree-emptyText">'+ options.text.none +'</div>');
     othis.html(that.elem);
 
     if(that.elem.find('.layui-tree-set').length == 0){
@@ -22359,7 +22358,7 @@ ready$1.run = function(_$){
       that.renderForm('checkbox');
     }
     that.elem.find('.layui-tree-set').each(function(){
-      var othis = jquery(this);
+      var othis = $(this);
       // 最外层
       if(!othis.parent('.layui-tree-pack')[0]){
         othis.addClass('layui-tree-setHide');
@@ -22391,8 +22390,8 @@ ready$1.run = function(_$){
     // 遍历数据
     layui.each(data, function(index, item){
       var hasChild = item[customName.children] && item[customName.children].length > 0;
-      var packDiv = jquery('<div class="layui-tree-pack" '+ (item.spread ? 'style="display: block;"' : '') +'></div>');
-      var entryDiv = jquery(['<div data-id="'+ item[customName.id] +'" class="layui-tree-set'+ (item.spread ? " layui-tree-spread" : "") + (item.checked ? " layui-tree-checkedFirst" : "") +'">'
+      var packDiv = $('<div class="layui-tree-pack" '+ (item.spread ? 'style="display: block;"' : '') +'></div>');
+      var entryDiv = $(['<div data-id="'+ item[customName.id] +'" class="layui-tree-set'+ (item.spread ? " layui-tree-spread" : "") + (item.checked ? " layui-tree-checkedFirst" : "") +'">'
         ,'<div class="layui-tree-entry">'
           ,'<div class="layui-tree-main">'
             // 箭头
@@ -22516,7 +22515,7 @@ ready$1.run = function(_$){
 
     // 点击回调
     elemText.on('click', function(){
-      var othis = jquery(this);
+      var othis = $(this);
 
       // 判断是否禁用状态
       if(othis.hasClass(DISABLED$1)) return;
@@ -22612,7 +22611,7 @@ ready$1.run = function(_$){
     elemMain.on('click', 'input[same="layuiTreeCheck"]+', function(e){
       layui.stope(e); // 阻止点击节点事件
 
-      var elemCheckbox = jquery(this).prev();
+      var elemCheckbox = $(this).prev();
       var checked = elemCheckbox.prop('checked');
 
       if(elemCheckbox.prop('disabled')) return;
@@ -22640,7 +22639,7 @@ ready$1.run = function(_$){
     entry.children('.layui-tree-btnGroup').on('click', '.layui-icon', function(e){
       layui.stope(e);  // 阻止节点操作
 
-      var type = jquery(this).data("type");
+      var type = $(this).data("type");
       var packCont = elem.children('.'+ELEM_PACK);
       var returnObj = {
         data: item,
@@ -22679,7 +22678,7 @@ ready$1.run = function(_$){
             var parentPack = elem.parent('.'+ELEM_PACK);
 
             layui.each(siblings, function(index, i){
-              if(!jquery(i).children('.'+ELEM_PACK)[0]){
+              if(!$(i).children('.'+ELEM_PACK)[0]){
                 num = 0;
               }            });
 
@@ -22701,7 +22700,7 @@ ready$1.run = function(_$){
               packCont.addClass(ELEM_EXTEND);
             }            // 子节点添加延伸线
             elem.find('.'+ELEM_PACK).each(function(){
-              jquery(this).children('.'+ELEM_SET).last().addClass(ELEM_LINE_SHORT);
+              $(this).children('.'+ELEM_SET).last().addClass(ELEM_LINE_SHORT);
             });
             // 如果前一个节点有延伸线
             if(packCont.children('.'+ELEM_SET).last().prev().hasClass(ELEM_LINE_SHORT)){
@@ -22742,13 +22741,13 @@ ready$1.run = function(_$){
         };
         // 失去焦点
         elemMain.children('.layui-tree-editInput').blur(function(){
-          getVal(jquery(this));
+          getVal($(this));
         });
         // 回车
         elemMain.children('.layui-tree-editInput').on('keydown', function(e){
           if(e.keyCode === 13){
             e.preventDefault();
-            getVal(jquery(this));
+            getVal($(this));
           }        });
 
       // 删除
@@ -22782,7 +22781,7 @@ ready$1.run = function(_$){
                 if(checkState.checked == false){
                   // 遍历兄弟节点
                   siblingTree.each(function(i, item1){
-                    var input = jquery(item1).find('input[same="layuiTreeCheck"]')[0];
+                    var input = $(item1).find('input[same="layuiTreeCheck"]')[0];
                     if(input.checked == false && !input.disabled){
                       state = 0;
                     }                    // 判断是否全为不可勾选框
@@ -22806,7 +22805,7 @@ ready$1.run = function(_$){
               var parentPack = elem.parent('.'+ELEM_PACK);
 
               layui.each(siblings, function(index, i){
-                if(!jquery(i).children('.'+ELEM_PACK)[0]){
+                if(!$(i).children('.'+ELEM_PACK)[0]){
                   num = 0;
                 }              });
               // 若兄弟节点都有子节点
@@ -22843,7 +22842,7 @@ ready$1.run = function(_$){
 
               // 兄弟节点最后子节点添加延伸线
               pare.children('.'+ELEM_SET).each(function(){
-                jquery(this).children('.'+ELEM_PACK).children('.'+ELEM_SET).last().addClass(ELEM_LINE_SHORT);
+                $(this).children('.'+ELEM_PACK).children('.'+ELEM_SET).last().addClass(ELEM_LINE_SHORT);
               });
             }else {
             // 父节点隐藏箭头
@@ -22870,17 +22869,17 @@ ready$1.run = function(_$){
 
     // 搜索
     that.elem.find('.layui-tree-search').on('keyup', function(){
-      var input = jquery(this);
+      var input = $(this);
       var val = input.val();
       var pack = input.nextAll();
       var arr = [];
 
       // 遍历所有的值
       pack.find('.'+ ELEM_TEXT).each(function(){
-        var entry = jquery(this).parents('.'+ELEM_ENTRY);
+        var entry = $(this).parents('.'+ELEM_ENTRY);
         // 若值匹配，加一个类以作标识
-        if(jquery(this).html().indexOf(val) != -1){
-          arr.push(jquery(this).parent());
+        if($(this).html().indexOf(val) != -1){
+          arr.push($(this).parent());
 
           var select = function(div){
             div.addClass('layui-tree-searchShow');
@@ -22893,7 +22892,7 @@ ready$1.run = function(_$){
 
       // 根据标志剔除
       pack.find('.'+ELEM_ENTRY).each(function(){
-        var parent = jquery(this).parent('.'+ELEM_SET);
+        var parent = $(this).parent('.'+ELEM_SET);
         if(!parent.hasClass('layui-tree-searchShow')){
           parent.addClass(HIDE$2);
         }      });
@@ -22908,11 +22907,11 @@ ready$1.run = function(_$){
 
     // 还原搜索初始状态
     that.elem.find('.layui-tree-search').on('keydown', function(){
-      jquery(this).nextAll().find('.'+ELEM_ENTRY).each(function(){
-        var parent = jquery(this).parent('.'+ELEM_SET);
+      $(this).nextAll().find('.'+ELEM_ENTRY).each(function(){
+        var parent = $(this).parent('.'+ELEM_SET);
         parent.removeClass('layui-tree-searchShow '+ HIDE$2);
       });
-      if(jquery('.layui-tree-emptyText')[0]) jquery('.layui-tree-emptyText').remove();
+      if($('.layui-tree-emptyText')[0]) $('.layui-tree-emptyText').remove();
     });
   };
 
@@ -22926,7 +22925,7 @@ ready$1.run = function(_$){
 
     // 遍历节点找到选中索引
     that.elem.find('.layui-form-checked').each(function(){
-      checkId.push(jquery(this).prev()[0].value);
+      checkId.push($(this).prev()[0].value);
     });
 
     // 遍历节点
@@ -22936,7 +22935,7 @@ ready$1.run = function(_$){
           if(item[customName.id] == item2){
             that.updateFieldValue(item, 'checked', true);
 
-            var cloneItem = jquery.extend({}, item);
+            var cloneItem = $.extend({}, item);
             delete cloneItem[customName.children];
 
             checkNode.push(cloneItem);
@@ -22951,7 +22950,7 @@ ready$1.run = function(_$){
       });
     };
 
-    eachNodes(jquery.extend({}, options.data), checkData);
+    eachNodes($.extend({}, options.data), checkData);
 
     return checkData;
   };
@@ -22963,8 +22962,8 @@ ready$1.run = function(_$){
 
     // 初始选中
     that.elem.find('.'+ELEM_SET).each(function(i, item){
-      var thisId = jquery(this).data('id');
-      var input = jquery(item).children('.'+ELEM_ENTRY).find('input[same="layuiTreeCheck"]');
+      var thisId = $(this).data('id');
+      var input = $(item).children('.'+ELEM_ENTRY).find('input[same="layuiTreeCheck"]');
       var reInput = input.next();
 
       // 若返回数字
@@ -23039,7 +23038,7 @@ ready$1.run = function(_$){
     // 设置全局项
     set: function(options){
       var that = this;
-      that.config = jquery.extend({}, that.config, options);
+      that.config = $.extend({}, that.config, options);
       return that;
     },
 
@@ -23116,13 +23115,13 @@ ready$1.run = function(_$){
     if(templet){
       content = typeof templet === 'function'
         ? templet.call(item3, obj.tplData, obj.obj)
-        : laytpl(resolveTplStr(templet) || String(content)).render(jquery.extend({
+        : laytpl(resolveTplStr(templet) || String(content)).render($.extend({
             LAY_COL: item3
           }, obj.tplData));
     }
 
     // 是否只返回文本
-    return obj.text ? jquery('<div>'+ content +'</div>').text() : content;
+    return obj.text ? $('<div>'+ content +'</div>').text() : content;
   };
 
   // 字符
@@ -23284,14 +23283,14 @@ ready$1.run = function(_$){
     ,'</div>'
   ].join('');
 
-  var _WIN = jquery(window);
-  var _DOC = jquery(document);
+  var _WIN = $(window);
+  var _DOC = $(document);
 
   // constructor
   var Class$6 = function(options){
     var that = this;
     that.index = ++table.index;
-    that.config = jquery.extend({}, that.config, table.config, options);
+    that.config = $.extend({}, that.config, table.config, options);
     that.render();
   };
 
@@ -23317,7 +23316,7 @@ ready$1.run = function(_$){
     var that = this;
     var options = that.config;
 
-    options.elem = jquery(options.elem);
+    options.elem = $(options.elem);
     options.where = options.where || {};
 
     // 初始化 id 属性 - 优先取 options > 元素 id > 自增索引
@@ -23329,13 +23328,13 @@ ready$1.run = function(_$){
     thisTable.config[id] = options; // 记录当前实例配置项
 
     //请求参数的自定义格式
-    options.request = jquery.extend({
+    options.request = $.extend({
       pageName: 'page',
       limitName: 'limit'
     }, options.request);
 
     // 响应数据的自定义格式
-    options.response = jquery.extend({
+    options.response = $.extend({
       statusName: 'code', //规定数据状态的字段名称
       statusCode: 0, //规定成功的状态码
       msgName: 'msg', //规定状态信息的字段名称
@@ -23383,7 +23382,7 @@ ready$1.run = function(_$){
       var parentDiv = options.height.split("-");
       that.parentHeightGap = parentDiv.pop();
       that.parentDiv = parentDiv.join("-");
-      options.height = jquery(that.parentDiv).height() - (parseFloat(that.parentHeightGap) || 0);
+      options.height = $(that.parentDiv).height() - (parseFloat(that.parentHeightGap) || 0);
     } else if (typeof options.height === "function"){
       that.customHeightFunc = options.height;
       options.height = that.customHeightFunc();
@@ -23394,7 +23393,7 @@ ready$1.run = function(_$){
     var hasRender = othis.next('.' + ELEM_VIEW$2);
 
     // 主容器
-    var reElem = that.elem = jquery('<div></div>');
+    var reElem = that.elem = $('<div></div>');
 
     // 添加 className
     reElem.addClass(function(){
@@ -23646,7 +23645,7 @@ ready$1.run = function(_$){
     if(options.toolbar === 'default'){
       elemToolTemp.html(leftDefaultTemp);
     } else if(typeof options.toolbar === 'string'){
-      var toolbarHtml = jquery(options.toolbar).html() || '';
+      var toolbarHtml = $(options.toolbar).html() || '';
       toolbarHtml && elemToolTemp.html(
         laytpl(toolbarHtml).render(options)
       );
@@ -23667,14 +23666,14 @@ ready$1.run = function(_$){
               var lis = [];
               that.eachCols(function(i, item){
                 if(item.field && item.type == 'normal'){
-                  lis.push('<li><input type="checkbox" name="'+ item.field +'" data-key="'+ item.key +'" data-parentkey="'+ (item.parentKey||'') +'" lay-skin="primary" '+ (item.hide ? '' : 'checked') +' title="'+ util.escape(jquery('<div>' + (item.fieldTitle || item.title || item.field) + '</div>').text()) +'" lay-filter="LAY_TABLE_TOOL_COLS"></li>');
+                  lis.push('<li><input type="checkbox" name="'+ item.field +'" data-key="'+ item.key +'" data-parentkey="'+ (item.parentKey||'') +'" lay-skin="primary" '+ (item.hide ? '' : 'checked') +' title="'+ util.escape($('<div>' + (item.fieldTitle || item.title || item.field) + '</div>').text()) +'" lay-filter="LAY_TABLE_TOOL_COLS"></li>');
                 }
               });
               return lis.join('');
             }(),
             done: function() {
               form.on('checkbox(LAY_TABLE_TOOL_COLS)', function(obj){
-                var othis = jquery(obj.elem);
+                var othis = $(obj.elem);
                 var checked = this.checked;
                 var key = othis.data('key');
                 var col = that.col(key);
@@ -23731,7 +23730,7 @@ ready$1.run = function(_$){
               }(),
               done: function(panel, list){
                 list.on('click', function(){
-                  var type = jquery(this).data('type');
+                  var type = $(this).data('type');
                   table.exportFile.call(that, options.id, null, type);
                 });
               }
@@ -23758,7 +23757,7 @@ ready$1.run = function(_$){
             'img{max-height: 100%;}',
             '*.layui-hide{display: none}',
           '</style>'].join('');
-          var html = jquery(that.layHeader.html()); // 输出表头
+          var html = $(that.layHeader.html()); // 输出表头
 
           html.append(that.layMain.find('table').html()); // 输出表体
           html.append(that.layTotal.find('table').html()); // 输出合计行
@@ -23766,7 +23765,7 @@ ready$1.run = function(_$){
           html.find('th.layui-table-patch').remove(); // 移除补丁
           // 移除表头特殊列
           html.find('thead>tr>th.'+ ELEM_COL_SPECIAL).filter(function(i, thElem){
-            return !jquery(thElem).children('.'+ ELEM_GROUP).length; // 父级表头除外
+            return !$(thElem).children('.'+ ELEM_GROUP).length; // 父级表头除外
           }).remove();
           html.find('tbody>tr>td.'+ ELEM_COL_SPECIAL).remove(); // 移除表体特殊列
 
@@ -23787,13 +23786,13 @@ ready$1.run = function(_$){
     // 若开启 defaultToolbar
     if (typeof options.defaultToolbar === 'object') {
       var iconElem = [];
-      options.defaultToolbar = jquery.map(options.defaultToolbar, function(item, i) {
+      options.defaultToolbar = $.map(options.defaultToolbar, function(item, i) {
         var itemIsName = typeof item === 'string';
         var thisItem = itemIsName ? defaultConfig[item] : item;
         if (thisItem) {
           // 根据 name 匹配默认工具并合并
           if (thisItem.name && defaultConfig[thisItem.name]) {
-            thisItem = jquery.extend({}, defaultConfig[thisItem.name], thisItem);
+            thisItem = $.extend({}, defaultConfig[thisItem.name], thisItem);
           }
           // 初始化默认工具 name
           if (!thisItem.name && itemIsName) {
@@ -23817,11 +23816,11 @@ ready$1.run = function(_$){
     var that = this;
     var options = that.config;
 
-    var layPagebar = that.layPagebar = jquery('<div class="layui-inline layui-table-pagebar"></div>');
+    var layPagebar = that.layPagebar = $('<div class="layui-inline layui-table-pagebar"></div>');
 
     // 开启分页栏自定义模板
     if(options.pagebar){
-      var pagebarHtml = jquery(options.pagebar).html() || '';
+      var pagebarHtml = $(options.pagebar).html() || '';
       pagebarHtml && layPagebar.append(laytpl(pagebarHtml).render(options));
       that.layPage.append(layPagebar);
     }
@@ -23883,12 +23882,12 @@ ready$1.run = function(_$){
 
     groups.css('width', 0);
     layui.each(groups.get().reverse(), function(){
-      var othis = jquery(this);
+      var othis = $(this);
       var key = othis.parent().data('key');
       var maxWidth = 0;
 
       that.layHeader.eq(0).find('th[data-parentkey='+ key +']').width(function(i, width){
-        var oTh = jquery(this);
+        var oTh = $(this);
         if(oTh.hasClass(HIDE$1)) return;
         width > 0 && (maxWidth += width);
       });
@@ -24067,7 +24066,7 @@ ready$1.run = function(_$){
 
     var tableElemIsConnected = that.layMain && ('isConnected' in that.layMain[0]
       ? that.layMain[0].isConnected
-      : jquery.contains(document.body, that.layMain[0]));
+      : $.contains(document.body, that.layMain[0]));
 
     if(!tableElemIsConnected) return;
 
@@ -24089,7 +24088,7 @@ ready$1.run = function(_$){
     });
 
     // 对参数进行深度或浅扩展
-    that.config = jquery.extend(deep, {}, that.config, options);
+    that.config = $.extend(deep, {}, that.config, options);
     if (type !== 'reloadData') {
       layui.each(that.config.cols, function (i1, item1) {
         layui.each(item1, function (i2, item2) {
@@ -24106,7 +24105,7 @@ ready$1.run = function(_$){
   Class$6.prototype.errorView = function(html){
     var that = this
     ,elemNone = that.layMain.find('.'+ NONE)
-    ,layNone = jquery('<div class="'+ NONE +'">'+ (html || 'Error') +'</div>');
+    ,layNone = $('<div class="'+ NONE +'">'+ (html || 'Error') +'</div>');
 
     if(elemNone[0]){
       that.layNone.remove();
@@ -24175,7 +24174,7 @@ ready$1.run = function(_$){
 
       // 记录合计行数据
       if(typeof options.totalRow === 'object'){
-        res[response.totalRowName] = jquery.extend({}, that.totalRow);
+        res[response.totalRowName] = $.extend({}, that.totalRow);
       }
 
       that.renderData({
@@ -24194,7 +24193,7 @@ ready$1.run = function(_$){
       }
 
       // 参数
-      var data = jquery.extend(params, options.where);
+      var data = $.extend(params, options.where);
       if(options.contentType && options.contentType.indexOf("application/json") == 0){ // 提交 json 格式
         data = JSON.stringify(data);
       }
@@ -24206,7 +24205,7 @@ ready$1.run = function(_$){
         that._xhrAbort = true;
         that._xhr.abort();
       }
-      that._xhr = jquery.ajax({
+      that._xhr = $.ajax({
         type: options.method || 'get',
         url: options.url,
         contentType: options.contentType,
@@ -24267,7 +24266,7 @@ ready$1.run = function(_$){
 
       // 记录合计行数据
       if(typeof options.totalRow === 'object'){
-        res[response.totalRowName] = jquery.extend({}, options.totalRow);
+        res[response.totalRowName] = $.extend({}, options.totalRow);
       }
       that.totalRow = res[response.totalRowName];
 
@@ -24369,7 +24368,7 @@ ready$1.run = function(_$){
           + (item3.align ? ' align="'+ item3.align +'"' : '')
           +'>'
           + function(){
-            var tplData = jquery.extend(true, {
+            var tplData = $.extend(true, {
               LAY_COL: item3
             }, item1);
             var checkName = table.config.checkName;
@@ -24411,7 +24410,7 @@ ready$1.run = function(_$){
 
             //解析工具列模板
             if(item3.toolbar){
-              return laytpl(jquery(item3.toolbar).html()||'').render(tplData);
+              return laytpl($(item3.toolbar).html()||'').render(tplData);
             }
             return parseTempData.call(that, {
               item3: item3
@@ -24545,7 +24544,7 @@ ready$1.run = function(_$){
 
     //同步分页状态
     if(options.page){
-      options.page = jquery.extend({
+      options.page = $.extend({
         elem: 'layui-table-page' + options.index,
         count: count,
         limit: options.limit,
@@ -24646,7 +24645,7 @@ ready$1.run = function(_$){
 
         // 如果 totalRow 参数为字符类型，则解析为自定义模版
         if(typeof totalRow === 'string'){
-          return laytpl(totalRow).render(jquery.extend({
+          return laytpl(totalRow).render($.extend({
             TOTAL_NUMS: TOTAL_NUMS || totalNums[field],
             TOTAL_ROW: totalRowData || {},
             LAY_COL: item3
@@ -24659,7 +24658,7 @@ ready$1.run = function(_$){
       // 合计原始结果
       item3.field && that.dataTotal.push({
         field: item3.field,
-        total: jquery('<div>'+ tdContent +'</div>').text()
+        total: $('<div>'+ tdContent +'</div>').text()
       });
 
       // td 容器
@@ -24782,13 +24781,13 @@ ready$1.run = function(_$){
     var selector = isCheckAllOrMult ? 'tr' : 'tr[data-index="'+ opts.index +'"]';
     var tr = function(tr) {
       return isCheckAll ? tr : tr.filter(isCheckMult ? function() {
-        var dataIndex = jquery(this).data('index');
+        var dataIndex = $(this).data('index');
         return opts.index[dataIndex];
       } : '[data-index="'+ opts.index +'"]');
     }(tbody.children(selector));
 
     // 默认属性
-    opts = jquery.extend({
+    opts = $.extend({
       type: 'checkbox' // 选中方式
     }, opts);
 
@@ -24805,7 +24804,7 @@ ready$1.run = function(_$){
 
     // 给匹配行设置选中状态
     tr.each(function() {
-      var el = jquery(this);
+      var el = $(this);
       var i = el.attr('data-index');
       var item = thisData[i];
 
@@ -24875,7 +24874,7 @@ ready$1.run = function(_$){
     if(typeof opts.field === 'string'){
       field = opts.field;
       that.layHeader.find('th').each(function(i, item){
-        var othis = jquery(this);
+        var othis = $(this);
         var _field = othis.data('field');
         if(_field === opts.field){
           opts.field = othis;
@@ -24940,7 +24939,7 @@ ready$1.run = function(_$){
         field: field,
         type: opts.type
       };
-      layui.event.call(opts.field, MOD_NAME$4, 'sort('+ filter +')', jquery.extend({
+      layui.event.call(opts.field, MOD_NAME$4, 'sort('+ filter +')', $.extend({
         config: options
       }, options.initSort));
     }
@@ -24982,7 +24981,7 @@ ready$1.run = function(_$){
       if(height < MIN_HEIGHT) height = MIN_HEIGHT;
       // that.elem.css('height', height);
     } else if (that.parentDiv && that.parentHeightGap) {
-      height = jquery(that.parentDiv).height() - that.parentHeightGap;
+      height = $(that.parentDiv).height() - that.parentHeightGap;
       if(height < MIN_HEIGHT) height = MIN_HEIGHT;
       // that.elem.css("height", height);
     } else if (that.customHeightFunc) {
@@ -24997,7 +24996,7 @@ ready$1.run = function(_$){
       // 固定列表头同步跟本体 th 一致高度
       var headerMain = that.layHeader.first();
       layui.each(th, function (thIndex, thElem) {
-        thElem = jquery(thElem);
+        thElem = $(thElem);
         thElem.height(headerMain.find('th[data-key="' + thElem.attr('data-key') + '"]').height() + 'px');
       });
     }
@@ -25066,7 +25065,7 @@ ready$1.run = function(_$){
       if(scrollWidth && scrollHeight){
         elem = elem.eq(0);
         if(!elem.find('.layui-table-patch')[0]){
-          var patchElem = jquery('<th class="layui-table-patch"><div class="layui-table-cell"></div></th>'); // 补丁元素
+          var patchElem = $('<th class="layui-table-patch"><div class="layui-table-cell"></div></th>'); // 补丁元素
           patchElem.find('div').css({
             width: scrollWidth
           });
@@ -25142,7 +25141,7 @@ ready$1.run = function(_$){
           cell.html(parseTempData.call(that, {
             item3: item3,
             content: content,
-            tplData: jquery.extend({
+            tplData: $.extend({
               LAY_COL: item3,
             }, data)
           }));
@@ -25176,19 +25175,19 @@ ready$1.run = function(_$){
     var th = that.layHeader.find('th');
     var ELEM_CELL = '.layui-table-cell';
 
-    var _BODY = jquery('body');
+    var _BODY = $('body');
     var dict = {};
 
     // 头部工具栏操作事件
     that.layTool.on('click', '*[lay-event]', function(e){
-      var othis = jquery(this);
+      var othis = $(this);
       var events = othis.attr('lay-event');
       var data = table.cache[options.id];
 
       // 弹出工具下拉面板
       var openPanel = function(sets) {
-        var list = jquery(sets.list);
-        var panel = jquery('<ul class="' + ELEM_TOOL_PANEL + '"></ul>');
+        var list = $(sets.list);
+        var panel = $('<ul class="' + ELEM_TOOL_PANEL + '"></ul>');
 
         panel.html(list);
 
@@ -25226,7 +25225,7 @@ ready$1.run = function(_$){
       });
 
       // table toolbar 事件
-      layui.event.call(this, MOD_NAME$4, 'toolbar('+ filter +')', jquery.extend({
+      layui.event.call(this, MOD_NAME$4, 'toolbar('+ filter +')', $.extend({
         event: events,
         config: options
       },{}));
@@ -25234,13 +25233,13 @@ ready$1.run = function(_$){
 
     // 表头自定义元素事件
     that.layHeader.on('click', '*[lay-event]', function(e){
-      var othis = jquery(this);
+      var othis = $(this);
       var events = othis.attr('lay-event');
       var th = othis.closest('th');
       var key = th.data('key');
       var col = that.col(key);
 
-      layui.event.call(this, MOD_NAME$4, 'colTool('+ filter +')', jquery.extend({
+      layui.event.call(this, MOD_NAME$4, 'colTool('+ filter +')', $.extend({
         event: events,
         config: options,
         col: col
@@ -25249,10 +25248,10 @@ ready$1.run = function(_$){
 
     // 分页栏操作事件
     that.layPagebar.on('click', '*[lay-event]', function(e){
-      var othis = jquery(this);
+      var othis = $(this);
       var events = othis.attr('lay-event');
 
-      layui.event.call(this, MOD_NAME$4, 'pagebar('+ filter +')', jquery.extend({
+      layui.event.call(this, MOD_NAME$4, 'pagebar('+ filter +')', $.extend({
         event: events,
         config: options
       },{}));
@@ -25260,7 +25259,7 @@ ready$1.run = function(_$){
 
     // 拖拽调整宽度
     th.on('mousemove', function(e){
-      var othis = jquery(this);
+      var othis = $(this);
       var oLeft = othis.offset().left;
       var pLeft = e.clientX - oLeft;
       if(othis.data('unresize') || thisTable.eventMoveElem){
@@ -25269,12 +25268,12 @@ ready$1.run = function(_$){
       dict.allowResize = othis.width() - pLeft <= 10; //是否处于拖拽允许区域
       _BODY.css('cursor', (dict.allowResize ? 'col-resize' : ''));
     }).on('mouseleave', function(){
-      jquery(this);
+      $(this);
       if(thisTable.eventMoveElem) return;
       dict.allowResize = false;
       _BODY.css('cursor', '');
     }).on('mousedown', function(e){
-      var othis = jquery(this);
+      var othis = $(this);
       if(dict.allowResize){
         var key = othis.data('key');
         e.preventDefault();
@@ -25357,7 +25356,7 @@ ready$1.run = function(_$){
 
     // 排序
     th.on('click', function(e){
-      var othis = jquery(this);
+      var othis = $(this);
       var elemSort = othis.find(ELEM_SORT);
       var nowType = elemSort.attr('lay-sort');
       var type;
@@ -25380,7 +25379,7 @@ ready$1.run = function(_$){
         fromEvent: true
       });
     }).find(ELEM_SORT+' .layui-edge ').on('click', function(e){
-      var othis = jquery(this);
+      var othis = $(this);
       var index = othis.index();
       var field = othis.parents('th').eq(0).data('field');
       layui.stope(e);
@@ -25401,7 +25400,7 @@ ready$1.run = function(_$){
 
     //数据行中的事件返回的公共对象成员
     var commonMember = that.commonMember = function(sets){
-      var othis = jquery(this);
+      var othis = $(this);
       var index = othis.parents('tr').eq(0).data('index');
       var tr = that.layBody.find('tr[data-index="'+ index +'"]');
       var data = table.cache[that.key] || [];
@@ -25432,19 +25431,19 @@ ready$1.run = function(_$){
         },
         // 设置行选中状态
         setRowChecked: function(opts){
-          that.setRowChecked(jquery.extend({
+          that.setRowChecked($.extend({
             index: index
           }, opts));
         }
         // 获取当前列
       };
 
-      return jquery.extend(obj, sets);
+      return $.extend(obj, sets);
     };
 
     // 复选框选择（替代元素的 click 事件）
     that.elem.on('click', 'input[name="layTableCheckbox"]+', function(e){
-      var othis = jquery(this);
+      var othis = $(this);
       var td = othis.closest('td');
       var checkbox = othis.prev();
       that.layBody.find('input[name="layTableCheckbox"]');
@@ -25485,7 +25484,7 @@ ready$1.run = function(_$){
 
     // 单选框选择
     that.elem.on('click', 'input[lay-type="layTableRadio"]+', function(e){
-      var othis = jquery(this);
+      var othis = $(this);
       var td = othis.closest('td');
       var radio = othis.prev();
       var checked = radio[0].checked;
@@ -25515,12 +25514,12 @@ ready$1.run = function(_$){
 
     // 行事件
     that.layBody.on('mouseenter', 'tr', function(){ // 鼠标移入行
-      var othis = jquery(this);
+      var othis = $(this);
       var index = othis.index();
       if(othis.data('off')) return; // 不触发事件
       that.layBody.find('tr:eq('+ index +')').addClass(ELEM_HOVER$1);
     }).on('mouseleave', 'tr', function(){ // 鼠标移出行
-      var othis = jquery(this);
+      var othis = $(this);
       var index = othis.index();
       if(othis.data('off')) return; // 不触发事件
       that.layBody.find('tr:eq('+ index +')').removeClass(ELEM_HOVER$1);
@@ -25535,7 +25534,7 @@ ready$1.run = function(_$){
 
     // 创建行单击、双击、菜单事件
     var setRowEvent = function(eventType, e){
-      var othis = jquery(this);
+      var othis = $(this);
       if(othis.data('off')) return; // 不触发事件
 
       // 不触发「行单/双击事件」的子元素
@@ -25547,7 +25546,7 @@ ready$1.run = function(_$){
           '[lay-unrow]'
         ].join(',');
 
-        if(jquery(e.target).is(UNROW) || jquery(e.target).closest(UNROW)[0]){
+        if($(e.target).is(UNROW) || $(e.target).closest(UNROW)[0]){
           return;
         }
       }
@@ -25563,7 +25562,7 @@ ready$1.run = function(_$){
 
     // 渲染单元格编辑状态
     var renderGridEdit = function(othis, e){
-      othis = jquery(othis);
+      othis = $(othis);
 
       if(othis.data('off')) return; // 不触发事件
 
@@ -25582,7 +25581,7 @@ ready$1.run = function(_$){
 
       // 显示编辑表单
       if(editType){
-        var input = jquery(function(){
+        var input = $(function(){
           var inputElem = '<input class="layui-input '+ ELEM_EDIT +'" lay-unrow>';
           if(editType === 'textarea') {
             inputElem = '<textarea class="layui-input ' + ELEM_EDIT + '" lay-unrow></textarea>';
@@ -25600,7 +25599,7 @@ ready$1.run = function(_$){
 
     // 单元格编辑 - 输入框内容被改变的事件
     that.layBody.on('change', '.'+ ELEM_EDIT, function(){
-      var othis = jquery(this);
+      var othis = $(this);
       var td = othis.parent();
       var value = this.value;
       var field = othis.parent().data('field');
@@ -25637,7 +25636,7 @@ ready$1.run = function(_$){
       // 执行 API 编辑事件
       layui.event.call(td[0], MOD_NAME$4, 'edit('+ filter +')', params);
     }).on('blur', '.'+ ELEM_EDIT, function(){ // 单元格编辑 - 恢复非编辑状态事件
-      jquery(this).remove(); // 移除编辑状态
+      $(this).remove(); // 移除编辑状态
     });
 
     // 表格主体单元格触发编辑的事件
@@ -25657,7 +25656,7 @@ ready$1.run = function(_$){
     });
     var ELEM_GRID_DOWN = 'layui-table-grid-down';
     var showGridExpandIcon = function(hide){
-      var othis = jquery(this);
+      var othis = $(this);
       var elemCell = othis.children(ELEM_CELL);
 
       if(othis.data('off')) return; // 不触发事件
@@ -25675,14 +25674,14 @@ ready$1.run = function(_$){
     };
     // 展开单元格内容
     var gridExpand = function(e, expandedMode){
-      var othis = jquery(this);
+      var othis = $(this);
       var td = othis.parent();
       var key = td.data('key');
       var col = that.col(key);
       var index = td.parent().data('index');
       var elemCell = td.children(ELEM_CELL);
       var ELEM_CELL_C = 'layui-table-cell-c';
-      var elemCellClose = jquery('<i class="layui-icon layui-icon-up '+ ELEM_CELL_C +'">');
+      var elemCellClose = $('<i class="layui-icon layui-icon-up '+ ELEM_CELL_C +'">');
 
       expandedMode = expandedMode || col.expandedMode || options.cellExpandedMode;
 
@@ -25744,7 +25743,7 @@ ready$1.run = function(_$){
 
         // 关闭展开状态
         elemCellClose.on('click', function(){
-          var $this = jquery(this);
+          var $this = $(this);
           that.setRowActive(index, [ELEM_EXPAND, ELEM_HOVER$1].join(' '), true); // 移除单元格展开样式
           that.cssRules(key, function(item){
             item.style.width =  $this.data('cell-width'); // 恢复单元格展开前的宽度
@@ -25774,7 +25773,7 @@ ready$1.run = function(_$){
 
     // 行工具条操作事件
     var toolFn = function(type){
-      var othis = jquery(this);
+      var othis = $(this);
       var td = othis.closest('td');
       var index = othis.parents('tr').eq(0).data('index');
       // 标记当前活动行
@@ -25805,7 +25804,7 @@ ready$1.run = function(_$){
 
     // 同步滚动条
     that.layMain.on('scroll', function(){
-      var othis = jquery(this);
+      var othis = $(this);
       var scrollLeft = othis.scrollLeft();
       var scrollTop = othis.scrollTop();
 
@@ -25922,7 +25921,7 @@ ready$1.run = function(_$){
 
     // 工具面板移除事件
     _DOC.on('table.remove.tool.panel', function(){
-      jquery('.' + ELEM_TOOL_PANEL).remove();
+      $('.' + ELEM_TOOL_PANEL).remove();
     });
   })();
 
@@ -25932,21 +25931,21 @@ ready$1.run = function(_$){
     var that = this;
     var elemTable = typeof filter === 'object' ? filter : (
       typeof filter === 'string'
-        ? jquery('table[lay-filter="'+ filter +'"]')
-      : jquery(ELEM$1 + '[lay-data], '+ ELEM$1 + '[lay-options]')
+        ? $('table[lay-filter="'+ filter +'"]')
+      : $(ELEM$1 + '[lay-data], '+ ELEM$1 + '[lay-options]')
     );
     var errorTips = 'Table element property lay-data configuration item has a syntax error: ';
 
     //遍历数据表格
     elemTable.each(function(){
-      var othis = jquery(this);
+      var othis = $(this);
       var attrData = othis.attr('lay-data');
       var tableData = lay.options(this, {
         attr: attrData ? 'lay-data' : null,
         errorText: errorTips + (attrData || othis.attr('lay-options'))
       });
 
-      var options = jquery.extend({
+      var options = $.extend({
         elem: this
         ,cols: []
         ,data: []
@@ -25960,15 +25959,15 @@ ready$1.run = function(_$){
       //获取表头数据
       othis.find('thead>tr').each(function(i){
         options.cols[i] = [];
-        jquery(this).children().each(function(ii){
-          var th = jquery(this);
+        $(this).children().each(function(ii){
+          var th = $(this);
           var attrData = th.attr('lay-data');
           var itemData = lay.options(this, {
             attr: attrData ? 'lay-data' : null,
             errorText: errorTips + (attrData || th.attr('lay-options'))
           });
 
-          var row = jquery.extend({
+          var row = $.extend({
             title: th.text()
             ,colspan: parseInt(th.attr('colspan')) || 1 //列单元格
             ,rowspan: parseInt(th.attr('rowspan')) || 1 //行单元格
@@ -25990,7 +25989,7 @@ ready$1.run = function(_$){
         table.eachCols(tableIns.config.id, function (i3, item3) {
           trElem.each(function(i1){
             options.data[i1] = options.data[i1] || {};
-            var tr = jquery(this);
+            var tr = $(this);
             var field = item3.field;
             options.data[i1][field] = tr.children('td').eq(tdIndex).html();
           });
@@ -26043,7 +26042,7 @@ ready$1.run = function(_$){
     var config = thisTable.config[id] || {};
     var arrs = [], index = 0;
 
-    cols = jquery.extend(true, [], cols || config.cols);
+    cols = $.extend(true, [], cols || config.cols);
 
     //重新整理表头结构
     layui.each(cols, function(i1, item1){
@@ -26152,7 +26151,7 @@ ready$1.run = function(_$){
     var isTreeTable = config.tree && config.tree.view;
     if (isTreeTable) {
       try {
-        data = jquery.extend(true, [], table.cache[id]);
+        data = $.extend(true, [], table.cache[id]);
         data = (function fn(data) {
           return data.reduce(function (acc, obj){
             var children = obj.children || [];
@@ -26176,7 +26175,7 @@ ready$1.run = function(_$){
           layui.each(id, function(i, item){
             i1 == 0 && dataTitle.push(item || '');
           });
-          layui.each(layui.isArray(item1) ? jquery.extend([], item1) : table.clearCacheKey(item1), function(i2, item2){
+          layui.each(layui.isArray(item1) ? $.extend([], item1) : table.clearCacheKey(item1), function(i2, item2){
             vals.push('"'+ (item2 || '') +'"');
           });
         } else {
@@ -26290,7 +26289,7 @@ ready$1.run = function(_$){
         });
       });
     }
-    jquery('.' + ELEM_TOOL_PANEL).remove(); // 关闭字段筛选面板如果打开的话
+    $('.' + ELEM_TOOL_PANEL).remove(); // 关闭字段筛选面板如果打开的话
     // 重新适配尺寸
     that.resize();
   };
@@ -26308,7 +26307,7 @@ ready$1.run = function(_$){
 
   // 仅重载数据
   table.reloadData = function(){
-    var args = jquery.extend([], arguments);
+    var args = $.extend([], arguments);
     args[3] = 'reloadData';
 
     // 重载时，影响整个结构的参数，不适合更新的参数
@@ -26336,7 +26335,7 @@ ready$1.run = function(_$){
 
   // 清除临时 Key
   table.clearCacheKey = function(data){
-    data = jquery.extend({}, data);
+    data = $.extend({}, data);
     delete data[table.config.checkName];
     delete data[table.config.indexName];
     delete data[table.config.initIndexName];
@@ -26346,7 +26345,7 @@ ready$1.run = function(_$){
   };
 
   // 自动完成渲染
-  jquery(function(){
+  $(function(){
     table.init();
   });
 
@@ -26368,7 +26367,7 @@ ready$1.run = function(_$){
     index: table.index,
     set: function (options) {
       var that = this;
-      that.config = jquery.extend({}, that.config, options);
+      that.config = $.extend({}, that.config, options);
       return that;
     },
     resize: table.resize,
@@ -26433,7 +26432,7 @@ ready$1.run = function(_$){
   var Class$5 = function (options) {
     var that = this;
     that.index = ++treeTable.index;
-    that.config = jquery.extend(true, {}, that.config, treeTable.config, options);
+    that.config = $.extend(true, {}, that.config, treeTable.config, options);
     // 处理一些属性
     that.init();
     that.render();
@@ -26455,7 +26454,7 @@ ready$1.run = function(_$){
     reload === 'reloadData' || (that.status = { // 用于记录一些状态信息
       expand: {} // 折叠状态
     });
-    var thatOptionsTemp = jquery.extend(true, {}, that.getOptions(), options);
+    var thatOptionsTemp = $.extend(true, {}, that.getOptions(), options);
     var treeOptions = thatOptionsTemp.tree;
     var childrenKey = treeOptions.customName.children;
     var idKey = treeOptions.customName.id;
@@ -26590,7 +26589,7 @@ ready$1.run = function(_$){
     }
 
     // 先初始一个空的表格以便拿到对应的表格实例信息
-    var tableIns = table.render(jquery.extend({}, options, {
+    var tableIns = table.render($.extend({}, options, {
       data: [],
       url: '',
       done: null
@@ -26685,7 +26684,7 @@ ready$1.run = function(_$){
       // 合并节点
       var tempObj = {};
       tempObj[childrenKey] = map[idTemp][childrenKey];
-      map[idTemp] = jquery.extend({}, item, tempObj);
+      map[idTemp] = $.extend({}, item, tempObj);
 
       var isRootNode = (rootPid ? map[idTemp][pIdKey] === rootPid : !map[idTemp][pIdKey]);
       if(isRootNode){
@@ -26725,7 +26724,7 @@ ready$1.run = function(_$){
     var flat = [];
     layui.each(tableData, function (i1, item1) {
       var dataIndex = (parentIndex ? parentIndex + '-' : '') + i1;
-      var dataNew = jquery.extend({}, item1);
+      var dataNew = $.extend({}, item1);
 
       dataNew[pIdKey] = typeof item1[pIdKey] !== 'undefined' ? item1[pIdKey] : parentId;
       flat.push(dataNew);
@@ -26782,12 +26781,12 @@ ready$1.run = function(_$){
         return treeTable.removeNode(tableId, index)
       },
       expand: function (opts) {
-        return treeTable.expandNode(tableId, jquery.extend({}, opts, {
+        return treeTable.expandNode(tableId, $.extend({}, opts, {
           index: index
         }))
       },
       setChecked: function (opts) {
-        return treeTable.setRowChecked(tableId, jquery.extend({}, opts, {
+        return treeTable.setRowChecked(tableId, $.extend({}, opts, {
           index: index
         }))
       }
@@ -26835,8 +26834,8 @@ ready$1.run = function(_$){
 
     // 若非删除操作，则返回合并后的数据
     if (newValue !== 'delete' && dataCache) {
-      jquery.extend(dataCache, newValue);
-      return clone ? jquery.extend({}, dataCache) : dataCache;
+      $.extend(dataCache, newValue);
+      return clone ? $.extend({}, dataCache) : dataCache;
     }
 
     // 删除操作
@@ -26860,12 +26859,12 @@ ready$1.run = function(_$){
           }*/
           return (i ? dataRet[childrenKey] : dataRet).splice(indexArr[i], 1)[0];
         } else { // 更新值
-          jquery.extend((i ? dataRet[childrenKey] : dataRet)[indexArr[i]], newValue);
+          $.extend((i ? dataRet[childrenKey] : dataRet)[indexArr[i]], newValue);
         }
       }
       dataRet = i ? dataRet[childrenKey][indexArr[i]] : dataRet[indexArr[i]];
     }
-    return clone ? jquery.extend({}, dataRet) : dataRet;
+    return clone ? $.extend({}, dataRet) : dataRet;
   };
 
   treeTable.getNodeDataByIndex = function (id, index) {
@@ -27019,7 +27018,7 @@ ready$1.run = function(_$){
 
           var params = {};
           // 参数
-          var data = jquery.extend(params, asyncSetting.where || options.where);
+          var data = $.extend(params, asyncSetting.where || options.where);
           var asyncAutoParam = asyncSetting.autoParam;
           layui.each(asyncAutoParam, function (index, item) {
             var itemArr = item.split('=');
@@ -27037,7 +27036,7 @@ ready$1.run = function(_$){
           var asyncParseData = asyncSetting.parseData || options.parseData;
           var asyncResponse = asyncSetting.response || options.response;
 
-          jquery.ajax({
+          $.ajax({
             type: asyncType || 'get',
             url: asyncUrl,
             contentType: asyncContentType,
@@ -27088,9 +27087,9 @@ ready$1.run = function(_$){
           var str2 = table.getTrHtml(tableId, childNodes, null, null, dataIndex);
 
           var str2Obj = {
-            trs: jquery(str2.trs.join('')),
-            trs_fixed: jquery(str2.trs_fixed.join('')),
-            trs_fixed_r: jquery(str2.trs_fixed_r.join(''))
+            trs: $(str2.trs.join('')),
+            trs_fixed: $(str2.trs_fixed.join('')),
+            trs_fixed_r: $(str2.trs_fixed_r.join(''))
           };
           var dataLevel = dataIndex.split('-').length - 1;
           var dataLevelNew = (dataLevel || 0) + 1;
@@ -27307,9 +27306,9 @@ ready$1.run = function(_$){
         var trAll = table.getTrHtml(id, tableDataFlat);
 
         var trAllObj = {
-          trs: jquery(trAll.trs.join('')),
-          trs_fixed: jquery(trAll.trs_fixed.join('')),
-          trs_fixed_r: jquery(trAll.trs_fixed_r.join(''))
+          trs: $(trAll.trs.join('')),
+          trs_fixed: $(trAll.trs_fixed.join('')),
+          trs_fixed_r: $(trAll.trs_fixed_r.join(''))
         };
         var props;
         layui.each(tableDataFlat, function (dataIndex, dataItem) {
@@ -27406,7 +27405,7 @@ ready$1.run = function(_$){
     var nameKey = customName.name;
     var indent = treeOptionsView.indent || 14;
     layui.each(tableView.find('td[data-field="' + nameKey + '"]'), function (index, item) {
-      item = jquery(item);
+      item = $(item);
       var trElem = item.closest('tr');
       var itemCell = item.children('.layui-table-cell');
       if (itemCell.hasClass('layui-table-tree-item')) {
@@ -27473,12 +27472,12 @@ ready$1.run = function(_$){
       });
       // #1463 expandNode 中已经展开过的节点不会重新渲染
       debounceFn('renderTreeTable2-' + tableId, function () {
-        form.render(jquery('.layui-table-tree[' + MOD_ID + '="' + tableId + '"]'));
+        form.render($('.layui-table-tree[' + MOD_ID + '="' + tableId + '"]'));
       }, 0)();
     } else {
       debounceFn('renderTreeTable-' + tableId, function () {
         options.hasNumberCol && formatNumber(that);
-        form.render(jquery('.layui-table-tree[' + MOD_ID + '="' + tableId + '"]'));
+        form.render($('.layui-table-tree[' + MOD_ID + '="' + tableId + '"]'));
       }, 0)();
     }
   };
@@ -27504,7 +27503,7 @@ ready$1.run = function(_$){
   // 树表渲染
   Class$5.prototype.render = function (type) {
     var that = this;
-    that.tableIns = table[type === 'reloadData' ? 'reloadData' : 'reload'](that.tableIns.config.id, jquery.extend(true, {}, that.config));
+    that.tableIns = table[type === 'reloadData' ? 'reloadData' : 'reload'](that.tableIns.config.id, $.extend(true, {}, that.config));
     that.config = that.tableIns.config;
   };
 
@@ -27524,7 +27523,7 @@ ready$1.run = function(_$){
     updateOptions(that.getOptions().id, options, type || true);
 
     // 对参数进行深度或浅扩展
-    that.config = jquery.extend(deep, {}, that.config, options);
+    that.config = $.extend(deep, {}, that.config, options);
 
     // 执行渲染
     that.render(type);
@@ -27532,7 +27531,7 @@ ready$1.run = function(_$){
 
   // 仅重载数据
   treeTable.reloadData = function () {
-    var args = jquery.extend(true, [], arguments);
+    var args = $.extend(true, [], arguments);
     args[3] = 'reloadData';
 
     return treeTable.reload.apply(null, args);
@@ -27544,9 +27543,9 @@ ready$1.run = function(_$){
       if (layui.type(statusObj) === 'function') {
         statusObj(item1);
       } else {
-        jquery.extend(item1, statusObj);
+        $.extend(item1, statusObj);
       }
-      dataUpdated.push(jquery.extend({}, item1));
+      dataUpdated.push($.extend({}, item1));
       notCascade || (dataUpdated = dataUpdated.concat(updateStatus(item1[childrenKey], statusObj, childrenKey, notCascade)));
     });
     return dataUpdated;
@@ -27629,7 +27628,7 @@ ready$1.run = function(_$){
     obj.update = function () {
       var updateThat = this;
       var args = arguments;
-      jquery.extend(tableThat.getNodeDataByIndex(trIndex), args[0]);
+      $.extend(tableThat.getNodeDataByIndex(trIndex), args[0]);
       var ret = updateFn.apply(updateThat, args); // 主要负责更新节点内容
       var nameKey = obj.config.tree.customName.name;
       nameKey in args[0] && obj.tr.find('td[data-field="' + nameKey + '"]').children('div.layui-table-cell').removeClass('layui-table-tree-item');
@@ -27672,7 +27671,7 @@ ready$1.run = function(_$){
     var trNew = table.getTrHtml(id, [newNodeTemp]);
     // 重新渲染tr
     layui.each(['main', 'fixed-l', 'fixed-r'], function (i, item) {
-      tableView.find('.layui-table-' + item + ' tbody tr[lay-data-index="' + index + '"]').replaceWith(jquery(trNew[['trs', 'trs_fixed', 'trs_fixed_r'][i]].join('')).attr({
+      tableView.find('.layui-table-' + item + ' tbody tr[lay-data-index="' + index + '"]').replaceWith($(trNew[['trs', 'trs_fixed', 'trs_fixed_r'][i]].join('')).attr({
         'data-index': trIndex,
         'lay-data-index': index,
         'data-level': trLevel
@@ -27793,7 +27792,7 @@ ready$1.run = function(_$){
     index = layui.type(index) === 'number' ? index : -1;
 
     // 添加数据
-    newNodes = jquery.extend(true, [], (layui.isArray(newNodes) ? newNodes : [newNodes]));
+    newNodes = $.extend(true, [], (layui.isArray(newNodes) ? newNodes : [newNodes]));
 
     // 若未传入 LAY_CHECKED 属性，则继承父节点的 checked 状态
     layui.each(newNodes, function(i, item){
@@ -27826,9 +27825,9 @@ ready$1.run = function(_$){
 
       var newNodesHtml = table.getTrHtml(id, newNodes);
       var newNodesHtmlObj = {
-        trs: jquery(newNodesHtml.trs.join('')),
-        trs_fixed: jquery(newNodesHtml.trs_fixed.join('')),
-        trs_fixed_r: jquery(newNodesHtml.trs_fixed_r.join(''))
+        trs: $(newNodesHtml.trs.join('')),
+        trs_fixed: $(newNodesHtml.trs_fixed.join('')),
+        trs_fixed_r: $(newNodesHtml.trs_fixed_r.join(''))
       };
 
       var attrs = {};
@@ -28060,7 +28059,7 @@ ready$1.run = function(_$){
 
     // 右侧固定行
     tr.each(function(){
-      var index = jquery(this).data('index');
+      var index = $(this).data('index');
       var trFixedR = tableViewElem.find('.layui-table-fixed-r tbody tr[data-index="'+ index +'"]');
       trFixedR[checked ? 'addClass' : 'removeClass'](ELEM_CHECKED);
     });
@@ -28178,7 +28177,7 @@ ready$1.run = function(_$){
       dataP[LAY_CHECKBOX_HALF] = checked ? false : checkedNum > 0;
     }
     dataP[checkName] = checked;
-    dataRet.push(jquery.extend({}, dataP));
+    dataRet.push($.extend({}, dataP));
     if (dataP[LAY_PARENT_INDEX]) {
       dataRet = dataRet.concat(that.updateParentCheckStatus(table.cache[tableId][dataP[LAY_PARENT_INDEX]], checked));
     }
@@ -28374,7 +28373,7 @@ ready$1.run = function(_$){
     if (!that) return;
 
     var tableData = [];
-    layui.each(jquery.extend(true, [], table.cache[id] || []), function (index, item) {
+    layui.each($.extend(true, [], table.cache[id] || []), function (index, item) {
       // 遍历排除掉临时的数据
       tableData.push(item);
     });
@@ -28481,11 +28480,10 @@ ready$1.run = function(_$){
  * Layui 2 组件构建器
  */
 
-
   // export
   function component$2(settings) {
     // 默认设置
-    settings = jquery.extend(true, {
+    settings = $.extend(true, {
       isDeepReload: false // 是否默认为深度重载
     }, settings);
 
@@ -28499,7 +28497,7 @@ ready$1.run = function(_$){
       index: layui[MOD_NAME] ? (layui[MOD_NAME].index + 10000) : 0, // 组件索引
 
       // 通用常量集，一般存放固定字符，如类名等
-      CONST: jquery.extend(true, {
+      CONST: $.extend(true, {
         MOD_NAME: MOD_NAME,
         MOD_ID: MOD_ID,
 
@@ -28514,7 +28512,7 @@ ready$1.run = function(_$){
       // 设置全局项
       set: function(options) {
         var that = this;
-        jquery.extend(true, that.config, options);
+        $.extend(true, that.config, options);
         return that;
       },
 
@@ -28543,7 +28541,7 @@ ready$1.run = function(_$){
 
       // 扩展实例对象的回调
       if (typeof settings.extendsInstance === 'function') {
-        jquery.extend(true, inst, settings.extendsInstance.call(that));
+        $.extend(true, inst, settings.extendsInstance.call(that));
       }
 
       // 返回实例对象
@@ -28556,7 +28554,7 @@ ready$1.run = function(_$){
       that.index = ++component.index; // 每创建一个实例，下标自增
 
       // 扩展配置项：传入选项 -> 全局选项 -> 默认选项 = 当前选项
-      that.config = jquery.extend(true, {}, that.config, component.config, options);
+      that.config = $.extend(true, {}, that.config, component.config, options);
 
       // 初始化之前的回调
       if (typeof settings.beforeInit === 'function') {
@@ -28573,7 +28571,7 @@ ready$1.run = function(_$){
     // 重载实例
     Class.prototype.reload = function(options, type) {
       var that = this;
-      that.config = jquery.extend(settings.isDeepReload, {}, that.config, options);
+      that.config = $.extend(settings.isDeepReload, {}, that.config, options);
       that.init(true, type);
     };
 
@@ -28581,12 +28579,12 @@ ready$1.run = function(_$){
     Class.prototype.init = function(rerender, type) {
       var that = this;
       var options = that.config;
-      var elem = jquery(options.elem);
+      var elem = $(options.elem);
 
       // 若 elem 非唯一，则拆分为多个实例
       if (elem.length > 1) {
         layui.each(elem, function() {
-          component.render(jquery.extend({}, options, {
+          component.render($.extend({}, options, {
             elem: this
           }));
         });
@@ -28597,9 +28595,9 @@ ready$1.run = function(_$){
       var layOptions = lay.options(elem[0]);
       if (rerender) {
         // 若重载渲染，则重载传入的 options 配置优先
-        options = that.config = jquery.extend(layOptions, options);
+        options = that.config = $.extend(layOptions, options);
       } else {
-        jquery.extend(options, layOptions); // 若首次渲染，则 lay-options 配置优先
+        $.extend(options, layOptions); // 若首次渲染，则 lay-options 配置优先
       }
 
       // 若重复执行 render，则视为 reload 处理
@@ -28609,7 +28607,7 @@ ready$1.run = function(_$){
         return newThat.reload(options, type);
       }
 
-      options.elem = jquery(options.elem);
+      options.elem = $(options.elem);
 
       // 初始化 id 属性 - 优先取 options.id > 元素 id > 自增索引
       options.id = lay.hasOwn(options, 'id') ? options.id : (
@@ -28788,13 +28786,13 @@ ready$1.run = function(_$){
         // 给任意元素绑定 tabs 切换功能
         if (typeof options.header[0] === 'string') {
           that.headerElem = options.header.concat();
-          that.documentElem = jquery(document);
+          that.documentElem = $(document);
         } else { // 方法传值渲染
-          that.elemView = jquery('<div class="layui-tabs"></div>');
+          that.elemView = $('<div class="layui-tabs"></div>');
           if (options.className) that.elemView.addClass(options.className);
 
-          var headerElem = jquery('<ul class="layui-tabs-header"></ul>');
-          var bodyElem = jquery('<div class="layui-tabs-body"></div>');
+          var headerElem = $('<ul class="layui-tabs-header"></ul>');
+          var bodyElem = $('<div class="layui-tabs-body"></div>');
 
           // 生成标签项
           layui.each(options.header, function(i, item){
@@ -28816,7 +28814,7 @@ ready$1.run = function(_$){
       // 若 body 选项类型为数组
       if (layui.type(options.body) === 'array') {
         if (typeof options.body[0] === 'string') {
-          that.documentElem = jquery(document);
+          that.documentElem = $(document);
           that.bodyElem = options.body.concat();
         }
       }
@@ -28862,13 +28860,13 @@ ready$1.run = function(_$){
       var trigger = options.trigger + TRIGGER_NAMESPACE;
       var elemHeaderItem = that.documentElem ? that.headerElem[1] : that.headerElem.join('');
       delegatedElement.off(trigger).on(trigger, elemHeaderItem, function() {
-        that.change(jquery(this));
+        that.change($(this));
       });
 
       // 窗口 resize 事件
       if (!inner.onresize) {
         var timer;
-        jquery(window).on('resize', function() {
+        $(window).on('resize', function() {
           clearTimeout(timer);
           timer = setTimeout(function(){
             layui.each(component$1.cache.id, function(key) {
@@ -28915,7 +28913,7 @@ ready$1.run = function(_$){
     var data = that.data();
 
     // 选项默认值
-    opts = jquery.extend({
+    opts = $.extend({
       active: true
     }, opts);
 
@@ -28944,7 +28942,7 @@ ready$1.run = function(_$){
 
     // 回调
     typeof opts.done === 'function' && opts.done(
-      jquery.extend(data, {
+      $.extend(data, {
         headerItem: newHeaderItem,
         bodyItem: newBodyItem
       })
@@ -28978,7 +28976,7 @@ ready$1.run = function(_$){
         thisHeaderItem[0],
         component$1.CONST.MOD_NAME,
         'beforeClose('+ options.id +')',
-        jquery.extend(data, {
+        $.extend(data, {
           index: index
         })
       );
@@ -29039,7 +29037,7 @@ ready$1.run = function(_$){
     if (data.thisHeaderItem.attr('lay-closable') !== 'false') {
       if(mode === 'all' || !mode){
         var nextHeader = headers.filter(':gt('+ data.index +')'+ DISABLED_CLOSE_SELECTOR).eq(0);
-        var prevHeader = jquery(headers.filter(':lt('+ data.index +')'+ DISABLED_CLOSE_SELECTOR).get().reverse()).eq(0);
+        var prevHeader = $(headers.filter(':lt('+ data.index +')'+ DISABLED_CLOSE_SELECTOR).get().reverse()).eq(0);
         if (nextHeader[0]) {
           that.change(nextHeader, true);
         } else if(prevHeader[0]) {
@@ -29052,7 +29050,7 @@ ready$1.run = function(_$){
 
     // 执行批量关闭标签
     headers.each(function(i) {
-      var $this = jquery(this);
+      var $this = $(this);
       var layid = $this.attr('lay-id');
       var bodyItem = that.findBodyItem(layid || i);
 
@@ -29120,7 +29118,7 @@ ready$1.run = function(_$){
         thisHeaderItem[0],
         component$1.CONST.MOD_NAME,
         'beforeChange('+ options.id +')',
-        jquery.extend(data, {
+        $.extend(data, {
           from: {
             index: data.index,
             headerItem: data.thisHeaderItem
@@ -29167,7 +29165,7 @@ ready$1.run = function(_$){
   Class$4.prototype.renderHeaderItem = function(opts) {
     var that = this;
     var options = that.config;
-    var headerItem = jquery(opts.headerItem || options.headerItem || '<li></li>');
+    var headerItem = $(opts.headerItem || options.headerItem || '<li></li>');
 
     headerItem.html(opts.title || 'New Tab').attr('lay-id', opts.id);
     that.appendClose(headerItem, opts); // 追加标签关闭元素
@@ -29181,7 +29179,7 @@ ready$1.run = function(_$){
   Class$4.prototype.renderBodyItem = function(opts) {
     var that = this;
     var options = that.config;
-    var bodyItem = jquery(opts.bodyItem || options.bodyItem || '<div class="'+ component$1.CONST.ITEM +'"></div>');
+    var bodyItem = $(opts.bodyItem || options.bodyItem || '<div class="'+ component$1.CONST.ITEM +'"></div>');
 
     bodyItem.html(opts.content || '').attr('lay-id', opts.id);
     return bodyItem;
@@ -29211,9 +29209,9 @@ ready$1.run = function(_$){
 
     // 可关闭项追加关闭按钮
     if (!headerItem.find('.'+ component$1.CONST.CLOSE)[0]) {
-      var close = jquery('<i class="layui-icon layui-icon-close layui-unselect '+ component$1.CONST.CLOSE +'"></i>');
+      var close = $('<i class="layui-icon layui-icon-close layui-unselect '+ component$1.CONST.CLOSE +'"></i>');
       close.on('click', function(){
-        that.close(jquery(this).parent());
+        that.close($(this).parent());
         return false;
       });
       headerItem.append(close);
@@ -29227,7 +29225,7 @@ ready$1.run = function(_$){
     var container = that.getContainer();
 
     container.header.items.each(function() {
-      var $this = jquery(this);
+      var $this = $(this);
       // 是否开启关闭
       if (options.closable) {
         that.appendClose($this);
@@ -29293,8 +29291,8 @@ ready$1.run = function(_$){
 
     // 滚动结构
     var rollElem = {
-      elem: jquery('<div class="'+ CLASS_SCROLL +' layui-border-box layui-unselect"></div>'),
-      bar: jquery([
+      elem: $('<div class="'+ CLASS_SCROLL +' layui-border-box layui-unselect"></div>'),
+      bar: $([
         '<div class="'+ CLASS_BAR +'">',
           '<i class="layui-icon '+ CLASS_BAR_ICON[0] +'" lay-mode="prev"></i>',
           '<i class="layui-icon '+ CLASS_BAR_ICON[1] +'" lay-mode="next"></i>',
@@ -29317,9 +29315,9 @@ ready$1.run = function(_$){
 
         // 点击左右箭头
         rollElem.bar.children().on('click', function(){
-          var othis = jquery(this);
+          var othis = $(this);
           var mode = othis.attr('lay-mode');
-          if (jquery(this).hasClass(component$1.CONST.CLASS_DISABLED)) return;
+          if ($(this).hasClass(component$1.CONST.CLASS_DISABLED)) return;
           mode && that.roll(mode);
         });
       }
@@ -29346,7 +29344,7 @@ ready$1.run = function(_$){
       var  prevLeft = -tabsLeft - outerWidth;
       if(prevLeft < 0) prevLeft = 0;
       headerItems.each(function(i, item){
-        var li = jquery(item);
+        var li = $(item);
         var left = Math.ceil(li.position().left);
 
         if (left >= prevLeft) {
@@ -29358,7 +29356,7 @@ ready$1.run = function(_$){
       rollToVisibleArea();
     } else { // 右箭头（往左滚动） 默认 next
       headerItems.each(function(i, item){
-        var li = jquery(item);
+        var li = $(item);
         var left = Math.ceil(li.position().left);
 
         if (left + li.outerWidth() >= outerWidth - tabsLeft) {
@@ -29445,7 +29443,7 @@ ready$1.run = function(_$){
   };
 
   // 扩展组件接口
-  jquery.extend(component$1, {
+  $.extend(component$1, {
     /**
      * 添加标签
      * @param {string} id - 渲染时的实例 ID
@@ -29541,7 +29539,7 @@ ready$1.run = function(_$){
   });
 
   // 初始化渲染
-  jquery(function() {
+  $(function() {
     component$1.render();
   });
 
@@ -29566,7 +29564,7 @@ ready$1.run = function(_$){
   // 全局设置
   Element.prototype.set = function(options){
     var that = this;
-    jquery.extend(true, that.config, options);
+    $.extend(true, that.config, options);
     return that;
   };
 
@@ -29577,7 +29575,7 @@ ready$1.run = function(_$){
 
   // 外部 Tab 新增
   Element.prototype.tabAdd = function(filter, options){
-    var tabElem = jquery('.layui-tab[lay-filter='+ filter +']');
+    var tabElem = $('.layui-tab[lay-filter='+ filter +']');
     var titElem = tabElem.children(TITLE);
     var barElem = titElem.children('.layui-tab-bar');
     var contElem = tabElem.children('.layui-tab-content');
@@ -29609,7 +29607,7 @@ ready$1.run = function(_$){
    * @returns {this}
    */
   Element.prototype.tabDelete = function(filter, layid, force){
-    var tabElem = jquery('.layui-tab[lay-filter='+ filter +']');
+    var tabElem = $('.layui-tab[lay-filter='+ filter +']');
     var titElem = tabElem.children(TITLE);
     var liElem = titElem.find('>li[lay-id="'+ layid +'"]');
     call.tabDelete.call(liElem[0], {
@@ -29627,7 +29625,7 @@ ready$1.run = function(_$){
    * @returns {this}
    */
   Element.prototype.tabChange = function(filter, layid, force){
-    var tabElem = jquery('.layui-tab[lay-filter='+ filter +']');
+    var tabElem = $('.layui-tab[lay-filter='+ filter +']');
     var titElem = tabElem.children(TITLE);
     var liElem = titElem.find('>li[lay-id="'+ layid +'"]');
 
@@ -29642,7 +29640,7 @@ ready$1.run = function(_$){
   Element.prototype.tab = function(options){
     options = options || {};
     dom.on('click', options.headerElem, function(e){
-      var index = jquery(options.headerElem).index(jquery(this));
+      var index = $(options.headerElem).index($(this));
       call.tabClick.call(this, {
         index: index,
         options: options
@@ -29654,7 +29652,7 @@ ready$1.run = function(_$){
   // 动态改变进度条
   Element.prototype.progress = function(filter, percent){
     var ELEM = 'layui-progress';
-    var elem = jquery('.'+ ELEM +'[lay-filter='+ filter +']');
+    var elem = $('.'+ ELEM +'[lay-filter='+ filter +']');
     var elemBar = elem.find('.'+ ELEM +'-bar');
     var text = elemBar.find('.'+ ELEM +'-text');
 
@@ -29683,12 +29681,12 @@ ready$1.run = function(_$){
     tabClick: function(obj){
       obj = obj || {};
       var options = obj.options || {};
-      var othis = obj.liElem || jquery(this);
+      var othis = obj.liElem || $(this);
       var parents = options.headerElem
         ? othis.parent()
       : othis.parents('.layui-tab').eq(0);
       var item = options.bodyElem
-        ? jquery(options.bodyElem)
+        ? $(options.bodyElem)
       : parents.children('.layui-tab-content').children('.layui-tab-item');
       var elemA = othis.find('a');
       var isJump = elemA.attr('href') !== 'javascript:;' && elemA.attr('target') === '_blank'; // 是否存在跳转
@@ -29741,7 +29739,7 @@ ready$1.run = function(_$){
     ,tabDelete: function(obj){
       obj = obj || {};
 
-      var li = obj.liElem || jquery(this).parent();
+      var li = obj.liElem || $(this).parent();
       var index = li.parent().children('li').index(li);
       var tabElem = li.closest('.layui-tab');
       var item = tabElem.children('.layui-tab-content').children('.layui-tab-item');
@@ -29793,14 +29791,14 @@ ready$1.run = function(_$){
       var BAR = 'layui-tab-bar';
       var CLOSE = 'layui-tab-close';
       var that = this;
-      var targetElem = elem || jquery('.layui-tab');
+      var targetElem = elem || $('.layui-tab');
 
       targetElem.each(function(){
-        var othis = jquery(this);
+        var othis = $(this);
         var title = othis.children('.layui-tab-title');
         othis.children('.layui-tab-content').children('.layui-tab-item');
         var STOPE = 'lay-stope="tabmore"';
-        var span = jquery('<span class="layui-unselect layui-tab-bar" '+ STOPE +'><i '+ STOPE +' class="layui-icon">&#xe61a;</i></span>');
+        var span = $('<span class="layui-unselect layui-tab-bar" '+ STOPE +'><i '+ STOPE +' class="layui-icon">&#xe61a;</i></span>');
 
         if(that === window && device$1.ie != 8);
 
@@ -29808,9 +29806,9 @@ ready$1.run = function(_$){
         var allowclose = othis.attr('lay-allowclose');
         if(allowclose && allowclose !== 'false'){
           title.find('li').each(function(){
-            var li = jquery(this);
+            var li = $(this);
             if(!li.find('.'+CLOSE)[0] && li.attr('lay-allowclose') !== 'false'){
-              var close = jquery('<i class="layui-icon layui-icon-close layui-unselect '+ CLOSE +'"></i>');
+              var close = $('<i class="layui-icon layui-icon-close layui-unselect '+ CLOSE +'"></i>');
               close.on('click', function(e) {
                 call.tabDelete.call(this, {
                   e: e
@@ -29853,8 +29851,8 @@ ready$1.run = function(_$){
     }
     // 隐藏更多 Tab
     ,hideTabMore: function(e){
-      var tsbTitle = jquery('.layui-tab-title');
-      if(e === true || jquery(e.target).attr('lay-stope') !== 'tabmore'){
+      var tsbTitle = $('.layui-tab-title');
+      if(e === true || $(e.target).attr('lay-stope') !== 'tabmore'){
         tsbTitle.removeClass('layui-tab-more');
         tsbTitle.find('.layui-tab-bar').attr('title','');
       }
@@ -29882,7 +29880,7 @@ ready$1.run = function(_$){
 
     // 点击菜单 - a 标签触发
     ,clickThis: function() {
-      var othis = jquery(this);
+      var othis = $(this);
       var parents = othis.closest(NAV_ELEM);
       var filter = parents.attr('lay-filter');
       var parent = othis.parent() ;
@@ -29905,7 +29903,7 @@ ready$1.run = function(_$){
 
         // 动画执行完成后的操作
         var complete = function() {
-          jquery(this).css({
+          $(this).css({
             "display": "" // 剔除动画生成的 style display，以适配外部样式的状态重置
           });
           // 避免导航滑块错位
@@ -29946,7 +29944,7 @@ ready$1.run = function(_$){
 
     // 折叠面板
     ,collapse: function() {
-      var othis = jquery(this);
+      var othis = $(this);
       var wrapper = othis.closest('.layui-collapse');
       var filter = wrapper.attr('lay-filter');
 
@@ -29961,7 +29959,7 @@ ready$1.run = function(_$){
 
       // 动画执行完成后的操作
       var complete = function() {
-        jquery(this).css('display', ''); // 剔除动画生成的 style display，以适配外部样式的状态重置
+        $(this).css('display', ''); // 剔除动画生成的 style display，以适配外部样式的状态重置
       };
 
       // 是否正处于动画中的状态
@@ -30003,7 +30001,7 @@ ready$1.run = function(_$){
       // Tab 选项卡
       tab: function(elem){
         var TAB_ELEM = '.layui-tab';
-        var targetElem = elem || jquery(TAB_ELEM + elemFilter);
+        var targetElem = elem || $(TAB_ELEM + elemFilter);
         call.tabAuto.call({}, null, targetElem);
       }
 
@@ -30017,7 +30015,7 @@ ready$1.run = function(_$){
 
         // 滑块跟随
         var follow = function(bar, nav, index) {
-          var othis = jquery(this);
+          var othis = $(this);
           var child = othis.find('.'+NAV_CHILD);
 
           // 是否垂直导航菜单
@@ -30076,10 +30074,10 @@ ready$1.run = function(_$){
         };
 
         // 遍历导航
-        var targetElem = elem || jquery(NAV_ELEM + elemFilter);
+        var targetElem = elem || $(NAV_ELEM + elemFilter);
         targetElem.each(function(index) {
-          var othis = jquery(this);
-          var bar = jquery('<span class="'+ NAV_BAR +'"></span>');
+          var othis = $(this);
+          var bar = $('<span class="'+ NAV_BAR +'"></span>');
           var itemElem = othis.find('.'+NAV_ITEM);
 
           // hover 滑动效果
@@ -30124,7 +30122,7 @@ ready$1.run = function(_$){
 
           // 展开子菜单
           itemElem.find('a').each(function() {
-            var thisA = jquery(this);
+            var thisA = $(this);
             thisA.parent();
             var child = thisA.siblings('.'+ NAV_CHILD);
 
@@ -30141,17 +30139,17 @@ ready$1.run = function(_$){
       //面包屑
       ,breadcrumb: function(elem){
         var ELEM = '.layui-breadcrumb';
-        var targetElem = elem || jquery(ELEM + elemFilter);
+        var targetElem = elem || $(ELEM + elemFilter);
 
         targetElem.each(function(){
-          var othis = jquery(this)
+          var othis = $(this)
           ,ATTE_SPR = 'lay-separator'
           ,separator = othis.attr(ATTE_SPR) || '/'
           ,aNode = othis.find('a');
           if(aNode.next('span['+ ATTE_SPR +']')[0]) return;
           aNode.each(function(index){
             if(index === aNode.length - 1) return;
-            jquery(this).after('<span '+ ATTE_SPR +'>'+ separator +'</span>');
+            $(this).after('<span '+ ATTE_SPR +'>'+ separator +'</span>');
           });
           othis.css('visibility', 'visible');
         });
@@ -30160,10 +30158,10 @@ ready$1.run = function(_$){
       //进度条
       ,progress: function(elem){
         var ELEM = 'layui-progress';
-        var targetElem = elem || jquery('.' + ELEM + elemFilter);
+        var targetElem = elem || $('.' + ELEM + elemFilter);
 
         targetElem.each(function(){
-          var othis = jquery(this)
+          var othis = $(this)
           ,elemBar = othis.find('.layui-progress-bar')
           ,percent = elemBar.attr('lay-percent');
 
@@ -30184,12 +30182,12 @@ ready$1.run = function(_$){
       // 折叠面板
       ,collapse: function(elem) {
         var ELEM = 'layui-collapse';
-        var targetElem = elem || jquery('.' + ELEM + elemFilter);
+        var targetElem = elem || $('.' + ELEM + elemFilter);
 
         targetElem.each(function() {
-          var elemItem = jquery(this).find('.layui-colla-item');
+          var elemItem = $(this).find('.layui-colla-item');
           elemItem.each(function() {
-            var othis = jquery(this);
+            var othis = $(this);
             var elemTitle = othis.find('.layui-colla-title');
             var elemCont = othis.find('.layui-colla-content');
             var isNone = elemCont.css('display') === 'none';
@@ -30211,7 +30209,7 @@ ready$1.run = function(_$){
       }
     };
 
-    if(type && typeof filter === 'object' && filter instanceof jquery){
+    if(type && typeof filter === 'object' && filter instanceof $){
       var targetElem = filter;
       return items[type](targetElem);
     }
@@ -30224,15 +30222,15 @@ ready$1.run = function(_$){
   Element.prototype.render = Element.prototype.init;
 
   var element = new Element();
-  var dom = jquery(document);
+  var dom = $(document);
 
-  jquery(function(){
+  $(function(){
     element.render();
   });
 
   dom.on('click', '.layui-tab-title li', call.tabClick); // Tab 切换
   // dom.on('click', call.hideTabMore); // 隐藏展开的 Tab
-  jquery(window).on('resize', call.tabAuto); // 自适应
+  $(window).on('resize', call.tabAuto); // 自适应
 
 /**
  * rate
@@ -30310,7 +30308,7 @@ ready$1.run = function(_$){
 
       // 生成替代元素
       hasRender[0] && hasRender.remove(); // 如果已经渲染，则 Rerender
-      that.elemTemplate = jquery(template);
+      that.elemTemplate = $(template);
 
       options.span = that.elemTemplate.next('span');
       options.setText && options.setText(options.value);
@@ -30355,7 +30353,7 @@ ready$1.run = function(_$){
 
     liElems.each(function(index) {
       var ind = index + 1;
-      var othis = jquery(this);
+      var othis = $(this);
 
       // 点击
       othis.on('click', function(e) {
@@ -30363,7 +30361,7 @@ ready$1.run = function(_$){
         options.value = ind;
         if (options.half) {
           // 获取鼠标在 li 上的位置
-          var x = e.pageX - jquery(this).offset().left;
+          var x = e.pageX - $(this).offset().left;
           if (x <= wide / 2) {
             options.value = options.value - 0.5;
           }
@@ -30380,14 +30378,14 @@ ready$1.run = function(_$){
       // 移入
       othis.on('mousemove', function(e) {
         _ul.find("i").each(function() {
-          jquery(this).addClass(CONST$1.ICON_RATE).removeClass(CONST$1.ICON_SOLID_HALF);
+          $(this).addClass(CONST$1.ICON_RATE).removeClass(CONST$1.ICON_SOLID_HALF);
         });
         _ul.find("i:lt(" + ind + ")").each(function() {
-          jquery(this).addClass(CONST$1.ICON_RATE_SOLID).removeClass(CONST$1.ICON_HALF_RATE);
+          $(this).addClass(CONST$1.ICON_RATE_SOLID).removeClass(CONST$1.ICON_HALF_RATE);
         });
         // 如果设置可选半星，那么判断鼠标相对 li 的位置
         if (options.half) {
-          var x = e.pageX - jquery(this).offset().left;
+          var x = e.pageX - $(this).offset().left;
           if (x <= wide / 2) {
             othis.children("i").addClass(CONST$1.ICON_RATE_HALF).removeClass(CONST$1.ICON_RATE_SOLID);
           }
@@ -30397,10 +30395,10 @@ ready$1.run = function(_$){
       // 移出
       othis.on('mouseleave', function() {
         _ul.find("i").each(function() {
-          jquery(this).addClass(CONST$1.ICON_RATE).removeClass(CONST$1.ICON_SOLID_HALF);
+          $(this).addClass(CONST$1.ICON_RATE).removeClass(CONST$1.ICON_SOLID_HALF);
         });
         _ul.find("i:lt(" + Math.floor(options.value) + ")").each(function() {
-          jquery(this).addClass(CONST$1.ICON_RATE_SOLID).removeClass(CONST$1.ICON_HALF_RATE);
+          $(this).addClass(CONST$1.ICON_RATE_SOLID).removeClass(CONST$1.ICON_HALF_RATE);
         });
         // 如果设置可选半星，根据分数判断是否有半星
         if (options.half) {
@@ -30429,7 +30427,7 @@ ready$1.run = function(_$){
         if(score < 0) score = 0;
 
         liElems.each(function(index) {
-          var iconElem = jquery(this).children('i');
+          var iconElem = $(this).children('i');
           var isActiveIcon = (Math.ceil(score) - index === 1);
           var needSelect = Math.ceil(score) > index;
           var shouldHalfIcon = (score - index === 0.5);
@@ -30481,7 +30479,7 @@ ready$1.run = function(_$){
     // 设置全局项
     set: function(options) {
       var that = this;
-      that.config = jquery.extend({}, that.config, options);
+      that.config = $.extend({}, that.config, options);
       return that;
     },
 
@@ -30586,7 +30584,7 @@ ready$1.run = function(_$){
       ,rgb.g.toString(16)
       ,rgb.b.toString(16)
     ];
-    jquery.each(hex, function(nr, val){
+    $.each(hex, function(nr, val){
       if(val.length === 1){
         hex[nr] = '0' + val;
       }
@@ -30601,14 +30599,14 @@ ready$1.run = function(_$){
     return {r:re[0], g:re[1], b:re[2]};
   }
 
-  ,$win = jquery(window)
-  ,$doc = jquery(document)
+  ,$win = $(window)
+  ,$doc = $(document)
 
   //构造器
   ,Class$2 = function(options){
     var that = this;
     that.index = ++colorpicker.index;
-    that.config = jquery.extend({}, that.config, colorpicker.config, options);
+    that.config = $.extend({}, that.config, colorpicker.config, options);
     that.render();
   };
 
@@ -30631,10 +30629,10 @@ ready$1.run = function(_$){
     var options = that.config;
 
     // 若 elem 非唯一，则拆分为多个实例
-    var elem = jquery(options.elem);
+    var elem = $(options.elem);
     if(elem.length > 1){
       layui.each(elem, function(){
-        colorpicker.render(jquery.extend({}, options, {
+        colorpicker.render($.extend({}, options, {
           elem: this
         }));
       });
@@ -30642,10 +30640,10 @@ ready$1.run = function(_$){
     }
 
     // 合并 lay-options 属性上的配置信息
-    jquery.extend(options, lay.options(elem[0]));
+    $.extend(options, lay.options(elem[0]));
 
     //颜色选择框对象
-    var elemColorBox = jquery(['<div class="layui-unselect layui-colorpicker">'
+    var elemColorBox = $(['<div class="layui-unselect layui-colorpicker">'
       ,'<span '+ (options.format == 'rgb' && options.alpha
           ? 'class="layui-colorpicker-trigger-bgcolor"'
         : '') +'>'
@@ -30675,7 +30673,7 @@ ready$1.run = function(_$){
     ,'</div>'].join(''));
 
     //初始化颜色选择框
-    elem = options.elem = jquery(options.elem);
+    elem = options.elem = $(options.elem);
     options.size && elemColorBox.addClass('layui-colorpicker-'+ options.size); //初始化颜色选择框尺寸
 
     // 插入颜色选择框
@@ -30702,7 +30700,7 @@ ready$1.run = function(_$){
     ,elemColorBox = that.elemColorBox[0]
 
     //颜色选择器对象
-    ,elemPicker = that.elemPicker = jquery(['<div id="layui-colorpicker'+ that.index +'" data-index="'+ that.index +'" class="layui-anim layui-anim-downbit layui-colorpicker-main">'
+    ,elemPicker = that.elemPicker = $(['<div id="layui-colorpicker'+ that.index +'" data-index="'+ that.index +'" class="layui-anim layui-anim-downbit layui-colorpicker-main">'
       //颜色面板
       ,'<div class="layui-colorpicker-main-wrapper">'
         ,'<div class="layui-colorpicker-basis">'
@@ -30755,11 +30753,11 @@ ready$1.run = function(_$){
     ;that.elemColorBox.find('.' + PICKER_TRIG_SPAN)[0];
 
     //如果当前点击的颜色盒子已经存在选择器，则关闭
-    if(jquery(ELEM_MAIN)[0] && jquery(ELEM_MAIN).data('index') == that.index){
+    if($(ELEM_MAIN)[0] && $(ELEM_MAIN).data('index') == that.index){
       that.removePicker(Class$2.thisElemInd);
     } else { //插入颜色选择器
       that.removePicker(Class$2.thisElemInd);
-      jquery('body').append(elemPicker);
+      $('body').append(elemPicker);
     }
 
     // 记录当前执行的实例索引
@@ -30776,7 +30774,7 @@ ready$1.run = function(_$){
   Class$2.prototype.removePicker = function(index){
     var that = this;
     var options = that.config;
-    var elem = jquery('#layui-colorpicker'+ (index || that.index));
+    var elem = $('#layui-colorpicker'+ (index || that.index));
 
     if(elem[0]){
       elem.remove();
@@ -30895,13 +30893,13 @@ ready$1.run = function(_$){
       }
 
       //回调更改的颜色
-      options.change && options.change(jquery.trim(that.elemPicker.find('.' + PICKER_INPUT).find('input').val()));
+      options.change && options.change($.trim(that.elemPicker.find('.' + PICKER_INPUT).find('input').val()));
     }
 
     //拖拽元素
-    ,elemMove = jquery(['<div class="layui-auxiliar-moving" id="LAY-colorpicker-moving"></div>'].join(''))
+    ,elemMove = $(['<div class="layui-auxiliar-moving" id="LAY-colorpicker-moving"></div>'].join(''))
     ,createMoveElem = function(call){
-      jquery('#LAY-colorpicker-moving')[0] || jquery('body').append(elemMove);
+      $('#LAY-colorpicker-moving')[0] || $('body').append(elemMove);
       elemMove.on('mousemove', call);
       elemMove.on('mouseup', function(){
         elemMove.remove();
@@ -30935,7 +30933,7 @@ ready$1.run = function(_$){
     });
 
     side.on('mousedown', function(e){
-      var top = e.clientY - jquery(this).offset().top + $win.scrollTop();
+      var top = e.clientY - $(this).offset().top + $win.scrollTop();
       if(top < 0)top = 0;
       if(top > this.offsetHeight) top = this.offsetHeight;
       var h = top/180*360;
@@ -30973,8 +30971,8 @@ ready$1.run = function(_$){
     });
 
     basis.on('mousedown', function(e){
-      var top = e.clientY - jquery(this).offset().top + $win.scrollTop()
-      ,left = e.clientX - jquery(this).offset().left + $win.scrollLeft();
+      var top = e.clientY - $(this).offset().top + $win.scrollTop()
+      ,left = e.clientX - $(this).offset().left + $win.scrollLeft();
       if(top < 0)top = 0;
       if(top > this.offsetHeight)top = this.offsetHeight;
       if(left < 0)left = 0;
@@ -31009,7 +31007,7 @@ ready$1.run = function(_$){
       e.preventDefault();
     });
     alphacolor.on('mousedown', function(e){
-      var left = e.clientX - jquery(this).offset().left;
+      var left = e.clientX - $(this).offset().left;
       if(left < 0)left = 0;
       if(left > this.offsetWidth)left = this.offsetWidth;
       var a = Math.round(left /280*100) /100;
@@ -31021,8 +31019,8 @@ ready$1.run = function(_$){
 
     //预定义颜色选择
     pre.each(function(){
-      jquery(this).on('click', function(){
-        jquery(this).parent('.layui-colorpicker-pre').addClass('selected').siblings().removeClass('selected');
+      $(this).on('click', function(){
+        $(this).parent('.layui-colorpicker-pre').addClass('selected').siblings().removeClass('selected');
         var color = this.style.backgroundColor
         ,hsb = RGBToHSB(RGBSTo(color))
         ,a = color.slice(color.lastIndexOf(",") + 1, color.length - 1);
@@ -31117,7 +31115,7 @@ ready$1.run = function(_$){
 
       //确认
       ,confirm: function(othis, change){
-        var value =  jquery.trim(elemPickerInput.val())
+        var value =  $.trim(elemPickerInput.val())
         ,colorValue
         ,hsb;
 
@@ -31152,14 +31150,14 @@ ready$1.run = function(_$){
 
     //选择器面板点击事件
     that.elemPicker.on('click', '*[colorpicker-events]', function(){
-      var othis = jquery(this)
+      var othis = $(this)
       ,attrEvent = othis.attr('colorpicker-events');
       pickerEvents[attrEvent] && pickerEvents[attrEvent].call(this, othis);
     });
 
     //输入框事件
     elemPickerInput.on('keyup', function(e){
-      var othis = jquery(this);
+      var othis = $(this);
       pickerEvents.confirm.call(this, othis, e.keyCode === 13 ?  null : 'change');
     });
   };
@@ -31172,7 +31170,7 @@ ready$1.run = function(_$){
     // 弹出颜色选择器
     that.elemColorBox.on('click' , function(){
       that.renderPicker();
-      if(jquery(ELEM_MAIN)[0]){
+      if($(ELEM_MAIN)[0]){
         that.val();
         that.side();
       }
@@ -31191,13 +31189,13 @@ ready$1.run = function(_$){
       var elemColorBoxSpan = that.elemColorBox.find('.' + PICKER_TRIG_SPAN);
 
       //如果点击的元素是颜色框
-      if(jquery(e.target).hasClass(ELEM)
-        || jquery(e.target).parents('.'+ELEM)[0]
+      if($(e.target).hasClass(ELEM)
+        || $(e.target).parents('.'+ELEM)[0]
       ) return;
 
       //如果点击的元素是选择器
-      if(jquery(e.target).hasClass(ELEM_MAIN.replace(/\./g, ''))
-        || jquery(e.target).parents(ELEM_MAIN)[0]
+      if($(e.target).hasClass(ELEM_MAIN.replace(/\./g, ''))
+        || $(e.target).parents(ELEM_MAIN)[0]
       ) return;
 
       if(!that.elemPicker) return;
@@ -31223,7 +31221,7 @@ ready$1.run = function(_$){
       var that = thisModule.getThis(colorpicker.thisId);
       if(!that) return;
 
-      if(!that.elemPicker ||  !jquery(ELEM_MAIN)[0]){
+      if(!that.elemPicker ||  !$(ELEM_MAIN)[0]){
         return false;
       }
       that.position();
@@ -31259,7 +31257,7 @@ ready$1.run = function(_$){
     // 设置全局项
     set: function(options) {
       var that = this;
-      that.config = jquery.extend({}, that.config, options);
+      that.config = $.extend({}, that.config, options);
       return that;
     },
 
@@ -31302,7 +31300,7 @@ ready$1.run = function(_$){
   var Class$1 = function(options){
     var that = this;
     that.index = ++slider.index;
-    that.config = jquery.extend({}, that.config, slider.config, options);
+    that.config = $.extend({}, that.config, slider.config, options);
     that.render();
   };
 
@@ -31327,7 +31325,7 @@ ready$1.run = function(_$){
   Class$1.prototype.precision = function(){
     var that = this;
     var options = that.config;
-    var precisions = jquery.map([options.min, options.max, options.step], function(v, i){
+    var precisions = $.map([options.min, options.max, options.step], function(v, i){
       var decimalArr = String(v).split('.');
       return decimalArr[1] ? decimalArr[1].length : 0;
     });
@@ -31340,10 +31338,10 @@ ready$1.run = function(_$){
     var options = that.config;
 
     // 若 elem 非唯一，则拆分为多个实例
-    var elem = jquery(options.elem);
+    var elem = $(options.elem);
     if(elem.length > 1){
       layui.each(elem, function(){
-        slider.render(jquery.extend({}, options, {
+        slider.render($.extend({}, options, {
           elem: this
         }));
       });
@@ -31351,7 +31349,7 @@ ready$1.run = function(_$){
     }
 
     // 合并 lay-options 属性上的配置信息
-    jquery.extend(options, lay.options(elem[0]));
+    $.extend(options, lay.options(elem[0]));
 
     //间隔值不能小于等于 0
     if(options.step <= 0) options.step = 1;
@@ -31398,11 +31396,11 @@ ready$1.run = function(_$){
     '<div class="layui-slider-bar" style="background:'+ theme +'; '+ (options.type === 'vertical' ? 'height' : 'width') +':'+ scale +';'+ (options.type === 'vertical' ? 'bottom' : 'left') +':'+ (scaleFir || 0) +';"></div><div class="layui-slider-wrap" style="'+ (options.type === 'vertical' ? 'bottom' : 'left') +':'+ (scaleFir || scale) +';">' +
     '<div class="layui-slider-wrap-btn" style="border: 2px solid '+ theme +';"></div></div>'+ (options.range ? '<div class="layui-slider-wrap" style="'+ (options.type === 'vertical' ? 'bottom' : 'left') +':'+ scaleSec +';"><div class="layui-slider-wrap-btn" style="border: 2px solid '+ theme +';"></div></div>' : '') +'</div>';
 
-    var othis = jquery(options.elem);
+    var othis = $(options.elem);
     var hasRender = othis.next('.' + ELEM_VIEW);
     //生成替代元素
     hasRender[0] && hasRender.remove(); //如果已经渲染，则Rerender
-    that.elemTemp = jquery(temp);
+    that.elemTemp = $(temp);
 
     //把数据缓存到滑块上
     if(options.range){
@@ -31434,7 +31432,7 @@ ready$1.run = function(_$){
 
     //插入输入框
     if(options.input && !options.range){
-      var elemInput = jquery('<div class="layui-slider-input"><div class="layui-slider-input-txt"><input type="text" class="layui-input"></div><div class="layui-slider-input-btn"><i class="layui-icon layui-icon-up"></i><i class="layui-icon layui-icon-down"></i></div></div>');
+      var elemInput = $('<div class="layui-slider-input"><div class="layui-slider-input-txt"><input type="text" class="layui-input"></div><div class="layui-slider-input-btn"><i class="layui-icon layui-icon-up"></i><i class="layui-icon layui-icon-down"></i></div></div>');
       othis.css("position","relative");
       othis.append(elemInput);
       othis.find('.' + SLIDER_INPUT_TXT).children('input').val(options.value);
@@ -31508,8 +31506,8 @@ ready$1.run = function(_$){
         //划过滑块显示数值
         var timer;
         that.elemTemp.find('.' + SLIDER_WRAP_BTN).on('mouseover', function(){
-          setSliderTipsTxt(jquery(this));
-          var left = calcSliderTipsLeft(jquery(this));
+          setSliderTipsTxt($(this));
+          var left = calcSliderTipsLeft($(this));
           clearTimeout(timer);
           timer = setTimeout(function(){
             setSliderTipsLeft(left);
@@ -31596,7 +31594,7 @@ ready$1.run = function(_$){
     };
 
     //拖拽元素
-    var elemMove = jquery(['<div class="layui-auxiliar-moving" id="LAY-slider-moving"></div'].join(''));
+    var elemMove = $(['<div class="layui-auxiliar-moving" id="LAY-slider-moving"></div'].join(''));
     var createMoveElem = function(sliderBtnElem, move, up){
       var upCall = function(){
         // 移动端延时一秒关闭
@@ -31610,7 +31608,7 @@ ready$1.run = function(_$){
           sliderBtnElem[0].removeEventListener('touchcancel', upCall);
         }
       };
-      jquery('#LAY-slider-moving')[0] || jquery('body').append(elemMove);
+      $('#LAY-slider-moving')[0] || $('body').append(elemMove);
       elemMove.on('mousemove', move);
       elemMove.on('mouseup', upCall).on('mouseleave', upCall);
       // 移动端
@@ -31628,7 +31626,7 @@ ready$1.run = function(_$){
 
     //滑块滑动
     sliderAct.find('.' + SLIDER_WRAP_BTN).each(function(index){
-      var othis = jquery(this);
+      var othis = $(this);
       othis.on('mousedown touchstart', function(e){
         e = e || window.event;
         if(e.type === 'touchstart'){
@@ -31674,20 +31672,20 @@ ready$1.run = function(_$){
 
     // 点击滑块
     sliderAct.on('click', function(e){
-      var main = jquery('.' + SLIDER_WRAP_BTN);
-      var othis = jquery(this);
+      var main = $('.' + SLIDER_WRAP_BTN);
+      var othis = $(this);
       if(!main.is(event.target) && main.has(event.target).length === 0 && main.length){
         var index;
         var offset = options.type === 'vertical'
-          ? (sliderWidth() - e.clientY + othis.offset().top - jquery(window).scrollTop())
-        :(e.clientX - othis.offset().left - jquery(window).scrollLeft());
+          ? (sliderWidth() - e.clientY + othis.offset().top - $(window).scrollTop())
+        :(e.clientX - othis.offset().left - $(window).scrollLeft());
 
         if(offset < 0)offset = 0;
         if(offset > sliderWidth()) offset = sliderWidth();
         var reaLeft = offset / sliderWidth() * 100 / step;
         if(options.range){
           if(options.type === 'vertical'){
-            index = Math.abs(offset - parseInt(jquery(sliderWrap[0]).css('bottom'))) > Math.abs(offset -  parseInt(jquery(sliderWrap[1]).css('bottom'))) ? 1 : 0;
+            index = Math.abs(offset - parseInt($(sliderWrap[0]).css('bottom'))) > Math.abs(offset -  parseInt($(sliderWrap[1]).css('bottom'))) ? 1 : 0;
           } else {
             index = Math.abs(offset - sliderWrap[0].offsetLeft) > Math.abs(offset - sliderWrap[1].offsetLeft) ? 1 : 0;
           }
@@ -31701,7 +31699,7 @@ ready$1.run = function(_$){
 
     //点击加减输入框
     sliderTxt.children('.' + SLIDER_INPUT_BTN).children('i').each(function(index){
-      jquery(this).on('click', function(){
+      $(this).on('click', function(){
         inputValue = sliderTxt.children('.' + SLIDER_INPUT_TXT).children('input').val();
         if(index == 1){ //减
           inputValue = inputValue - options.step < options.min
@@ -31763,7 +31761,7 @@ ready$1.run = function(_$){
     // 设置全局项
     set: function(options) {
       var that = this;
-      that.config = jquery.extend({}, that.config, options);
+      that.config = $.extend({}, that.config, options);
       return that;
     },
 
@@ -31788,7 +31786,7 @@ ready$1.run = function(_$){
   // 构造器
   var Class = function(options) {
     var that = this;
-    that.config = jquery.extend({}, that.config, carousel.config, options);
+    that.config = $.extend({}, that.config, carousel.config, options);
     that.render();
   };
 
@@ -31812,10 +31810,10 @@ ready$1.run = function(_$){
     var options = that.config;
 
     // 若 elem 非唯一，则拆分为多个实例
-    var elem = jquery(options.elem);
+    var elem = $(options.elem);
     if(elem.length > 1){
       layui.each(elem, function(){
-        carousel.render(jquery.extend({}, options, {
+        carousel.render($.extend({}, options, {
           elem: this
         }));
       });
@@ -31823,9 +31821,9 @@ ready$1.run = function(_$){
     }
 
     // 合并 lay-options 属性上的配置信息
-    jquery.extend(options, lay.options(elem[0]));
+    $.extend(options, lay.options(elem[0]));
 
-    options.elem = jquery(options.elem);
+    options.elem = $(options.elem);
     if(!options.elem[0]) return;
     that.elemItem = options.elem.find(ELEM_ITEM);
 
@@ -31867,7 +31865,7 @@ ready$1.run = function(_$){
   Class.prototype.reload = function(options){
     var that = this;
     clearInterval(that.timer);
-    that.config = jquery.extend({}, that.config, options);
+    that.config = $.extend({}, that.config, options);
     that.render();
   };
 
@@ -31948,7 +31946,7 @@ ready$1.run = function(_$){
     var itemsCount = that.elemItem.length;
 
     // 模板
-    var tplArrow = jquery([
+    var tplArrow = $([
       '<button type="button" class="layui-icon '+ (options.anim === 'updown' ? 'layui-icon-up' : 'layui-icon-left') + ' ' + ELEM_ARROW +'" lay-type="sub"></button>',
       '<button type="button" class="layui-icon '+ (options.anim === 'updown' ? 'layui-icon-down' : 'layui-icon-right') + ' ' + ELEM_ARROW +'" lay-type="add"></button>'
     ].join(''));
@@ -31964,7 +31962,7 @@ ready$1.run = function(_$){
 
     // 事件
     tplArrow.on('click', function(){
-      var othis = jquery(this);
+      var othis = $(this);
       var type = othis.attr('lay-type');
       that.slide(type);
     });
@@ -31989,7 +31987,7 @@ ready$1.run = function(_$){
     var itemsCount = that.elemItem.length;
 
     // 模板
-    var tplInd = that.elemInd = jquery(['<div class="'+ ELEM_IND +'"><ul>',
+    var tplInd = that.elemInd = $(['<div class="'+ ELEM_IND +'"><ul>',
       function(){
         var li = [];
         layui.each(that.elemItem, function(index){
@@ -32015,7 +32013,7 @@ ready$1.run = function(_$){
 
     // 事件
     tplInd.find('li').on(options.trigger === 'hover' ? 'mouseover' : options.trigger, function(){
-      that.goto(jquery(this).index());
+      that.goto($(this).index());
     });
   };
 
@@ -32123,8 +32121,8 @@ ready$1.run = function(_$){
     var that = this, page = 0, lock, isOver, lazyimg, timer;
     options = options || {};
 
-    var elem = jquery(options.elem); if(!elem[0]) return;
-    var scrollElem = jquery(options.scrollElem || document); // 滚动条所在元素
+    var elem = $(options.elem); if(!elem[0]) return;
+    var scrollElem = $(options.scrollElem || document); // 滚动条所在元素
     var threshold = 'mb' in options ? options.mb : 50; // 临界距离
     var isAuto = 'isAuto' in options ? options.isAuto : true; // 否自动滚动加载
     var moreText = options.moreText || "加载更多"; // 手动加载时，加载更多按钮文案
@@ -32140,7 +32138,7 @@ ready$1.run = function(_$){
 
     //加载更多
     var ELEM_TEXT = '<cite>' + moreText + '</cite>'
-    ,more = jquery('<div class="layui-flow-more"><a href="javascript:;">'+ ELEM_TEXT +'</a></div>');
+    ,more = $('<div class="layui-flow-more"><a href="javascript:;">'+ ELEM_TEXT +'</a></div>');
 
     if(!elem.find('.layui-flow-more')[0]){
       elem[isTop ? 'prepend' : 'append'](more);
@@ -32150,7 +32148,7 @@ ready$1.run = function(_$){
     var next = function(html, over){
       var scrollHeightStart = notDocument ? scrollElem.prop('scrollHeight') : document.documentElement.scrollHeight;
       var scrollTopStart = scrollElem.scrollTop();
-      html = jquery(html);
+      html = $(html);
       more[isTop ? 'after' : 'before'](html);
       over = over == 0 ? true : null;
       over ? more.html(end) : more.find('a').html(ELEM_TEXT);
@@ -32180,7 +32178,7 @@ ready$1.run = function(_$){
 
     //不自动滚动加载
     more.find('a').on('click.flow', function(){
-      jquery(this);
+      $(this);
       if(isOver) return;
       lock || done();
     });
@@ -32197,14 +32195,14 @@ ready$1.run = function(_$){
     if(!isAuto) return that;
 
     scrollElem.on('scroll.flow', function(){
-      var othis = jquery(this), top = othis.scrollTop();
+      var othis = $(this), top = othis.scrollTop();
 
       if(timer) clearTimeout(timer);
       if(isOver || !elem.width()) return; //如果已经结束，或者元素处于隐藏状态，则不执行滚动加载
 
       timer = setTimeout(function(){
         //计算滚动所在容器的可视高度
-        var height = notDocument ? othis.height() : jquery(window).height();
+        var height = notDocument ? othis.height() : $(window).height();
 
         //计算滚动所在容器的实际高度
         var scrollHeight = notDocument
@@ -32226,7 +32224,7 @@ ready$1.run = function(_$){
     var that = this, index = 0, haveScroll;
     options = options || {};
 
-    var scrollElem = jquery(options.scrollElem || document); //滚动条所在元素
+    var scrollElem = $(options.scrollElem || document); //滚动条所在元素
     var elem = options.elem || 'img';
     var direction = options.direction || 'bottom';
     var isTop = direction === 'top';
@@ -32261,10 +32259,10 @@ ready$1.run = function(_$){
     }, render = function(othis, scroll){
 
       //计算滚动所在容器的可视高度
-      var height = notDocument ? (scroll||scrollElem).height() : jquery(window).height();
+      var height = notDocument ? (scroll||scrollElem).height() : $(window).height();
       var start = scrollElem.scrollTop(), end = start + height;
 
-      that.lazyimg.elem = jquery(elem);
+      that.lazyimg.elem = $(elem);
 
       if(othis){
         show(othis, height);
@@ -32289,7 +32287,7 @@ ready$1.run = function(_$){
     if(!haveScroll){
       var timer;
       scrollElem.on('scroll.lazyimg' , function(){
-        var othis = jquery(this);
+        var othis = $(this);
         if(timer) clearTimeout(timer);
         timer = setTimeout(function(){
           render(null, othis);
@@ -32365,7 +32363,7 @@ ready$1.run = function(_$){
 
   // export api
   function code(options, mode){
-    options = jquery.extend(true, {}, config, options);
+    options = $.extend(true, {}, config, options);
 
     // 返回对象
     var ret = {
@@ -32376,7 +32374,7 @@ ready$1.run = function(_$){
       updateOptions: function(opts) { // 更新属性（选项）
         opts = opts || {};
         delete opts.elem;
-        return jquery.extend(true, options, opts);
+        return $.extend(true, options, opts);
       },
       reloadCode: function(opts) { // 仅重载 code
         layui.code(this.updateOptions(opts), 'reloadCode');
@@ -32384,11 +32382,11 @@ ready$1.run = function(_$){
     };
 
     // 若 elem 非唯一
-    var elem = jquery(options.elem);
+    var elem = $(options.elem);
     if(elem.length > 1){
       // 是否正向渲染
       layui.each(options.obverse ? elem : elem.get().reverse(), function(){
-        layui.code(jquery.extend({}, options, {
+        layui.code($.extend({}, options, {
           elem: this
         }), mode);
       });
@@ -32396,11 +32394,11 @@ ready$1.run = function(_$){
     }
 
     // 目标元素是否存在
-    var othis = options.elem = jquery(options.elem);
+    var othis = options.elem = $(options.elem);
     if(!othis[0]) return ret;
 
     // 合并属性上的参数，并兼容旧版本属性写法 lay-*
-    jquery.extend(true, options, lay.options(othis[0]), function(obj){
+    $.extend(true, options, lay.options(othis[0]), function(obj){
       var attrs = ['title', 'height', 'encode', 'skin', 'about'];
       layui.each(attrs, function(i, attr){
         var value = othis.attr('lay-'+ attr);
@@ -32444,7 +32442,7 @@ ready$1.run = function(_$){
       var lines = String(html).split(/\r?\n/g);
 
       // 包裹 code 行结构
-      html = jquery.map(lines, function(line, num) {
+      html = $.map(lines, function(line, num) {
         return [
           '<div class="'+ CONST.ELEM_LINE +'">',
             (
@@ -32552,15 +32550,15 @@ ready$1.run = function(_$){
       var isIframePreview = options.preview === 'iframe';
 
       // 追加 Tab 组件
-      var elemView = jquery('<div class="'+ CONST.ELEM_PREVIEW +'">');
-      var elemTabView = jquery('<div class="layui-tab layui-tab-brief">');
-      var elemHeaderView = jquery('<div class="layui-tab-title">');
-      var elemPreviewView = jquery('<div class="'+ [
+      var elemView = $('<div class="'+ CONST.ELEM_PREVIEW +'">');
+      var elemTabView = $('<div class="layui-tab layui-tab-brief">');
+      var elemHeaderView = $('<div class="layui-tab-title">');
+      var elemPreviewView = $('<div class="'+ [
         CONST.ELEM_ITEM,
         CONST.ELEM_ITEM +'-preview',
         'layui-border'
       ].join(' ') +'">');
-      var elemToolbar = jquery('<div class="layui-code-tools"></div>');
+      var elemToolbar = $('<div class="layui-code-tools"></div>');
 
 
       if(options.id) elemView.attr('id', options.id);
@@ -32569,14 +32567,14 @@ ready$1.run = function(_$){
 
       // 标签头
       layui.each(layout, function(i, v){
-        var li = jquery('<li lay-id="'+ v +'">');
+        var li = $('<li lay-id="'+ v +'">');
         if(i === 0) li.addClass('layui-this');
         li.html(options.text[v]);
         elemHeaderView.append(li);
       });
 
       // 工具栏
-      jquery.extend(tools, {
+      $.extend(tools, {
         'full': {
           className: 'screen-full',
           title: ['最大化显示', '还原显示'],
@@ -32586,7 +32584,7 @@ ready$1.run = function(_$){
             var classNameFull = 'layui-icon-'+ this.className;
             var classNameRestore = 'layui-icon-screen-restore';
             var title = this.title;
-            var htmlElem = jquery('html,body');
+            var htmlElem = $('html,body');
             var ELEM_SCROLLBAR_HIDE = 'layui-scrollbar-hide';
 
             if(el.hasClass(classNameFull)){
@@ -32627,7 +32625,7 @@ ready$1.run = function(_$){
 
       // 工具栏事件
       elemToolbar.on('click', '>i', function(){
-        var oi = jquery(this);
+        var oi = $(this);
         var type = oi.data('type');
         var parameters = {
           elem: oi,
@@ -32669,7 +32667,7 @@ ready$1.run = function(_$){
         if (!tools[type]) {
           var obj = {};
           obj[type] = tool;
-          jquery.extend(tools, obj);
+          $.extend(tools, obj);
         }
 
         elemToolbar.append(
@@ -32728,8 +32726,8 @@ ready$1.run = function(_$){
 
       // tab change
       element.on('tab('+ FILTER_VALUE +')', function(data){
-        var $this = jquery(this);
-        var thisElem = jquery(data.elem).closest('.'+ CONST.ELEM_PREVIEW);
+        var $this = $(this);
+        var thisElem = $(data.elem).closest('.'+ CONST.ELEM_PREVIEW);
         var elemItemBody = thisElem.find('.'+ CONST.ELEM_ITEM);
         var thisItemBody = elemItemBody.eq(data.index);
 
@@ -32745,7 +32743,7 @@ ready$1.run = function(_$){
     }
 
     // 创建 code 容器
-    var codeElem = jquery('<code class="layui-code-wrap"></code>'); // 此处的闭合标签是为了兼容 IE8
+    var codeElem = $('<code class="layui-code-wrap"></code>'); // 此处的闭合标签是为了兼容 IE8
 
     // 添加主容器 className
     othis.addClass(function(arr) {
@@ -32822,7 +32820,7 @@ ready$1.run = function(_$){
     var styleElem = lay.style({
       target: othis[0],
       id: 'DF-code-'+ index,
-      text: jquery.map(jquery.map(cssRules, function(val){
+      text: $.map($.map(cssRules, function(val){
         return val.selector;
       }), function(val, i) {
         return ['.layui-code-view[lay-code-index="'+ index + '"]', val].join(' ');
@@ -32853,17 +32851,17 @@ ready$1.run = function(_$){
 
     // 创建 code header
     if (options.header) {
-      var headerElem = jquery('<div class="'+ CONST.ELEM_HEADER +'"></div>');
+      var headerElem = $('<div class="'+ CONST.ELEM_HEADER +'"></div>');
       headerElem.html(options.title || options.text.code);
       othis.prepend(headerElem);
     }
 
     // 创建 code 区域固定条
-    var elemFixbar = jquery('<div class="layui-code-fixbar"></div>');
+    var elemFixbar = $('<div class="layui-code-fixbar"></div>');
 
     // 若开启复制，且未开启预览，则单独生成复制图标
     if(options.copy && !options.preview){
-      var copyElem = jquery(['<span class="layui-code-copy">',
+      var copyElem = $(['<span class="layui-code-copy">',
         '<i class="layui-icon layui-icon-file-b" title="复制"></i>',
       '</span>'].join(''));
 
@@ -32907,66 +32905,8 @@ ready$1.run = function(_$){
  * Layui ES Module 统一入口  
  */  
   
-  
-// 集成所有模块到 layui 对象  
-// layui.lay = lay;  
-// layui.layer = layer;  
-// layui.laydate = laydate;  
-// layui.laypage = laypage;  
-// layui.laytpl = laytpl;  
-// layui.form = form;  
-// layui.upload = upload;  
-// layui.dropdown = dropdown;  
-// layui.transfer = transfer;  
-// layui.tree = tree;  
-// layui.table = table;  
-// layui.treeTable = treeTable;  
-// layui.tabs = tabs;  
-// layui.element = element;  
-// layui.rate = rate;  
-// layui.colorpicker = colorpicker;  
-// layui.slider = slider;  
-// layui.carousel = carousel;  
-// layui.flow = flow;  
-// layui.util = util;  
-// layui.code = code;  
-// layui.jquery = jquery;  
-// layui.$ = jquery;  
-// layui.component = component;  
 
-const modules = {
-  lay,  
-  layer: layer$1,  
-  laydate,  
-  laypage,  
-  laytpl,  
-  form,  
-  upload,  
-  dropdown,  
-  transfer,  
-  tree,  
-  table,  
-  treeTable,
-  tabs: component$1,
-  element,
-  rate: component,
-  colorpicker,
-  slider,
-  carousel,
-  flow,
-  util,
-  code,
-  jquery,
-  component: component$2,
-};
-
-// 注册内置模块
-for (const key in modules) {
-  layui.define(function(exports){
-    exports(key, modules[key]);
-  });
-}
-layui.$ = jquery; 
 layui['layui.all'] = 'layui.all';
 
-export { jquery as $, carousel, code, colorpicker, component$2 as component, layui as default, dropdown, element, flow, form, jquery, lay, laydate, layer$1 as layer, laypage, laytpl, layui, component as rate, slider, table, component$1 as tabs, transfer, tree, treeTable, upload, util };
+export { $, carousel, code, colorpicker, component$2 as component, layui as default, dropdown, element, flow, form, $ as jquery, lay, laydate, layer$1 as layer, laypage, laytpl, layui, component as rate, slider, table, component$1 as tabs, transfer, tree, treeTable, upload, util };
+//# sourceMappingURL=layui.esm.js.map

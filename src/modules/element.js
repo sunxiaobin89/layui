@@ -3,7 +3,7 @@
  * 常用元素操作组件
  */
 
-  import { layui } from '../layui.js';
+  import { layui } from '../core.js';
   import $ from 'jquery';
 
   var hint = layui.hint();

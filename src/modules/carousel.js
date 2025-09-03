@@ -3,7 +3,7 @@
  * MIT Licensed
  */
 
-  import { layui } from '../layui.js';
+  import { layui } from '../core.js';
   import $ from 'jquery';
   import lay from './lay.js';
 

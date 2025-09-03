@@ -5,11 +5,13 @@ import postcss from "rollup-plugin-postcss";
 import url from "postcss-url";
 
 export default [
+  // 用于浏览器的 esm 版本
   {
     input: "src/index.js",
     output: {
       file: "dist/layui.esm.js",
       format: "es",
+      sourcemap: true,
     },
     plugins: [
       postcss({
@@ -22,12 +24,14 @@ export default [
       commonjs(),
     ],
   },
+  // 用于浏览器的 iife 版本
   {
     input: "src/index.global.js",
     output: {
       file: "dist/layui.js",
       format: "iife",
       name: "layui",
+      sourcemap: true,
     },
     plugins: [
       postcss(),
@@ -36,5 +40,18 @@ export default [
         requireReturnsDefault: "preferred",
       }),
     ],
+  },
+  // 用于构建工具的 esm 版本，treeShake 效果更好
+  {
+    external: ["jquery"],
+    input: "src/index.js",
+    output: {
+      format: "es",
+      dir: "dist",
+      sourcemap: true,
+      preserveModules: true,
+      preserveModulesRoot: "src",
+    },
+    plugins: [postcss(), resolve(), commonjs()],
   },
 ];

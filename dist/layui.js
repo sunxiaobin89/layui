@@ -18650,7 +18650,6 @@ var layui = (function () {
    * form 表单组件
    */
 
-
     var hint$4 = layui.hint();
     layui.device();
 
@@ -28484,7 +28483,6 @@ var layui = (function () {
    * Layui 2 组件构建器
    */
 
-
     // export
     function component$2(settings) {
       // 默认设置
@@ -32910,32 +32908,6 @@ var layui = (function () {
    * Layui ES Module 统一入口  
    */  
     
-    
-  // 集成所有模块到 layui 对象  
-  // layui.lay = lay;  
-  // layui.layer = layer;  
-  // layui.laydate = laydate;  
-  // layui.laypage = laypage;  
-  // layui.laytpl = laytpl;  
-  // layui.form = form;  
-  // layui.upload = upload;  
-  // layui.dropdown = dropdown;  
-  // layui.transfer = transfer;  
-  // layui.tree = tree;  
-  // layui.table = table;  
-  // layui.treeTable = treeTable;  
-  // layui.tabs = tabs;  
-  // layui.element = element;  
-  // layui.rate = rate;  
-  // layui.colorpicker = colorpicker;  
-  // layui.slider = slider;  
-  // layui.carousel = carousel;  
-  // layui.flow = flow;  
-  // layui.util = util;  
-  // layui.code = code;  
-  // layui.jquery = jquery;  
-  // layui.$ = jquery;  
-  // layui.component = component;  
 
   const modules = {
     lay,  
@@ -32963,15 +32935,18 @@ var layui = (function () {
     component: component$2,
   };
 
-  // 注册内置模块
+  // 兼容性处理
   for (const key in modules) {
     layui.define(function(exports){
       exports(key, modules[key]);
     });
   }
-  layui.$ = jquery; 
   layui['layui.all'] = 'layui.all';
+  window.lay = lay;
+  window.layer = layer$1;
+  layui.$ = jquery;
 
   return layui;
 
 })();
+//# sourceMappingURL=layui.js.map

@@ -1,6 +1,6 @@
 
 /** lay 基础模块 | MIT Licensed */
-import { layui } from '../layui.js';
+  import { layui } from '../core.js';
 
   var MOD_NAME = 'lay'; // 模块名
   var document = window.document;

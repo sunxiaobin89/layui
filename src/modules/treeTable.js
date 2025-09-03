@@ -3,7 +3,7 @@
  * 树表组件
  */
 
-  import { layui } from '../layui.js';
+  import { layui } from '../core.js';
   import $ from 'jquery';
   import form from './form.js';
   import table from './table.js';

@@ -2,7 +2,7 @@
  * transfer 穿梭框组件
  */
 
-import { layui } from '../layui.js';
+import { layui } from '../core.js';
 import $ from 'jquery';
 import laytpl from './laytpl.js';
 import form from './form.js';

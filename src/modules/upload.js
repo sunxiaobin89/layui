@@ -3,7 +3,7 @@
  * 上传组件
  */
 
-  import { layui } from '../layui.js';
+  import { layui } from '../core.js';
   import $ from 'jquery';
   import lay from './lay.js';
   import layer from './layer.js';

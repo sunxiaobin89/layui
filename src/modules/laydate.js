@@ -1,6 +1,6 @@
 /** laydate 日期与时间控件 | MIT Licensed */
 
-import { layui } from '../layui.js';
+import { layui } from '../core.js';
 import $ from 'jquery';
 import lay from './lay.js';
 

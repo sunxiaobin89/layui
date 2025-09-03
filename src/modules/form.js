@@ -1,8 +1,7 @@
 /**
  * form 表单组件
  */
-
-  import { layui } from '../layui.js';
+  import { layui } from '../core.js';
   import $ from 'jquery';
   import layer from './layer';
   import util from './util';

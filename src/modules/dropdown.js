@@ -4,8 +4,7 @@
  */
 
 
-
-  import { layui } from '../layui.js';
+  import { layui } from '../core.js';
   import $ from 'jquery';
   import laytpl from './laytpl.js';
   import lay from './lay.js';
