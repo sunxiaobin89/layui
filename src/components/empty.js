@@ -12,6 +12,8 @@ export class Empty extends Component {
 
   // 默认配置项
   static options = {
+    // 渲染目标：支持 CSS 选择器、DOM 元素或 jQuery 集合
+    // 为空或未匹配时不渲染，并输出警告提示
     elem: '',
 
     // 自定义图标内容（HTML 字符串）；
@@ -84,7 +86,7 @@ export class Empty extends Component {
     const options = this.options;
     const $elem = options.$elem;
 
-    // 目标元素不存在时提示并直接返回
+    // 目标元素不存在时输出警告并跳过渲染
     if (!$elem[0]) {
       log(`[empty] target element not found: ${options.elem}`);
       return this;
